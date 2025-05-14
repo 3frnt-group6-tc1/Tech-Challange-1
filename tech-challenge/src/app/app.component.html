@@ -1,3 +1,23 @@
-<div class="h-screen bg-primary-gradient bg-cover">
-  <h1 class="text-4xl text-white font-bold text-center pt-20">Gradiente funcionando 🎉</h1>
-</div>
+<h1 class="text-4xl text-black font-bold text-center p-20 bg-green-light ">Exemplos de utilização dos componentes</h1>
+
+<h1>Button Primary</h1>
+<app-button theme="primary" size="G" label="Primary" [disabled]="false"></app-button>
+
+<br><br>
+
+<h1>Button secondary</h1>
+<app-button theme="secondary" size="G" label="Secondary" [disabled]="false"></app-button>
+
+<br><br>
+
+<h1>Button outline-cyan-blue</h1>
+<app-button theme="outline-cyan-blue" size="G" label="Outline" [disabled]="false"></app-button>
+
+<br><br>
+
+<h1>Button Ghost</h1>
+<app-button label="Ghost" theme="ghost-cyan-blue" size="G" [disabled]="false"></app-button>
+
+<br><br>
+
+<app-input [options]="['Câmbio de Moeda', 'DOC/TED', 'Empréstimo e Financiamento']" size="G"></app-input>

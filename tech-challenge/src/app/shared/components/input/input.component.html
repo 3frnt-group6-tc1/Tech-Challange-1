@@ -1,0 +1,47 @@
+<div
+  class="relative inline-block w-full"
+  [ngClass]="{
+    'max-w-[355px]': size === 'G',
+    'max-w-[290px]': size === 'P'
+  }"
+>
+  <!-- Campo do select -->
+  <button
+    type="button"
+    [class]="
+      'w-full bg-gray-100 border border-cyan-blue-500 text-cyan-blue-500 font-inter font-medium rounded-md p-4 flex items-center justify-between ' +
+      (size === 'G' ? 'gap-[66px]' : 'gap-2')
+    "
+    (click)="toggleDropdown()"
+  >
+    {{ selectedOption || placeholder }}
+    <svg
+      class="w-4 h-4 transition-transform"
+      [ngClass]="{ 'rotate-180': isOpen }"
+      fill="none" stroke="currentColor" stroke-width="2"
+      viewBox="0 0 24 24"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+  <!-- Dropdown -->
+  <div
+  *ngIf="isOpen"
+  class="absolute z-10 mt-0 w-full bg-gray-100 border border-green-dark border-t-0 rounded-b-md shadow-lg"
+>
+  <ul>
+    <li
+      *ngFor="let option of options"
+      (click)="selectOption(option)"
+      class="px-4 py-2 text- cursor-pointer transition-colors font-inter text-center text-cyan-blue-500"
+      [ngClass]="{
+        'bg-gray-100 font-semibold': option === selectedOption,
+        'hover:bg-cyan-blue-500 hover:text-white hover:font-bold': option !== selectedOption
+      }"
+    >
+      {{ option }}
+    </li>
+  </ul>
+</div>
+</div>

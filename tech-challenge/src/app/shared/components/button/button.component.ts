@@ -10,9 +10,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './button.component.scss'
 })
 export class ButtonComponent {
-  @Input() theme: string = 'primary'; // Ipções aceitas: primary, secondary, danger
-  // @Input() size: string = 'G'; // Opções aceitas: P,M,G
-  @Input() size: 'P' | 'G' = 'G'; // valor padrão
+  @Input() theme: string = 'primary';
+  @Input() size: 'P' | 'G' = 'G';
   @Input() disabled: boolean = false;
   @Input() label: string = 'Button';
+  @Input() iconPosition: 'left' | 'right' = 'left';
 }

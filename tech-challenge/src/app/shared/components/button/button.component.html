@@ -9,7 +9,13 @@
     'px-3': size === 'P',
     'px-12': size === 'G'
   }"
-  class="py-[14px] rounded-lg font-inter text-base font-semibold transition-colors duration-300"
+  class="py-[14px] rounded-lg font-inter text-base font-semibold transition-colors duration-300 flex items-center justify-center gap-2"
 >
-  {{ label }}
+  <!-- Ícone à esquerda -->
+  <ng-content select="[icon-left]"></ng-content>
+
+  <span>{{ label }}</span>
+
+  <!-- Ícone à direita -->
+  <ng-content select="[icon-right]"></ng-content>
 </button>

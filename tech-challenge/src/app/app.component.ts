@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ButtonComponent } from './shared/components/button/button.component';
 import { InputComponent } from './shared/components/input/input.component';
@@ -10,6 +11,14 @@ import { AppTextRegularComponent } from './shared/typography/app-text-regular.co
 import { AppTextRegularGrayComponent } from './shared/typography/app-text-regular-gray.component';
 import { AppTextRegularGray14Component } from './shared/typography/app-text-regular-gray-14.component';
 import { AppTextBoldComponent } from './shared/typography/app-text-bold.component';
+import { MenuItemComponent } from './shared/components/menu-item/menu-item.component';
+
+import { IconHomeComponent } from './shared/assets/icons/icon-home.component';
+import { IconDollarComponent } from './shared/assets/icons/icon-dollar.component';
+import { IconListComponent } from './shared/assets/icons/icon-list.component';
+import { IconCardComponent } from './shared/assets/icons/icon-card.component';
+import { IconSettingsComponent } from './shared/assets/icons/icon-settings.component';
+
 
 @Component({
   selector: 'app-root',
@@ -19,6 +28,7 @@ import { AppTextBoldComponent } from './shared/typography/app-text-bold.componen
   imports: [
     ButtonComponent,
     InputComponent,
+    MenuItemComponent,
 
     AppTitleComponent,
     AppTitleRegularComponent,
@@ -26,9 +36,31 @@ import { AppTextBoldComponent } from './shared/typography/app-text-bold.componen
     AppTextRegularComponent,
     AppTextRegularGrayComponent,
     AppTextRegularGray14Component,
-    AppTextBoldComponent
+    AppTextBoldComponent,
+
+    IconHomeComponent,
+    IconDollarComponent,
+    IconListComponent,
+    IconCardComponent,
+    IconSettingsComponent
   ]
 })
 export class AppComponent {
-  title = 'tech-challenge';
+  title: string = 'tech-challenge';
+  currentRoute: string = '/inicio';
+  
+  iconHome = IconHomeComponent;
+  iconDollar = IconDollarComponent;
+  iconList = IconListComponent;
+  iconCard = IconCardComponent;
+  iconSettings = IconSettingsComponent;
+
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    this.currentRoute = this.router.url;
+    this.router.events.subscribe(() => {
+      this.currentRoute = this.router.url;
+    });
+  }
 }

@@ -10,7 +10,7 @@ module.exports = {
         'secondary-gradient': 'linear-gradient(to bottom, #dee9ea, #ffffff)',
       },
       fontFamily: {
-        inter: ['"Inter"', 'sans-serif'],
+        lato: ['"Lato"', 'sans-serif'],
       },
       colors: {
         "cyan-blue-100": "#80a6b0",

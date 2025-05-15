@@ -9,7 +9,7 @@
   <button
     type="button"
     [class]="
-      'w-full bg-gray-100 border border-cyan-blue-500 text-cyan-blue-500 font-inter font-medium rounded-md p-4 flex items-center justify-between ' +
+      'w-full bg-gray-100 border border-cyan-blue-500 text-cyan-blue-500 font-lato font-medium rounded-md p-4 flex items-center justify-between ' +
       (size === 'G' ? 'gap-[66px]' : 'gap-2')
     "
     (click)="toggleDropdown()"
@@ -34,7 +34,7 @@
     <li
       *ngFor="let option of options"
       (click)="selectOption(option)"
-      class="px-4 py-2 text- cursor-pointer transition-colors font-inter text-center text-cyan-blue-500"
+      class="px-4 py-2 text- cursor-pointer transition-colors font-lato text-center text-cyan-blue-500"
       [ngClass]="{
         'bg-gray-100 font-semibold': option === selectedOption,
         'hover:bg-cyan-blue-500 hover:text-white hover:font-bold': option !== selectedOption

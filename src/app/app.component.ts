@@ -19,7 +19,7 @@ import { IconDollarComponent } from './shared/assets/icons/icon-dollar.component
 import { IconListComponent } from './shared/assets/icons/icon-list.component';
 import { IconCardComponent } from './shared/assets/icons/icon-card.component';
 import { IconSettingsComponent } from './shared/assets/icons/icon-settings.component';
-
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @Component({
   selector: 'app-root',
@@ -31,7 +31,6 @@ import { IconSettingsComponent } from './shared/assets/icons/icon-settings.compo
     InputComponent,
     MenuItemComponent,
     StatementComponent,
-
     AppTitleComponent,
     AppTitleRegularComponent,
     AppSubtitleComponent,
@@ -39,6 +38,7 @@ import { IconSettingsComponent } from './shared/assets/icons/icon-settings.compo
     AppTextRegularGrayComponent,
     AppTextRegularGray14Component,
     AppTextBoldComponent,
+    DashboardComponent,
 
     // IconHomeComponent,
     // IconDollarComponent,
@@ -50,7 +50,7 @@ import { IconSettingsComponent } from './shared/assets/icons/icon-settings.compo
 export class AppComponent {
   title: string = 'tech-challenge';
   currentRoute: string = '/inicio';
-  
+
   iconHome: any = IconHomeComponent;
   iconDollar: any = IconDollarComponent;
   iconList: any = IconListComponent;

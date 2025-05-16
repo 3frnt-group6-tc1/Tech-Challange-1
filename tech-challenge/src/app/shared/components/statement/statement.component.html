@@ -1,0 +1,61 @@
+<div class="rounded-xl shadow p-6 bg-white">
+    <app-app-subtitle>Extrato</app-app-subtitle>
+  
+    <table class="w-full text-sm border-t-2 mt-3 pt-3">
+      <tbody>
+        <tr *ngFor="let item of items" class="border-b-2 last:border-none">
+          <!-- icone -->
+          <td class="py-4">
+            <ng-container [ngSwitch]="item.type">
+              <app-icon-dollar
+                *ngSwitchCase="'deposit'"
+                class="w-4 h-4"
+                [ngClass]="'text-green-600'"
+              ></app-icon-dollar>
+            
+              <app-icon-arrow-down-left
+                *ngSwitchCase="'withdraw'"
+                class="w-4 h-4"
+                [ngClass]="'text-red-600'"
+              ></app-icon-arrow-down-left>
+            </ng-container>          
+          </td>
+          <!-- Deposito ou Saque -->
+          <td class="py-4">
+            <app-app-text-regular [color]="item.type === 'deposit' ? 'text-green-600' : 'text-red-600'">
+              {{ item.description }}
+            </app-app-text-regular>
+          </td>
+          <!-- Valor -->
+          <td class="py-4">
+            <app-app-text-regular [color]="item.type === 'deposit' ? 'text-green-600' : 'text-red-600'">
+              R$ {{ item.amount.toFixed(2) }}
+            </app-app-text-regular>
+          </td>
+          <!-- Data -->
+          <td class="py-4">
+            <app-app-text-regular color="text-gray-600">
+              {{ item.date }}
+            </app-app-text-regular>
+          </td>
+          <!-- Icone de Lápís -->
+          <td class="py-4 text-center">
+            <app-icon-arrow-pencil [ngClass]="item.type === 'deposit' ? 'text-green-600' : 'text-red-600'" class="w-4 h-4"></app-icon-arrow-pencil>
+          </td>
+          <!-- Icone de Lixeira -->
+          <td class="py-4 text-center">
+            <app-icon-bin [ngClass]="item.type === 'deposit' ? 'text-green-600' : 'text-red-600'" class="w-4 h-4"></app-icon-bin>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="flex justify-end mt-4">
+      <a href="#" class="inline-flex items-center gap-2 text-cyan-blue-500 hover:underline" >
+        Listar
+        <img src="assets/icons/arrow-right.svg" alt="Ir para listagem" class="w-4 h-4" />
+      </a>
+    </div>
+    
+  </div>
+  

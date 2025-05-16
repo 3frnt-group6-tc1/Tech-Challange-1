@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { ButtonComponent } from './shared/components/button/button.component';
 import { InputComponent } from './shared/components/input/input.component';
+import { StatementComponent } from './shared/components/statement/statement.component'
 
 import { AppTitleComponent } from './shared/typography/app-title.component';
 import { AppTitleRegularComponent } from './shared/typography/app-title-regular.component';
@@ -29,6 +30,7 @@ import { IconSettingsComponent } from './shared/assets/icons/icon-settings.compo
     ButtonComponent,
     InputComponent,
     MenuItemComponent,
+    StatementComponent,
 
     AppTitleComponent,
     AppTitleRegularComponent,

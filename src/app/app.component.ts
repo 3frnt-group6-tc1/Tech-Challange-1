@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 
 import { ButtonComponent } from './shared/components/button/button.component';
 import { InputComponent } from './shared/components/input/input.component';
+import { MenuItemComponent } from './shared/components/menu-item/menu-item.component';
+import { StatementComponent } from './shared/components/statement/statement.component'
 
 import { AppTitleComponent } from './shared/typography/app-title.component';
 import { AppTitleRegularComponent } from './shared/typography/app-title-regular.component';
@@ -11,7 +13,6 @@ import { AppTextRegularComponent } from './shared/typography/app-text-regular.co
 import { AppTextRegularGrayComponent } from './shared/typography/app-text-regular-gray.component';
 import { AppTextRegularGray14Component } from './shared/typography/app-text-regular-gray-14.component';
 import { AppTextBoldComponent } from './shared/typography/app-text-bold.component';
-import { MenuItemComponent } from './shared/components/menu-item/menu-item.component';
 
 import { IconHomeComponent } from './shared/assets/icons/icon-home.component';
 import { IconDollarComponent } from './shared/assets/icons/icon-dollar.component';
@@ -29,6 +30,7 @@ import { IconSettingsComponent } from './shared/assets/icons/icon-settings.compo
     ButtonComponent,
     InputComponent,
     MenuItemComponent,
+    StatementComponent,
 
     AppTitleComponent,
     AppTitleRegularComponent,
@@ -38,22 +40,22 @@ import { IconSettingsComponent } from './shared/assets/icons/icon-settings.compo
     AppTextRegularGray14Component,
     AppTextBoldComponent,
 
-    IconHomeComponent,
-    IconDollarComponent,
-    IconListComponent,
-    IconCardComponent,
-    IconSettingsComponent
+    // IconHomeComponent,
+    // IconDollarComponent,
+    // IconListComponent,
+    // IconCardComponent,
+    // IconSettingsComponent
   ]
 })
 export class AppComponent {
   title: string = 'tech-challenge';
   currentRoute: string = '/inicio';
   
-  iconHome = IconHomeComponent;
-  iconDollar = IconDollarComponent;
-  iconList = IconListComponent;
-  iconCard = IconCardComponent;
-  iconSettings = IconSettingsComponent;
+  iconHome: any = IconHomeComponent;
+  iconDollar: any = IconDollarComponent;
+  iconList: any = IconListComponent;
+  iconCard: any = IconCardComponent;
+  iconSettings: any = IconSettingsComponent;
 
   constructor(private router: Router) {}
 

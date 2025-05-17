@@ -2,3 +2,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body, html {
+  font-family: 'Lato', sans-serif;
+}
+
+.text-size-24 {
+  font-size: 24px;
+}
+
+.text-size-16 {
+  font-size: 16px;
+}
+
+.text-size-14 {
+  font-size: 14px;
+}
+
+.text-size-12 {
+  font-size: 12px;
+}

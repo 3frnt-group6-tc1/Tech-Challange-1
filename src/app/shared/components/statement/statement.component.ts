@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AppSubtitleComponent } from "../../typography/app-subtitle.component";
-import { AppTextRegularComponent } from "../../typography/app-text-regular.component";
+
+// import { AppSubtitleComponent } from "../../typography/app-subtitle.component";
+// import { AppTextRegularComponent } from "../../typography/app-text-regular.component";
+
+import { TextComponent } from "../text/text.component"
+
 import { IconArrowPencilComponent } from "../../assets/icons/icon-arrow-pencil.component";
 import { IconBinComponent } from "../../assets/icons/icon-bin.component";
 import { IconDollarComponent } from "../../assets/icons/icon-dollar.component";
@@ -17,7 +21,7 @@ export interface StatementItem {
 @Component({
   selector: 'app-statement',
   standalone: true,
-  imports: [CommonModule, AppSubtitleComponent, AppTextRegularComponent, IconArrowPencilComponent, IconBinComponent, IconDollarComponent, IconArrowDownLeftComponent],
+  imports: [CommonModule, TextComponent, IconArrowPencilComponent, IconBinComponent, IconDollarComponent, IconArrowDownLeftComponent],
   templateUrl: './statement.component.html',
   styleUrls: ['./statement.component.scss'],
 })

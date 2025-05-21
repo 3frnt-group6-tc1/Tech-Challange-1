@@ -1,3 +1,5 @@
+<app-header></app-header>
+
 <div class="bg-[#dee9ea] flex flex-col gap-10">
     <h1 class="text-4xl text-black font-bold text-center p-20 bg-green-light">
         Exemplos de utilização dos componentes
@@ -43,20 +45,24 @@
     <!-- Componetização dos Textos -->
     <div class="flex flex-col gap-4">
         <h1>Componentização dos Textos</h1>
-        <app-app-title>Heading Title Bold</app-app-title>
-        <app-app-title-regular>Heading Title Regular</app-app-title-regular>
-        <app-app-subtitle>Heading Sub Title</app-app-subtitle>
-        <app-app-text-regular>Heading Text Regular</app-app-text-regular>
-        <app-app-text-regular-gray>Heading Text Regular Gray</app-app-text-regular-gray>
-        <app-app-text-regular-gray-14>Heading Text Regular 14</app-app-text-regular-gray-14>
-        <app-app-text-bold>Heading Text Bold 14</app-app-text-bold>
+        <app-text variant="title-bold" as="h1">Título Negrito</app-text>
+        <app-text variant="title-regular" as="h1">Título Regular</app-text>
+        <app-text variant="subtitle" as="h2">Subtítulo</app-text>
+        <app-text variant="text-regular">Texto comum</app-text>
+        <app-text variant="text-regular-special" color="text-orange-500">Texto especial</app-text>
+        <app-text variant="text-small">Texto menor</app-text>
+        <app-text variant="text-small-bold">Texto menor negrito</app-text>
     </div>
 
     <!-- Componetização do Menu -->
     <h1>Componentização do Menu</h1>
     <div class="flex flex-col gap-4 p-4 bg-white">
-        <app-menu-item [label]="'Início'" [route]="'/inicio'" [iconComponent]="iconHome"
-            [active]="currentRoute === '/inicio'"></app-menu-item>
+        <app-menu-item 
+            [label]="'Início'" 
+            [route]="'/inicio'" 
+            [iconComponent]="iconHome"
+            [active]="currentRoute === '/inicio'">
+        </app-menu-item>
 
         <app-menu-item [label]="'Transações'" [route]="'/transacoes'" [iconComponent]="iconDollar"
             [active]="currentRoute === '/transacoes'"></app-menu-item>
@@ -78,3 +84,10 @@
 
 <h1>Componente Dashboard</h1>
 <app-dashboard></app-dashboard>
+
+
+<main class="main">
+    <div class="content"></div>
+</main>
+
+<router-outlet></router-outlet>

@@ -3,6 +3,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .container {
+    @apply w-full max-w-[1440px] mx-auto flex justify-between items-center;
+  }
+}
+
+ 
 body, html {
   font-family: 'Lato', sans-serif;
 }

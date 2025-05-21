@@ -4,6 +4,13 @@ module.exports = {
     "./src/**/*.{html,ts}",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: '1rem',
+      screens: {
+        xl: '1440px',
+      },
+    },
     extend: {
       backgroundImage: {
         'primary-gradient': 'linear-gradient(to bottom, #004D61, #ffffff)',

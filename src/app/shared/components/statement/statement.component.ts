@@ -34,9 +34,5 @@ export class StatementComponent {
     { type: 'withdraw', description: 'Saque', amount: 200, date: '11/02/2025' },
     { type: 'deposit', description: 'Depósito', amount: 300, date: '11/02/2025' },
     { type: 'withdraw', description: 'Saque', amount: 300, date: '11/02/2025' },
-    { type: 'deposit', description: 'Depósito', amount: 400, date: '11/02/2025' },
-    { type: 'withdraw', description: 'Saque', amount: 400, date: '11/02/2025' },
-    { type: 'deposit', description: 'Depósito', amount: 500, date: '11/02/2025' },
-    { type: 'withdraw', description: 'Saque', amount: 500, date: '11/02/2025' },
   ];
 }

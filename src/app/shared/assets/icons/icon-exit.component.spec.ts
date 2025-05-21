@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AppTextBoldComponent } from './app-text-bold.component';
+import { IconExitComponent } from './icon-exit.component';
 
-describe('AppTextBoldComponent', () => {
-  let component: AppTextBoldComponent;
-  let fixture: ComponentFixture<AppTextBoldComponent>;
+describe('IconExitComponent', () => {
+  let component: IconExitComponent;
+  let fixture: ComponentFixture<IconExitComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppTextBoldComponent]
+      imports: [IconExitComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AppTextBoldComponent);
+    fixture = TestBed.createComponent(IconExitComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

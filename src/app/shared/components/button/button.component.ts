@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ButtonComponent {
   @Input() theme: string = 'primary';
-  @Input() size: 'P' | 'G' = 'G';
+  @Input() size: 'P' | 'G' | 'GG' = 'G';
   @Input() disabled: boolean = false;
   @Input() label: string = 'Button';
   @Input() iconPosition: 'left' | 'right' = 'left';

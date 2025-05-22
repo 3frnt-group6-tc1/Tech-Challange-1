@@ -1,14 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TransactionService } from '../../shared/services/Transaction/transaction-service';
-import { UserService } from '../../shared/services/User/user-service';
-import { Transaction } from '../../shared/models/transaction';
-
-interface TransactionData {
-  day: string;
-  entries: number;
-  exits: number;
-}
+import { TransactionService } from '../../services/Transaction/transaction-service';
+import { UserService } from '../../services/User/user-service';
+import { Transaction } from '../../models/transaction';
+import { TransactionData } from '../../models/transaction-data';
 
 @Component({
   selector: 'app-dashboard',

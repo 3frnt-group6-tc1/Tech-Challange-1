@@ -1,5 +1,5 @@
-<div class="bg-gray-100 p-4 min-h-screen font-lato">
-  <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-visible">
+<div class="bg-gray-100 font-lato rounded-xl">
+  <div class="mx-auto bg-white rounded-xl shadow-md overflow-visible">
     <!-- Cabeçalho com saldo -->
     <div class="p-6">
       <!-- Layout para telas maiores (Desktop) -->
@@ -8,11 +8,17 @@
           <h1 class="text-xl sm:text-2xl text-gray-900 font-bold">
             Olá, {{ userName }}!
           </h1>
+          <!-- <app-text variant="title-bold" as="h1" class="sm:text-2xl">Olá, {{ userName }}!</app-text> -->
           <p class="text-gray-500 mt-2 sm:mt-3 text-xs sm:text-sm">{{ currentDate }}</p>
+          <!-- <div class="mt-2">
+            <app-text variant="text-small" color="text-gray-500">{{ currentDate }}!</app-text>
+          </div> -->
+
         </div>
         <div class="text-right w-full sm:w-auto mt-4 sm:mt-0">
           <div class="flex items-center justify-end">
             <p class="font-medium text-gray-700 mr-3 text-xl sm:text-2xl">Saldo</p>
+            <!-- <app-text variant="title-bold" as="h1" class="sm:text-2xl">Olá, {{ userName }}!</app-text> -->
             <button (click)="toggleBalance()" class="focus:outline-none">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

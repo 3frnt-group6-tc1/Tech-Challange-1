@@ -29,6 +29,12 @@
       "name": "Lucas Oliveira",
       "email": "lucas.oliveira@email.com",
       "password": "senha654"
+    },
+        {
+      "id": "u6",
+      "name": "Mariano Oliveira",
+      "email": "mariano.oliveira@email.com",
+      "password": "senha435"
     }
   ],
   "transactions": [

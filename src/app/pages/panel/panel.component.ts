@@ -16,8 +16,6 @@ import { NewTransactionComponent } from "../../shared/components/new-transaction
   selector: 'app-panel',
   standalone: true,
   imports: [
-    ButtonComponent,
-    InputComponent,
     MenuItemComponent,
     StatementComponent,
     DashboardComponent,

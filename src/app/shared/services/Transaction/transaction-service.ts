@@ -1,7 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Transaction } from '../../models/transaction';
+import { map } from 'rxjs/operators';
+import {
+  Transaction,
+  isCredit,
+  isDebit,
+  TransactionType,
+  DEBIT_TYPES,
+  CREDIT_TYPES,
+} from '../../models/transaction';
+import { Balance } from '../../models/balance';
 import { apiConfig } from '../../../app.config';
 
 @Injectable({
@@ -42,7 +51,42 @@ export class TransactionService {
     return this.http.get<Transaction>(`${this.apiUrl}/${transactionId}`);
   }
 
-  getByUserId(userId: string): Observable<Transaction[]> {
-    return this.http.get<Transaction[]>(`${this.apiUrl}?id_user=${userId}`);
+  getByUserId(
+    userId: string,
+    types?: TransactionType[]
+  ): Observable<Transaction[]> {
+    let url = `${this.apiUrl}?id_user=${userId}`;
+    if (types && types.length > 0) {
+      url += `&type=${types.join(',')}`;
+    }
+    return this.http.get<Transaction[]>(url);
+  }
+
+  getCreditsByUserId(userId: string): Observable<Transaction[]> {
+    return this.getByUserId(userId, CREDIT_TYPES);
+  }
+
+  getDebitsByUserId(userId: string): Observable<Transaction[]> {
+    return this.getByUserId(userId, DEBIT_TYPES);
+  }
+
+  getUserBalance(userId: string): Observable<Balance> {
+    return this.getByUserId(userId).pipe(
+      map((transactions) => {
+        const totalCredits = transactions
+          .filter((t) => CREDIT_TYPES.includes(t.type))
+          .reduce((sum, t) => sum + t.amount, 0);
+
+        const totalDebits = transactions
+          .filter((t) => DEBIT_TYPES.includes(t.type))
+          .reduce((sum, t) => sum + t.amount, 0);
+
+        return {
+          totalCredits,
+          totalDebits,
+          balance: totalCredits - totalDebits,
+        };
+      })
+    );
   }
 }

@@ -6,7 +6,7 @@ import {
 import { apiConfig } from '../../../app.config';
 
 import { TransactionService } from './transaction-service';
-import { Transaction } from '../../models/transaction';
+import { Transaction, TransactionType } from '../../models/transaction';
 
 describe('TransactionService', () => {
   let service: TransactionService;
@@ -33,7 +33,7 @@ describe('TransactionService', () => {
   it('should create a transaction', () => {
     const newTransaction: Transaction = {
       id: '3',
-      type: 'credit',
+      type: TransactionType.Exchange,
       amount: 200,
       date: new Date(),
       description: 'New',
@@ -53,7 +53,7 @@ describe('TransactionService', () => {
   it('should read a transaction by id', () => {
     const transaction: Transaction = {
       id: '1',
-      type: 'credit',
+      type: TransactionType.Exchange,
       amount: 100,
       date: new Date(),
       description: 'Test',
@@ -72,7 +72,7 @@ describe('TransactionService', () => {
   it('should update a transaction', () => {
     const updatedTransaction: Transaction = {
       id: '1',
-      type: 'debit',
+      type: TransactionType.Transfer,
       amount: 150,
       date: new Date(),
       description: 'Updated',
@@ -102,7 +102,7 @@ describe('TransactionService', () => {
   it('should get transaction by id', () => {
     const transaction: Transaction = {
       id: '2',
-      type: 'debit',
+      type: TransactionType.Transfer,
       amount: 50,
       date: new Date(),
       description: 'Test2',
@@ -123,7 +123,7 @@ describe('TransactionService', () => {
     const userTransactions: Transaction[] = [
       {
         id: '1',
-        type: 'credit',
+        type: TransactionType.Exchange,
         amount: 100,
         date: new Date(),
         description: 'Test',
@@ -138,5 +138,132 @@ describe('TransactionService', () => {
     const req = httpMock.expectOne(`${transactionsUrl}?id_user=${userId}`);
     expect(req.request.method).toBe('GET');
     req.flush(userTransactions);
+  });
+
+  it('should get all transactions', () => {
+    const transactions: Transaction[] = [
+      {
+        id: '1',
+        type: TransactionType.Exchange,
+        amount: 100,
+        date: new Date(),
+        description: 'Test',
+        id_user: 'u1',
+      },
+      {
+        id: '2',
+        type: TransactionType.Transfer,
+        amount: 50,
+        date: new Date(),
+        description: 'Test2',
+        id_user: 'u2',
+      },
+    ];
+    service.getAll().subscribe((result) => {
+      expect(result).toEqual(transactions);
+    });
+    const req = httpMock.expectOne(transactionsUrl);
+    expect(req.request.method).toBe('GET');
+    req.flush(transactions);
+  });
+
+  it('should get credits by user id', () => {
+    const userId = 'u1';
+    const credits: Transaction[] = [
+      {
+        id: '1',
+        type: TransactionType.Exchange,
+        amount: 100,
+        date: new Date(),
+        description: 'Credit',
+        id_user: 'u1',
+      },
+    ];
+    service.getCreditsByUserId(userId).subscribe((result) => {
+      expect(result).toEqual(credits);
+    });
+    const req = httpMock.expectOne(
+      `${transactionsUrl}?id_user=${userId}&type=exchange,loan`
+    );
+    expect(req.request.method).toBe('GET');
+    req.flush(credits);
+  });
+
+  it('should get debits by user id', () => {
+    const userId = 'u1';
+    const debits: Transaction[] = [
+      {
+        id: '2',
+        type: TransactionType.Transfer,
+        amount: 50,
+        date: new Date(),
+        description: 'Debit',
+        id_user: 'u1',
+      },
+    ];
+    service.getDebitsByUserId(userId).subscribe((result) => {
+      expect(result).toEqual(debits);
+    });
+    const req = httpMock.expectOne(
+      `${transactionsUrl}?id_user=${userId}&type=transfer`
+    );
+    expect(req.request.method).toBe('GET');
+    req.flush(debits);
+  });
+
+  it('should return user balance', () => {
+    const userId = 'u1';
+    const transactions: Transaction[] = [
+      {
+        id: '1',
+        type: TransactionType.Exchange,
+        amount: 100,
+        date: new Date(),
+        description: '',
+        id_user: 'u1',
+      },
+      {
+        id: '2',
+        type: TransactionType.Transfer,
+        amount: 40,
+        date: new Date(),
+        description: '',
+        id_user: 'u1',
+      },
+    ];
+    service.getUserBalance(userId).subscribe((balance) => {
+      expect(balance).toEqual({
+        totalCredits: 100,
+        totalDebits: 40,
+        balance: 60,
+      });
+    });
+    const req = httpMock.expectOne(`${transactionsUrl}?id_user=${userId}`);
+    expect(req.request.method).toBe('GET');
+    req.flush(transactions);
+  });
+
+  it('should handle empty transactions for user balance', () => {
+    const userId = 'u1';
+    service.getUserBalance(userId).subscribe((balance) => {
+      expect(balance).toEqual({ totalCredits: 0, totalDebits: 0, balance: 0 });
+    });
+    const req = httpMock.expectOne(`${transactionsUrl}?id_user=${userId}`);
+    expect(req.request.method).toBe('GET');
+    req.flush([]);
+  });
+
+  it('should handle http error', () => {
+    service.getAll().subscribe({
+      next: () => fail('should have failed'),
+      error: (err) => {
+        expect(err.status).toBe(500);
+      },
+    });
+    const req = httpMock.expectOne(transactionsUrl);
+    req.flush('Internal Server Error', {
+      status: 500,
+      statusText: 'Server Error',
+    });
   });
 });

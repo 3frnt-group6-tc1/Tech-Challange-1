@@ -1,25 +1,244 @@
 {
   "users": [
-    { "id": "u1", "name": "João Silva", "email": "joao.silva@email.com", "password": "senha123" },
-    { "id": "u2", "name": "Maria Souza", "email": "maria.souza@email.com", "password": "senha456" },
-    { "id": "u3", "name": "Carlos Lima", "email": "carlos.lima@email.com", "password": "senha789" }
+    {
+      "id": "u1",
+      "name": "João Silva",
+      "email": "joao.silva@email.com",
+      "password": "senha123"
+    },
+    {
+      "id": "u2",
+      "name": "Maria Souza",
+      "email": "maria.souza@email.com",
+      "password": "senha456"
+    },
+    {
+      "id": "u3",
+      "name": "Carlos Lima",
+      "email": "carlos.lima@email.com",
+      "password": "senha789"
+    },
+    {
+      "id": "u4",
+      "name": "Ana Pereira",
+      "email": "ana.pereira@email.com",
+      "password": "senha321"
+    },
+    {
+      "id": "u5",
+      "name": "Lucas Oliveira",
+      "email": "lucas.oliveira@email.com",
+      "password": "senha654"
+    }
   ],
   "transactions": [
-    { "id": "1", "type": "credit", "amount": 100, "date": "2025-05-15T10:00:00.000Z", "description": "Salário", "id_user": "u1" },
-    { "id": "2", "type": "debit", "amount": 50, "date": "2025-05-14T15:30:00.000Z", "description": "Supermercado", "id_user": "u1" },
-    { "id": "3", "type": "credit", "amount": 200, "date": "2025-05-13T09:00:00.000Z", "description": "Freelance", "id_user": "u1" },
-    { "id": "4", "type": "debit", "amount": 30, "date": "2025-05-12T12:00:00.000Z", "description": "Transporte", "id_user": "u1" },
-    { "id": "5", "type": "credit", "amount": 80, "date": "2025-05-11T18:00:00.000Z", "description": "Venda", "id_user": "u1" },
-    { "id": "6", "type": "debit", "amount": 60, "date": "2025-05-10T14:00:00.000Z", "description": "Farmácia", "id_user": "u2" },
-    { "id": "7", "type": "credit", "amount": 120, "date": "2025-05-09T11:00:00.000Z", "description": "Reembolso", "id_user": "u2" },
-    { "id": "8", "type": "debit", "amount": 40, "date": "2025-05-08T13:00:00.000Z", "description": "Padaria", "id_user": "u2" },
-    { "id": "9", "type": "credit", "amount": 90, "date": "2025-05-07T10:00:00.000Z", "description": "Presente", "id_user": "u2" },
-    { "id": "10", "type": "debit", "amount": 70, "date": "2025-05-06T17:00:00.000Z", "description": "Restaurante", "id_user": "u2" },
-    { "id": "11", "type": "credit", "amount": 300, "date": "2025-05-05T09:00:00.000Z", "description": "Projeto", "id_user": "u2" },
-    { "id": "12", "type": "credit", "amount": 250, "date": "2025-05-04T10:00:00.000Z", "description": "Consultoria", "id_user": "u3" },
-    { "id": "13", "type": "debit", "amount": 80, "date": "2025-05-03T15:00:00.000Z", "description": "Combustível", "id_user": "u3" },
-    { "id": "14", "type": "credit", "amount": 150, "date": "2025-05-02T12:00:00.000Z", "description": "Venda Online", "id_user": "u3" },
-    { "id": "15", "type": "debit", "amount": 60, "date": "2025-05-01T18:00:00.000Z", "description": "Cinema", "id_user": "u3" },
-    { "id": "16", "type": "debit", "amount": 40, "date": "2025-04-30T20:00:00.000Z", "description": "Lanche", "id_user": "u3" }
+    {
+      "id": "1",
+      "type": "exchange",
+      "amount": 100,
+      "date": "2025-05-15T10:00:00.000Z",
+      "description": "Salário",
+      "id_user": "u1"
+    },
+    {
+      "id": "2",
+      "type": "transfer",
+      "amount": 50,
+      "date": "2025-05-14T15:30:00.000Z",
+      "description": "Supermercado",
+      "id_user": "u1"
+    },
+    {
+      "id": "3",
+      "type": "exchange",
+      "amount": 200,
+      "date": "2025-05-13T09:00:00.000Z",
+      "description": "Freelance",
+      "id_user": "u1"
+    },
+    {
+      "id": "4",
+      "type": "transfer",
+      "amount": 30,
+      "date": "2025-05-12T12:00:00.000Z",
+      "description": "Transporte",
+      "id_user": "u1"
+    },
+    {
+      "id": "5",
+      "type": "exchange",
+      "amount": 80,
+      "date": "2025-05-11T18:00:00.000Z",
+      "description": "Venda",
+      "id_user": "u1"
+    },
+    {
+      "id": "6",
+      "type": "transfer",
+      "amount": 60,
+      "date": "2025-05-10T14:00:00.000Z",
+      "description": "Farmácia",
+      "id_user": "u2"
+    },
+    {
+      "id": "7",
+      "type": "exchange",
+      "amount": 120,
+      "date": "2025-05-09T11:00:00.000Z",
+      "description": "Reembolso",
+      "id_user": "u2"
+    },
+    {
+      "id": "8",
+      "type": "transfer",
+      "amount": 40,
+      "date": "2025-05-08T13:00:00.000Z",
+      "description": "Padaria",
+      "id_user": "u2"
+    },
+    {
+      "id": "9",
+      "type": "exchange",
+      "amount": 90,
+      "date": "2025-05-07T10:00:00.000Z",
+      "description": "Presente",
+      "id_user": "u2"
+    },
+    {
+      "id": "10",
+      "type": "transfer",
+      "amount": 70,
+      "date": "2025-05-06T17:00:00.000Z",
+      "description": "Restaurante",
+      "id_user": "u2"
+    },
+    {
+      "id": "11",
+      "type": "exchange",
+      "amount": 300,
+      "date": "2025-05-05T09:00:00.000Z",
+      "description": "Projeto",
+      "id_user": "u2"
+    },
+    {
+      "id": "12",
+      "type": "exchange",
+      "amount": 250,
+      "date": "2025-05-04T10:00:00.000Z",
+      "description": "Consultoria",
+      "id_user": "u3"
+    },
+    {
+      "id": "13",
+      "type": "transfer",
+      "amount": 80,
+      "date": "2025-05-03T15:00:00.000Z",
+      "description": "Combustível",
+      "id_user": "u3"
+    },
+    {
+      "id": "14",
+      "type": "exchange",
+      "amount": 150,
+      "date": "2025-05-02T12:00:00.000Z",
+      "description": "Venda Online",
+      "id_user": "u3"
+    },
+    {
+      "id": "15",
+      "type": "transfer",
+      "amount": 60,
+      "date": "2025-05-01T18:00:00.000Z",
+      "description": "Cinema",
+      "id_user": "u3"
+    },
+    {
+      "id": "16",
+      "type": "transfer",
+      "amount": 40,
+      "date": "2025-04-30T20:00:00.000Z",
+      "description": "Lanche",
+      "id_user": "u3"
+    },
+    {
+      "id": "17",
+      "type": "exchange",
+      "amount": 180,
+      "date": "2025-05-16T09:00:00.000Z",
+      "description": "Bônus",
+      "id_user": "u4"
+    },
+    {
+      "id": "18",
+      "type": "transfer",
+      "amount": 90,
+      "date": "2025-05-15T13:00:00.000Z",
+      "description": "Supermercado",
+      "id_user": "u4"
+    },
+    {
+      "id": "19",
+      "type": "transfer",
+      "amount": 20,
+      "date": "2025-05-14T19:00:00.000Z",
+      "description": "Uber",
+      "id_user": "u4"
+    },
+    {
+      "id": "20",
+      "type": "exchange",
+      "amount": 220,
+      "date": "2025-05-13T11:00:00.000Z",
+      "description": "Projeto Freelancer",
+      "id_user": "u4"
+    },
+    {
+      "id": "21",
+      "type": "transfer",
+      "amount": 50,
+      "date": "2025-05-12T15:00:00.000Z",
+      "description": "Farmácia",
+      "id_user": "u4"
+    },
+    {
+      "id": "22",
+      "type": "exchange",
+      "amount": 500,
+      "date": "2025-05-11T10:00:00.000Z",
+      "description": "Venda de Equipamentos",
+      "id_user": "u5"
+    },
+    {
+      "id": "23",
+      "type": "transfer",
+      "amount": 150,
+      "date": "2025-05-10T14:30:00.000Z",
+      "description": "Aluguel",
+      "id_user": "u5"
+    },
+    {
+      "id": "24",
+      "type": "transfer",
+      "amount": 80,
+      "date": "2025-05-09T18:00:00.000Z",
+      "description": "Restaurante",
+      "id_user": "u5"
+    },
+    {
+      "id": "25",
+      "type": "exchange",
+      "amount": 100,
+      "date": "2025-05-08T09:00:00.000Z",
+      "description": "Freelance",
+      "id_user": "u5"
+    },
+    {
+      "id": "26",
+      "type": "transfer",
+      "amount": 60,
+      "date": "2025-05-07T12:00:00.000Z",
+      "description": "Cinema",
+      "id_user": "u5"
+    }
   ]
 }

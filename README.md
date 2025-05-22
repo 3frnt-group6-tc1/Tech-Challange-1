@@ -1,65 +1,79 @@
-# TechChallenge
+# Sistema de Gestão Financeira
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.10.
+Projeto desenvolvido como parte do **Tech Challenge - Fase 01** para a disciplina de Front-end, com foco na aplicação prática de conceitos de desenvolvimento web, design system e boas práticas de programação.
 
-## Development server
+---
 
-To start a local development server, run:
+## 📝 Descrição
+
+Este projeto consiste no desenvolvimento de uma aplicação web para **gerenciamento financeiro**, permitindo aos usuários visualizar, adicionar, editar e excluir transações financeiras.
+
+## 🎯 Funcionalidades
+
+- ✅ Página inicial com resumo de saldo e extrato das últimas transações.
+- ✅ Listagem completa de transações, com opções de visualizar, editar e excluir.
+- ✅ Formulário para adicionar novas transações (depósito, transferência, etc.).
+- ✅ Modal ou página dedicada para edição de transações existentes.
+- ✅ Interface consistente baseada em Design System.
+- ✅ Documentação de componentes com Storybook.
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+- **Framework:** Angular
+- **Estilização:** Tailwind CSS
+- **Documentação de Componentes:** Storybook
+- **Design System:** Figma ([Visualizar Figma](https://www.figma.com/design/x4g46ODcpZOemqLp0FYOlO/Bytebank?node-id=0-1&p=f))
+- **Base de Dados:** JSON
+
+---
+
+## 📦 Instalação e Execução
+
+### ✅ Pré-requisitos
+
+- Node.js (versão recomendada: LTS)
+- npm (gerenciador de pacotes)
+- Angular CLI
+
+### ✅ Passos para rodar o projeto:
+
+1. **Clone o repositório:**
+
+```bash
+git clone <URL_DO_REPOSITORIO>
+cd <nome_da_pasta_do_projeto>
+````
+
+2. **Instale as dependências:**
+
+```bash
+npm install
+```
+
+3. **Execute o projeto em ambiente de desenvolvimento:**
 
 ```bash
 ng serve
 ```
 
-To start backend services (json-server with src/data/db.json), run:
+4. **Acesse no navegador:**
 
 ```bash
-npm run server
+http://localhost:4200
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🧑‍💻 Equipe de Desenvolvimento
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Este projeto foi desenvolvido em grupo por:
 
-```bash
-ng generate component component-name
-```
+* **Matheus Althman**
+* **João Victor**
+* **Vinícius Batista**
+* **Fernando Borges**
+* **Danyllo Silva**
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---

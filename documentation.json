@@ -1,0 +1,2811 @@
+{
+    "pipes": [],
+    "interfaces": [
+        {
+            "name": "Balance",
+            "id": "interface-Balance-7ae4ce76e231f7b4e99c37840d18290cdf6bc071ac557a62eeeab30180a4572a357232a06bba7408132a7a1b8bfd4c2243ea81047dd9923111fa9892d932d6e7",
+            "file": "src/app/shared/models/balance.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface Balance {\r\n  totalCredits: number;\r\n  totalDebits: number;\r\n  balance: number;\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "balance",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                },
+                {
+                    "name": "totalCredits",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                },
+                {
+                    "name": "totalDebits",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 3
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "StatementItem",
+            "id": "interface-StatementItem-1b5d5164beec5bfb9567ca57b5bc303bb3abb5b192c5003a15fe13d4804a395056c21207e9052c9acbdb1caa79150130534baa2094b7b375ae7b835437147bb3",
+            "file": "src/app/shared/components/statement/statement.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n// import { AppSubtitleComponent } from \"../../typography/app-subtitle.component\";\r\n// import { AppTextRegularComponent } from \"../../typography/app-text-regular.component\";\r\n\r\nimport { TextComponent } from \"../text/text.component\"\r\n\r\nimport { IconArrowPencilComponent } from \"../../assets/icons/icon-arrow-pencil.component\";\r\nimport { IconBinComponent } from \"../../assets/icons/icon-bin.component\";\r\nimport { IconDollarComponent } from \"../../assets/icons/icon-dollar.component\";\r\nimport { IconArrowDownLeftComponent } from \"../../assets/icons/icon-arrow-down-left.component\";\r\n\r\nexport interface StatementItem {\r\n  type: 'deposit' | 'withdraw';\r\n  description: string;\r\n  amount: number;\r\n  date: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'app-statement',\r\n  standalone: true,\r\n  imports: [CommonModule, TextComponent, IconArrowPencilComponent, IconBinComponent, IconDollarComponent, IconArrowDownLeftComponent],\r\n  templateUrl: './statement.component.html',\r\n  styleUrls: ['./statement.component.scss'],\r\n})\r\n\r\nexport class StatementComponent {\r\n  items: StatementItem[] = [\r\n    { type: 'deposit', description: 'Depósito', amount: 100, date: '11/02/2025' },\r\n    { type: 'withdraw', description: 'Saque', amount: 100, date: '11/02/2025' },\r\n    { type: 'deposit', description: 'Depósito', amount: 200, date: '11/02/2025' },\r\n    { type: 'withdraw', description: 'Saque', amount: 200, date: '11/02/2025' },\r\n    { type: 'deposit', description: 'Depósito', amount: 300, date: '11/02/2025' },\r\n    { type: 'withdraw', description: 'Saque', amount: 300, date: '11/02/2025' },\r\n    { type: 'deposit', description: 'Depósito', amount: 400, date: '11/02/2025' },\r\n    { type: 'withdraw', description: 'Saque', amount: 400, date: '11/02/2025' },\r\n    { type: 'deposit', description: 'Depósito', amount: 500, date: '11/02/2025' },\r\n    { type: 'withdraw', description: 'Saque', amount: 500, date: '11/02/2025' },\r\n  ];\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "amount",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                },
+                {
+                    "name": "date",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
+                },
+                {
+                    "name": "description",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 16
+                },
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "\"deposit\" | \"withdraw\"",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "Transaction",
+            "id": "interface-Transaction-3867e7cc4f71b11a49e9574e1df568dc474139259db43513a53a85d1875270ae7d4c0320831cf3211097b08927d75a694851188cc72ae595b5a1a7e35388cdff",
+            "file": "src/app/shared/models/transaction.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export enum TransactionType {\r\n  Exchange = 'exchange',\r\n  Transfer = 'transfer',\r\n  Loan = 'loan',\r\n}\r\n\r\nexport const CREDIT_TYPES: TransactionType[] = [\r\n  TransactionType.Exchange,\r\n  TransactionType.Loan,\r\n];\r\nexport const DEBIT_TYPES: TransactionType[] = [TransactionType.Transfer];\r\n\r\nexport interface Transaction {\r\n  id: string;\r\n  type: TransactionType;\r\n  amount: number;\r\n  date: Date;\r\n  description: string;\r\n  id_user: string;\r\n}\r\n\r\nexport function isCredit(type: TransactionType): boolean {\r\n  return CREDIT_TYPES.includes(type);\r\n}\r\n\r\nexport function isDebit(type: TransactionType): boolean {\r\n  return DEBIT_TYPES.includes(type);\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "amount",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 16
+                },
+                {
+                    "name": "date",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Date",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                },
+                {
+                    "name": "description",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
+                },
+                {
+                    "name": "id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "id_user",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 19
+                },
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "TransactionType",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "TransactionData",
+            "id": "interface-TransactionData-39b5fd12dfa31779c3bfd518951dd088e653f634060e9bc1809c5c0703537c32539d42dd550fc4f5abbff0b60f93ad58e23d7ce68985a03cdc7d53b6a38ac638",
+            "file": "src/app/pages/dashboard/dashboard.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { TransactionService } from '../../shared/services/Transaction/transaction-service';\r\nimport { UserService } from '../../shared/services/User/user-service';\r\nimport { Transaction } from '../../shared/models/transaction';\r\n\r\ninterface TransactionData {\r\n  day: string;\r\n  entries: number;\r\n  exits: number;\r\n}\r\n\r\n@Component({\r\n  selector: 'app-dashboard',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './dashboard.component.html',\r\n  styleUrls: ['./dashboard.component.scss'],\r\n})\r\nexport class DashboardComponent {\r\n  userName: string = 'Fulano';\r\n  currentDate: string = '';\r\n  balance: string = '';\r\n  accountType: string = 'Conta Corrente';\r\n  totalEntries: string = '';\r\n  totalExits: string = '';\r\n\r\n  idUser: string = '';\r\n\r\n  showBalance: boolean = true;\r\n\r\n  transactionData: TransactionData[] = [];\r\n\r\n  errorMessage: string = '';\r\n\r\n  constructor(\r\n    private transactionService: TransactionService,\r\n    private userService: UserService\r\n  ) {}\r\n\r\n  ngOnInit(): void {\r\n    this.setCurrentDate();\r\n    this.fetchUser();\r\n  }\r\n\r\n  setCurrentDate(): void {\r\n    const weekDays = [\r\n      'Domingo',\r\n      'Segunda-feira',\r\n      'Terça-feira',\r\n      'Quarta-feira',\r\n      'Quinta-feira',\r\n      'Sexta-feira',\r\n      'Sábado',\r\n    ];\r\n    const today = new Date();\r\n    const weekDay = weekDays[today.getDay()];\r\n    const day = String(today.getDate()).padStart(2, '0');\r\n    const month = String(today.getMonth() + 1).padStart(2, '0');\r\n    const year = today.getFullYear();\r\n    const hour = String(today.getHours()).padStart(2, '0');\r\n    const minute = String(today.getMinutes()).padStart(2, '0');\r\n    this.currentDate = `${weekDay}, ${day}/${month}/${year} ${hour}:${minute}`;\r\n  }\r\n\r\n  fetchUser(): void {\r\n    this.userService.getById('u1').subscribe(\r\n      (response) => this.successUser(response),\r\n      (error) => {\r\n        this.errorMessage = 'Erro ao buscar usuário.';\r\n        console.error('Error fetching user name:', error);\r\n      }\r\n    );\r\n  }\r\n\r\n  successUser(response: any): void {\r\n    this.errorMessage = '';\r\n    this.userName = response.name;\r\n    this.idUser = response.id;\r\n    this.fetchTransactions(this.idUser);\r\n  }\r\n\r\n  fetchTransactions(id: string): void {\r\n    this.transactionService.getByUserId(id).subscribe(\r\n      (response) => this.successTransaction(response),\r\n      (error) => {\r\n        this.errorMessage = 'Erro ao buscar transações.';\r\n        console.error('Error fetching transactions:', error);\r\n      }\r\n    );\r\n  }\r\n\r\n  successTransaction(response: Transaction[]): void {\r\n    this.errorMessage = '';\r\n    const totalEntries = response\r\n      .filter((transaction) => this.isCredit(transaction.type))\r\n      .reduce((acc, transaction) => acc + transaction.amount, 0);\r\n    const totalExits = response\r\n      .filter((transaction) => this.isDebit(transaction.type))\r\n      .reduce((acc, transaction) => acc + transaction.amount, 0);\r\n\r\n    this.totalEntries = this.formatBalance(totalEntries);\r\n    this.totalExits = this.formatBalance(totalExits);\r\n    this.balance = this.formatBalance(totalEntries - totalExits);\r\n\r\n    const grouped: { [key: string]: { entries: number; exits: number } } = {};\r\n    response.forEach((transaction) => {\r\n      const date = new Date(transaction.date);\r\n      const key = `${date.getDate().toString().padStart(2, '0')}/${(\r\n        date.getMonth() + 1\r\n      )\r\n        .toString()\r\n        .padStart(2, '0')}/${date.getFullYear()}`;\r\n      if (!grouped[key]) grouped[key] = { entries: 0, exits: 0 };\r\n      if (this.isCredit(transaction.type))\r\n        grouped[key].entries += transaction.amount;\r\n      if (this.isDebit(transaction.type))\r\n        grouped[key].exits += transaction.amount;\r\n    });\r\n    this.transactionData = Object.entries(grouped).map(([day, data]) => ({\r\n      day,\r\n      entries: data.entries,\r\n      exits: data.exits,\r\n    }));\r\n  }\r\n\r\n  isCredit(type: string): boolean {\r\n    return type === 'exchange' || type === 'loan';\r\n  }\r\n\r\n  isDebit(type: string): boolean {\r\n    return type === 'transfer';\r\n  }\r\n\r\n  formatBalance(value: number): string {\r\n    return value.toLocaleString('pt-BR', {\r\n      style: 'currency',\r\n      currency: 'BRL',\r\n    });\r\n  }\r\n\r\n  toggleBalance(): void {\r\n    this.showBalance = !this.showBalance;\r\n  }\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "day",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 8
+                },
+                {
+                    "name": "entries",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                },
+                {
+                    "name": "exits",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "User",
+            "id": "interface-User-c2654ed724b00fdc0f4ac6fa76db906ee4752427f1a4069b5efd9b3975230739483950484656e41e94ff4b7f4f5c9b9dcb96b0358c47a1d1ce257a68f7fedf91",
+            "file": "src/app/shared/models/user.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface User {\r\n  name: string;\r\n  email: string;\r\n  password: string;\r\n  id: string\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "email",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 3
+                },
+                {
+                    "name": "id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                },
+                {
+                    "name": "name",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                },
+                {
+                    "name": "password",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        }
+    ],
+    "injectables": [
+        {
+            "name": "TransactionService",
+            "id": "injectable-TransactionService-11302f0fc517cec63332b22afc5e0e2552cdfcf14633dd58dcaa0a26f82d5109ee044bddcf1b49352434ba292af6221258d50a141818bc5d1a68a9d4f82e3a10",
+            "file": "src/app/shared/services/Transaction/transaction-service.ts",
+            "properties": [
+                {
+                    "name": "apiUrl",
+                    "defaultValue": "apiConfig.baseUrl + apiConfig.transactionsEndpoint",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 20,
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
+            "methods": [
+                {
+                    "name": "create",
+                    "args": [
+                        {
+                            "name": "transaction",
+                            "type": "Transaction",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<Transaction>",
+                    "typeParameters": [],
+                    "line": 24,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "transaction",
+                            "type": "Transaction",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "delete",
+                    "args": [
+                        {
+                            "name": "transactionId",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<void>",
+                    "typeParameters": [],
+                    "line": 42,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "transactionId",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getAll",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "Observable<Transaction[]>",
+                    "typeParameters": [],
+                    "line": 46,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "getById",
+                    "args": [
+                        {
+                            "name": "transactionId",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<Transaction>",
+                    "typeParameters": [],
+                    "line": 50,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "transactionId",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getByUserId",
+                    "args": [
+                        {
+                            "name": "userId",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "types",
+                            "type": "TransactionType[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<Transaction[]>",
+                    "typeParameters": [],
+                    "line": 54,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "userId",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "types",
+                            "type": "TransactionType[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getCreditsByUserId",
+                    "args": [
+                        {
+                            "name": "userId",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<Transaction[]>",
+                    "typeParameters": [],
+                    "line": 65,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "userId",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getDebitsByUserId",
+                    "args": [
+                        {
+                            "name": "userId",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<Transaction[]>",
+                    "typeParameters": [],
+                    "line": 69,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "userId",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getUserBalance",
+                    "args": [
+                        {
+                            "name": "userId",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<Balance>",
+                    "typeParameters": [],
+                    "line": 73,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "userId",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "read",
+                    "args": [
+                        {
+                            "name": "transactionId",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<Transaction>",
+                    "typeParameters": [],
+                    "line": 28,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "transactionId",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "update",
+                    "args": [
+                        {
+                            "name": "transactionId",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "transaction",
+                            "type": "Transaction",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<Transaction>",
+                    "typeParameters": [],
+                    "line": 32,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "transactionId",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "transaction",
+                            "type": "Transaction",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport { HttpClient } from '@angular/common/http';\r\nimport { Observable } from 'rxjs';\r\nimport { map } from 'rxjs/operators';\r\nimport {\r\n  Transaction,\r\n  isCredit,\r\n  isDebit,\r\n  TransactionType,\r\n  DEBIT_TYPES,\r\n  CREDIT_TYPES,\r\n} from '../../models/transaction';\r\nimport { Balance } from '../../models/balance';\r\nimport { apiConfig } from '../../../app.config';\r\n\r\n@Injectable({\r\n  providedIn: 'root',\r\n})\r\nexport class TransactionService {\r\n  private apiUrl = apiConfig.baseUrl + apiConfig.transactionsEndpoint;\r\n\r\n  constructor(private http: HttpClient) {}\r\n\r\n  create(transaction: Transaction): Observable<Transaction> {\r\n    return this.http.post<Transaction>(this.apiUrl, transaction);\r\n  }\r\n\r\n  read(transactionId: string): Observable<Transaction> {\r\n    return this.http.get<Transaction>(`${this.apiUrl}/${transactionId}`);\r\n  }\r\n\r\n  update(\r\n    transactionId: string,\r\n    transaction: Transaction\r\n  ): Observable<Transaction> {\r\n    return this.http.put<Transaction>(\r\n      `${this.apiUrl}/${transactionId}`,\r\n      transaction\r\n    );\r\n  }\r\n\r\n  delete(transactionId: string): Observable<void> {\r\n    return this.http.delete<void>(`${this.apiUrl}/${transactionId}`);\r\n  }\r\n\r\n  getAll(): Observable<Transaction[]> {\r\n    return this.http.get<Transaction[]>(this.apiUrl);\r\n  }\r\n\r\n  getById(transactionId: string): Observable<Transaction> {\r\n    return this.http.get<Transaction>(`${this.apiUrl}/${transactionId}`);\r\n  }\r\n\r\n  getByUserId(\r\n    userId: string,\r\n    types?: TransactionType[]\r\n  ): Observable<Transaction[]> {\r\n    let url = `${this.apiUrl}?id_user=${userId}`;\r\n    if (types && types.length > 0) {\r\n      url += `&type=${types.join(',')}`;\r\n    }\r\n    return this.http.get<Transaction[]>(url);\r\n  }\r\n\r\n  getCreditsByUserId(userId: string): Observable<Transaction[]> {\r\n    return this.getByUserId(userId, CREDIT_TYPES);\r\n  }\r\n\r\n  getDebitsByUserId(userId: string): Observable<Transaction[]> {\r\n    return this.getByUserId(userId, DEBIT_TYPES);\r\n  }\r\n\r\n  getUserBalance(userId: string): Observable<Balance> {\r\n    return this.getByUserId(userId).pipe(\r\n      map((transactions) => {\r\n        const totalCredits = transactions\r\n          .filter((t) => CREDIT_TYPES.includes(t.type))\r\n          .reduce((sum, t) => sum + t.amount, 0);\r\n\r\n        const totalDebits = transactions\r\n          .filter((t) => DEBIT_TYPES.includes(t.type))\r\n          .reduce((sum, t) => sum + t.amount, 0);\r\n\r\n        return {\r\n          totalCredits,\r\n          totalDebits,\r\n          balance: totalCredits - totalDebits,\r\n        };\r\n      })\r\n    );\r\n  }\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "http",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 20,
+                "jsdoctags": [
+                    {
+                        "name": "http",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": [],
+            "type": "injectable"
+        },
+        {
+            "name": "UserService",
+            "id": "injectable-UserService-12684765e1f175f7ada7330accf33f1b591dc9f13e1c45a8c03d4804dcae2378d8fe18b02a307d1726cd97847139a69ed295649321762cba0b73cfc0e9cae02d",
+            "file": "src/app/shared/services/User/user-service.ts",
+            "properties": [
+                {
+                    "name": "apiUrl",
+                    "defaultValue": "apiConfig.baseUrl + apiConfig.usersEndpoint",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 11,
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
+            "methods": [
+                {
+                    "name": "create",
+                    "args": [
+                        {
+                            "name": "user",
+                            "type": "User",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<User>",
+                    "typeParameters": [],
+                    "line": 15,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "user",
+                            "type": "User",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "delete",
+                    "args": [
+                        {
+                            "name": "userId",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<void>",
+                    "typeParameters": [],
+                    "line": 27,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "userId",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getAll",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "Observable<User[]>",
+                    "typeParameters": [],
+                    "line": 31,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "getById",
+                    "args": [
+                        {
+                            "name": "userId",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<User>",
+                    "typeParameters": [],
+                    "line": 35,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "userId",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "read",
+                    "args": [
+                        {
+                            "name": "userId",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<User>",
+                    "typeParameters": [],
+                    "line": 19,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "userId",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "update",
+                    "args": [
+                        {
+                            "name": "userId",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "user",
+                            "type": "User",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<User>",
+                    "typeParameters": [],
+                    "line": 23,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "userId",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "user",
+                            "type": "User",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport { HttpClient } from '@angular/common/http';\r\nimport { Observable } from 'rxjs';\r\nimport { User } from '../../models/user';\r\nimport { apiConfig } from '../../../app.config';\r\n\r\n@Injectable({\r\n  providedIn: 'root',\r\n})\r\nexport class UserService {\r\n  private apiUrl = apiConfig.baseUrl + apiConfig.usersEndpoint;\r\n\r\n  constructor(private http: HttpClient) {}\r\n\r\n  create(user: User): Observable<User> {\r\n    return this.http.post<User>(this.apiUrl, user);\r\n  }\r\n\r\n  read(userId: string): Observable<User> {\r\n    return this.http.get<User>(`${this.apiUrl}/${userId}`);\r\n  }\r\n\r\n  update(userId: string, user: User): Observable<User> {\r\n    return this.http.put<User>(`${this.apiUrl}/${userId}`, user);\r\n  }\r\n\r\n  delete(userId: string): Observable<void> {\r\n    return this.http.delete<void>(`${this.apiUrl}/${userId}`);\r\n  }\r\n\r\n  getAll(): Observable<User[]> {\r\n    return this.http.get<User[]>(this.apiUrl);\r\n  }\r\n\r\n  getById(userId: string): Observable<User> {\r\n    return this.http.get<User>(`${this.apiUrl}/${userId}`);\r\n  }\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "http",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 11,
+                "jsdoctags": [
+                    {
+                        "name": "http",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": [],
+            "type": "injectable"
+        }
+    ],
+    "guards": [],
+    "interceptors": [],
+    "classes": [],
+    "directives": [],
+    "components": [
+        {
+            "name": "AppComponent",
+            "id": "component-AppComponent-3e27b482a3b092e442b12420656ef635f0366ef3dab73ec5ad5aa81a0ed532a7a5a9d8d3a68e6d49098f3f3707eeecb1a8fca5367c4fdec3a210b40bcfdb6e84",
+            "file": "src/app/app.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-root",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<app-header></app-header>\n<router-outlet></router-outlet>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "title",
+                    "defaultValue": "'TechChallenge - FIAP'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 75
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "RouterOutlet"
+                },
+                {
+                    "name": "HeaderComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { RouterOutlet } from '@angular/router';\r\nimport { HeaderComponent } from './shared/components/header/header.component';\r\n\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  standalone: true,\r\n  imports: [\r\n    RouterOutlet,\r\n    HeaderComponent\r\n  ],\r\n  template: `\r\n    <app-header></app-header>\r\n    <router-outlet></router-outlet>\r\n  `,\r\n  styleUrl: './app.component.css'\r\n})\r\nexport class AppComponent {\r\n  title = 'TechChallenge - FIAP';\r\n}",
+            "styleUrl": "./app.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": []
+        },
+        {
+            "name": "ButtonComponent",
+            "id": "component-ButtonComponent-dd50714e3672d60bc326cafcb6c9d848dfddfd28a05562ad7c01d80430d65a5f396ab902e17c57dd7bd0484e5f7631ffbb687ff6735f0cbbdc8814b6a916d564",
+            "file": "src/app/shared/components/button/button.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-button",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./button.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "iconPosition",
+                    "defaultValue": "'left'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "\"left\" | \"right\"",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "'Button'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'G'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "\"P\" | \"G\"",
+                    "decorators": []
+                },
+                {
+                    "name": "theme",
+                    "defaultValue": "'primary'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'app-button',\r\n  imports: [\r\n    CommonModule\r\n  ],\r\n  templateUrl: './button.component.html',\r\n  styleUrl: './button.component.scss'\r\n})\r\nexport class ButtonComponent {\r\n  @Input() theme: string = 'primary';\r\n  @Input() size: 'P' | 'G' = 'G';\r\n  @Input() disabled: boolean = false;\r\n  @Input() label: string = 'Button';\r\n  @Input() iconPosition: 'left' | 'right' = 'left';\r\n}\r\n",
+            "styleUrl": "./button.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<button\r\n  [disabled]=\"disabled\"\r\n  [ngClass]=\"{\r\n    'bg-cyan-blue-500 hover:bg-cyan-blue-900 text-white': theme === 'primary' && !disabled,\r\n    'bg-orange-500 hover:bg-orange-900 !text-white': theme === 'secondary' && !disabled,\r\n    'bg-transparent border border-cyan-blue-500 text-cyan-blue-500 hover:bg-cyan-blue-500 hover:text-white': theme === 'outline-cyan-blue' && !disabled,\r\n    'bg-transparent text-cyan-blue-500 hover:text-cyan-blue-900': theme === 'ghost-cyan-blue' && !disabled,\r\n    'bg-transparent text-white hover:text-orange-500': theme === 'ghost-white' && !disabled,\r\n    'bg-gray-200 text-gray-500 cursor-not-allowed': disabled,\r\n    'px-3': size === 'P',\r\n    'px-12': size === 'G'\r\n  }\"\r\n  class=\"py-[14px] rounded-lg font-lato text-base font-semibold transition-colors duration-300 flex items-center justify-center gap-2\"\r\n>\r\n  <!-- Ícone à esquerda -->\r\n  <ng-content select=\"[icon-left]\"></ng-content>\r\n\r\n  <span>{{ label }}</span>\r\n\r\n  <!-- Ícone à direita -->\r\n  <ng-content select=\"[icon-right]\"></ng-content>\r\n</button>\r\n"
+        },
+        {
+            "name": "DashboardComponent",
+            "id": "component-DashboardComponent-39b5fd12dfa31779c3bfd518951dd088e653f634060e9bc1809c5c0703537c32539d42dd550fc4f5abbff0b60f93ad58e23d7ce68985a03cdc7d53b6a38ac638",
+            "file": "src/app/pages/dashboard/dashboard.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-dashboard",
+            "styleUrls": [
+                "./dashboard.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./dashboard.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "accountType",
+                    "defaultValue": "'Conta Corrente'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 24
+                },
+                {
+                    "name": "balance",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 23
+                },
+                {
+                    "name": "currentDate",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 22
+                },
+                {
+                    "name": "errorMessage",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 34
+                },
+                {
+                    "name": "idUser",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 28
+                },
+                {
+                    "name": "showBalance",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 30
+                },
+                {
+                    "name": "totalEntries",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 25
+                },
+                {
+                    "name": "totalExits",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 26
+                },
+                {
+                    "name": "transactionData",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "TransactionData[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 32
+                },
+                {
+                    "name": "userName",
+                    "defaultValue": "'Fulano'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 21
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "fetchTransactions",
+                    "args": [
+                        {
+                            "name": "id",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 83,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "id",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "fetchUser",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 66,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "formatBalance",
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 135,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "isCredit",
+                    "args": [
+                        {
+                            "name": "type",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 127,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "type",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "isDebit",
+                    "args": [
+                        {
+                            "name": "type",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 131,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "type",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 41,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "setCurrentDate",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 46,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "successTransaction",
+                    "args": [
+                        {
+                            "name": "response",
+                            "type": "Transaction[]",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 93,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "response",
+                            "type": "Transaction[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "successUser",
+                    "args": [
+                        {
+                            "name": "response",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 76,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "response",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "toggleBalance",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 142,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { TransactionService } from '../../shared/services/Transaction/transaction-service';\r\nimport { UserService } from '../../shared/services/User/user-service';\r\nimport { Transaction } from '../../shared/models/transaction';\r\n\r\ninterface TransactionData {\r\n  day: string;\r\n  entries: number;\r\n  exits: number;\r\n}\r\n\r\n@Component({\r\n  selector: 'app-dashboard',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './dashboard.component.html',\r\n  styleUrls: ['./dashboard.component.scss'],\r\n})\r\nexport class DashboardComponent {\r\n  userName: string = 'Fulano';\r\n  currentDate: string = '';\r\n  balance: string = '';\r\n  accountType: string = 'Conta Corrente';\r\n  totalEntries: string = '';\r\n  totalExits: string = '';\r\n\r\n  idUser: string = '';\r\n\r\n  showBalance: boolean = true;\r\n\r\n  transactionData: TransactionData[] = [];\r\n\r\n  errorMessage: string = '';\r\n\r\n  constructor(\r\n    private transactionService: TransactionService,\r\n    private userService: UserService\r\n  ) {}\r\n\r\n  ngOnInit(): void {\r\n    this.setCurrentDate();\r\n    this.fetchUser();\r\n  }\r\n\r\n  setCurrentDate(): void {\r\n    const weekDays = [\r\n      'Domingo',\r\n      'Segunda-feira',\r\n      'Terça-feira',\r\n      'Quarta-feira',\r\n      'Quinta-feira',\r\n      'Sexta-feira',\r\n      'Sábado',\r\n    ];\r\n    const today = new Date();\r\n    const weekDay = weekDays[today.getDay()];\r\n    const day = String(today.getDate()).padStart(2, '0');\r\n    const month = String(today.getMonth() + 1).padStart(2, '0');\r\n    const year = today.getFullYear();\r\n    const hour = String(today.getHours()).padStart(2, '0');\r\n    const minute = String(today.getMinutes()).padStart(2, '0');\r\n    this.currentDate = `${weekDay}, ${day}/${month}/${year} ${hour}:${minute}`;\r\n  }\r\n\r\n  fetchUser(): void {\r\n    this.userService.getById('u1').subscribe(\r\n      (response) => this.successUser(response),\r\n      (error) => {\r\n        this.errorMessage = 'Erro ao buscar usuário.';\r\n        console.error('Error fetching user name:', error);\r\n      }\r\n    );\r\n  }\r\n\r\n  successUser(response: any): void {\r\n    this.errorMessage = '';\r\n    this.userName = response.name;\r\n    this.idUser = response.id;\r\n    this.fetchTransactions(this.idUser);\r\n  }\r\n\r\n  fetchTransactions(id: string): void {\r\n    this.transactionService.getByUserId(id).subscribe(\r\n      (response) => this.successTransaction(response),\r\n      (error) => {\r\n        this.errorMessage = 'Erro ao buscar transações.';\r\n        console.error('Error fetching transactions:', error);\r\n      }\r\n    );\r\n  }\r\n\r\n  successTransaction(response: Transaction[]): void {\r\n    this.errorMessage = '';\r\n    const totalEntries = response\r\n      .filter((transaction) => this.isCredit(transaction.type))\r\n      .reduce((acc, transaction) => acc + transaction.amount, 0);\r\n    const totalExits = response\r\n      .filter((transaction) => this.isDebit(transaction.type))\r\n      .reduce((acc, transaction) => acc + transaction.amount, 0);\r\n\r\n    this.totalEntries = this.formatBalance(totalEntries);\r\n    this.totalExits = this.formatBalance(totalExits);\r\n    this.balance = this.formatBalance(totalEntries - totalExits);\r\n\r\n    const grouped: { [key: string]: { entries: number; exits: number } } = {};\r\n    response.forEach((transaction) => {\r\n      const date = new Date(transaction.date);\r\n      const key = `${date.getDate().toString().padStart(2, '0')}/${(\r\n        date.getMonth() + 1\r\n      )\r\n        .toString()\r\n        .padStart(2, '0')}/${date.getFullYear()}`;\r\n      if (!grouped[key]) grouped[key] = { entries: 0, exits: 0 };\r\n      if (this.isCredit(transaction.type))\r\n        grouped[key].entries += transaction.amount;\r\n      if (this.isDebit(transaction.type))\r\n        grouped[key].exits += transaction.amount;\r\n    });\r\n    this.transactionData = Object.entries(grouped).map(([day, data]) => ({\r\n      day,\r\n      entries: data.entries,\r\n      exits: data.exits,\r\n    }));\r\n  }\r\n\r\n  isCredit(type: string): boolean {\r\n    return type === 'exchange' || type === 'loan';\r\n  }\r\n\r\n  isDebit(type: string): boolean {\r\n    return type === 'transfer';\r\n  }\r\n\r\n  formatBalance(value: number): string {\r\n    return value.toLocaleString('pt-BR', {\r\n      style: 'currency',\r\n      currency: 'BRL',\r\n    });\r\n  }\r\n\r\n  toggleBalance(): void {\r\n    this.showBalance = !this.showBalance;\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./dashboard.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "transactionService",
+                        "type": "TransactionService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "userService",
+                        "type": "UserService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 34,
+                "jsdoctags": [
+                    {
+                        "name": "transactionService",
+                        "type": "TransactionService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "userService",
+                        "type": "UserService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": [],
+            "templateData": "<div class=\"bg-gray-100 p-4 min-h-screen font-lato\">\r\n  <div class=\"max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-visible\">\r\n    <!-- Cabeçalho com saldo -->\r\n    <div class=\"p-6\">\r\n      <!-- Layout para telas maiores (Desktop) -->\r\n      <div class=\"hidden sm:flex flex-col sm:flex-row justify-between items-start gap-6\">\r\n        <div>\r\n          <h1 class=\"text-xl sm:text-2xl text-gray-900 font-bold\">\r\n            Olá, {{ userName }}!\r\n          </h1>\r\n          <p class=\"text-gray-500 mt-2 sm:mt-3 text-xs sm:text-sm\">{{ currentDate }}</p>\r\n        </div>\r\n        <div class=\"text-right w-full sm:w-auto mt-4 sm:mt-0\">\r\n          <div class=\"flex items-center justify-end\">\r\n            <p class=\"font-medium text-gray-700 mr-3 text-xl sm:text-2xl\">Saldo</p>\r\n            <button (click)=\"toggleBalance()\" class=\"focus:outline-none\">\r\n              <svg\r\n                xmlns=\"http://www.w3.org/2000/svg\"\r\n                class=\"h-5 w-5 text-gray-700\"\r\n                fill=\"none\"\r\n                viewBox=\"0 0 24 24\"\r\n                stroke=\"currentColor\"\r\n              >\r\n                <path\r\n                  stroke-linecap=\"round\"\r\n                  stroke-linejoin=\"round\"\r\n                  stroke-width=\"2\"\r\n                  d=\"M15 12a3 3 0 11-6 0 3 3 0 016 0z\"\r\n                />\r\n                <path\r\n                  stroke-linecap=\"round\"\r\n                  stroke-linejoin=\"round\"\r\n                  stroke-width=\"2\"\r\n                  d=\"M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z\"\r\n                />\r\n              </svg>\r\n            </button>\r\n          </div>\r\n          <p class=\"text-gray-500 mt-1 text-xs sm:text-sm\">{{ accountType }}</p>\r\n          <p\r\n            class=\"text-gray-900 mt-2 sm:mt-3 text-xl sm:text-2xl font-bold\"\r\n            *ngIf=\"showBalance\"\r\n          >\r\n            {{ balance }}\r\n          </p>\r\n          <p\r\n            class=\"text-gray-500 mt-2 sm:mt-3 text-xl sm:text-2xl font-bold\"\r\n            *ngIf=\"!showBalance\"\r\n          >\r\n            ****\r\n          </p>\r\n        </div>\r\n      </div>\r\n\r\n      <!-- Layout para telas pequenas (Mobile) -->\r\n      <div class=\"flex flex-col sm:hidden items-center text-center\">\r\n        <div class=\"flex flex-col mb-4\">\r\n          <h1 class=\"text-xl text-gray-900 font-bold\">\r\n            Olá, {{ userName }}!\r\n          </h1>\r\n          <p class=\"text-gray-500 text-xs\">{{ currentDate }}</p>\r\n        </div>\r\n\r\n        <!-- Separador entre saudação e saldo (apenas mobile) -->\r\n        <div class=\"w-full border-t border-gray-200 mb-4\"></div>\r\n\r\n        <!-- Saldo -->\r\n        <div class=\"flex flex-col\">\r\n          <div class=\"flex items-center justify-center\">\r\n            <p class=\"font-medium text-gray-700 text-lg\">Saldo</p>\r\n            <button (click)=\"toggleBalance()\" class=\"focus:outline-none ml-2\">\r\n              <svg\r\n                xmlns=\"http://www.w3.org/2000/svg\"\r\n                class=\"h-5 w-5 text-gray-700\"\r\n                fill=\"none\"\r\n                viewBox=\"0 0 24 24\"\r\n                stroke=\"currentColor\"\r\n              >\r\n                <path\r\n                  stroke-linecap=\"round\"\r\n                  stroke-linejoin=\"round\"\r\n                  stroke-width=\"2\"\r\n                  d=\"M15 12a3 3 0 11-6 0 3 3 0 016 0z\"\r\n                />\r\n                <path\r\n                  stroke-linecap=\"round\"\r\n                  stroke-linejoin=\"round\"\r\n                  stroke-width=\"2\"\r\n                  d=\"M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z\"\r\n                />\r\n              </svg>\r\n            </button>\r\n          </div>\r\n          <p class=\"text-gray-500 mt-1 text-xs\">{{ accountType }}</p>\r\n          <p\r\n            class=\"text-gray-900 text-lg font-bold\"\r\n            *ngIf=\"showBalance\"\r\n          >\r\n            {{ balance }}\r\n          </p>\r\n          <p\r\n            class=\"text-gray-500 text-lg font-bold\"\r\n            *ngIf=\"!showBalance\"\r\n          >\r\n            ****\r\n          </p>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <!-- Separador principal entre cabeçalho e gráfico -->\r\n    <div class=\"px-6\">\r\n      <div class=\"border-t border-gray-200\"></div>\r\n    </div>\r\n\r\n    <!-- Gráfico de transações -->\r\n    <div class=\"p-6 sm:pb-12\">\r\n      <h2 class=\"text-gray-900 mb-4 text-base font-bold text-center sm:text-left\">\r\n        Transações de Maio\r\n      </h2>\r\n\r\n      <div class=\"flex flex-col lg:flex-row gap-8\">\r\n        <div class=\"relative h-48 mx-auto w-full sm:w-4/5 lg:w-4/5\">\r\n          <div class=\"relative h-full\">\r\n            <!-- Y-axis labels (números do eixo Y) -->\r\n            <div class=\"absolute left-0 h-full flex flex-col justify-between pointer-events-none\">\r\n              <span class=\"text-right text-xs text-gray-500 pr-1 w-10\">2000</span>\r\n              <span class=\"text-right text-xs text-gray-500 pr-1 w-10\">1500</span>\r\n              <span class=\"text-right text-xs text-gray-500 pr-1 w-10\">1000</span>\r\n              <span class=\"text-right text-xs text-gray-500 pr-1 w-10\">500</span>\r\n              <span class=\"text-right text-xs text-gray-500 pr-1 w-10\">0</span>\r\n            </div>\r\n\r\n            <!-- Elementos do gráfico -->\r\n            <div class=\"absolute inset-0 ml-10 border border-gray-200\">\r\n              <div class=\"absolute w-full h-1/4 border-b border-gray-200\"></div>\r\n              <div class=\"absolute w-full h-2/4 border-b border-gray-200\"></div>\r\n              <div class=\"absolute w-full h-3/4 border-b border-gray-200\"></div>\r\n              <div class=\"absolute h-full w-1/5 border-r border-gray-200\"></div>\r\n              <div class=\"absolute h-full w-2/5 border-r border-gray-200 left-1/5\"></div>\r\n              <div class=\"absolute h-full w-3/5 border-r border-gray-200 left-2/5\"></div>\r\n              <div class=\"absolute h-full w-4/5 border-r border-gray-200 left-3/5\"></div>\r\n            </div>\r\n\r\n            <div class=\"absolute inset-0 ml-10 flex justify-around items-end\">\r\n              <ng-container *ngFor=\"let data of transactionData; let i = index\">\r\n                <div class=\"flex items-end justify-center w-1/5 h-full\">\r\n                  <div class=\"flex items-end space-x-1 sm:space-x-2 mb-0\">\r\n                    <div\r\n                      class=\"w-3 sm:w-5 md:w-7\"\r\n                      [style.height.px]=\"(data.exits / 2000) * 170\"\r\n                      [style.backgroundColor]=\"'#FF5031'\"\r\n                    ></div>\r\n                    <div\r\n                      class=\"w-3 sm:w-5 md:w-7\"\r\n                      [style.height.px]=\"(data.entries / 2000) * 170\"\r\n                      [style.backgroundColor]=\"'#004D61'\"\r\n                    ></div>\r\n                  </div>\r\n                </div>\r\n              </ng-container>\r\n            </div>\r\n\r\n            <div class=\"absolute w-full -bottom-6 ml-10 pr-8 grid grid-cols-5 text-center\">\r\n              <ng-container *ngFor=\"let data of transactionData\">\r\n                <span class=\"text-gray-600 text-xs\">{{ data.day }}</span>\r\n              </ng-container>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- Legenda -->\r\n        <div class=\"flex flex-col sm:hidden justify-center gap-2 items-center mt-8\">\r\n          <!-- Entradas -->\r\n          <div class=\"flex items-center space-x-3\">\r\n            <div class=\"w-4 h-4 rounded-full bg-[#004d61]\"></div>\r\n            <div class=\"flex flex-col\">\r\n              <span class=\"text-xs\">Entradas</span>\r\n              <span class=\"text-sm font-bold\">{{ totalEntries }}</span>\r\n            </div>\r\n          </div>\r\n          <!-- Saídas -->\r\n          <div class=\"flex items-center space-x-3\">\r\n            <div class=\"w-4 h-4 rounded-full bg-[#ff5031]\"></div>\r\n            <div class=\"flex flex-col\">\r\n              <span class=\"text-xs\">Saídas</span>\r\n              <span class=\"text-sm font-bold\">{{ totalExits }}</span>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- Legenda para telas maiores -->\r\n        <div class=\"hidden sm:flex sm:flex-row lg:flex-col gap-4 sm:justify-center sm:items-center\">\r\n          <!-- Entradas -->\r\n          <div class=\"flex items-center space-x-3\">\r\n            <div class=\"w-4 h-4 rounded-full bg-[#004d61]\"></div>\r\n            <div class=\"flex flex-col\">\r\n              <span class=\"text-xs\">Entradas</span>\r\n              <span class=\"text-sm font-bold\">{{ totalEntries }}</span>\r\n            </div>\r\n          </div>\r\n          <!-- Saídas -->\r\n          <div class=\"flex items-center space-x-3\">\r\n            <div class=\"w-4 h-4 rounded-full bg-[#ff5031]\"></div>\r\n            <div class=\"flex flex-col\">\r\n              <span class=\"text-xs\">Saídas</span>\r\n              <span class=\"text-sm font-bold\">{{ totalExits }}</span>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
+        },
+        {
+            "name": "HeaderComponent",
+            "id": "component-HeaderComponent-9f0852b16b266f7d5823bc4a1e0a4659b837a2234848486f39fb144658008763024f645d17c1915124658edb36527999ff02d1f85247b53a8cf3c1f273ee2b74",
+            "file": "src/app/shared/components/header/header.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-header",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./header.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "isLoggedIn",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "ButtonComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "TextComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "IconExitComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\n\r\nimport { IconExitComponent } from '../../assets/icons/icon-exit.component'\r\nimport { ButtonComponent } from '../button/button.component'\r\nimport { TextComponent } from '../text/text.component'\r\n\r\n@Component({\r\n  selector: 'app-header',\r\n  imports: [\r\n    ButtonComponent,\r\n    TextComponent,\r\n    IconExitComponent\r\n  ],\r\n  templateUrl: './header.component.html',\r\n  styleUrl: './header.component.scss'\r\n})\r\nexport class HeaderComponent {\r\n  isLoggedIn: boolean = true; // Validação para saber se o Header e da LandingPage ou da Area Logada\r\n}\r\n",
+            "styleUrl": "./header.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<header class=\"bg-cyan-blue-500\">\r\n    <div class=\"flex items-center justify-between h-24 container\">\r\n        <!-- Variação para LandingPage -->\r\n        @if(isLoggedIn) {\r\n            <div class=\"flex gap-20\">   \r\n                <img src=\"assets/icons/logo.svg\" alt=\"Logo Bytebank\">\r\n                <ul class=\"flex items-center gap-10\">\r\n                    <li>\r\n                        <a href=\"#\" class=\"text-white hover:text-orange-500 transition-all text-center font-lato text-[18px] font-semibold leading-normal\">Sobre</a>\r\n                    </li>\r\n                    <li>\r\n                        <a href=\"#\" class=\"text-white hover:text-orange-500 transition-all  text-center font-lato text-[18px] font-semibold leading-normal\">Serviço</a>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n            <div class=\"flex gap-9\">\r\n                <app-button theme=\"secondary\" label=\"Abrir minha conta\" size=\"P\"></app-button>\r\n                <app-button theme=\"ghost-white\" label=\"Já tenho conta\" size=\"P\">\r\n                    <app-icon-exit icon-right />\r\n                </app-button>\r\n            </div>\r\n        }\r\n        <!-- Variação para usuario já logado -->\r\n        @else {            \r\n            <img src=\"assets/icons/logo.svg\" alt=\"Logo Bytebank\">\r\n            <div class=\"flex flex-row gap-6\">\r\n                <app-text variant=\"text-small\" color=\"text-white\">Fulano da Silva</app-text>\r\n                <a href=\"#\">\r\n                    <img src=\"../../../../assets/icons/dark-mode.svg\" alt=\"Icone de Dark Mode\">\r\n                </a>\r\n                <a href=\"#\">\r\n                    <img src=\"../../../../assets/icons/bell.svg\" alt=\"Icone de aviso\">\r\n                </a>\r\n                <a href=\"#\">\r\n                    <img src=\"../../../../assets/icons/account-circle.svg\" alt=\"Icone de Perfil do Usuario\">\r\n                </a>\r\n            </div>            \r\n        }\r\n    </div>\r\n</header>"
+        },
+        {
+            "name": "HomeComponent",
+            "id": "component-HomeComponent-99694081eedb41be8baa14be2073b4b883f9273383d230aa2fc6024565c8dfe5a7310b1f32457bc3835e8412e8e06e2425d4413a75eaf2fcf16f9cfb91020232",
+            "file": "src/app/pages/home/home.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-home",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./home.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "HeaderComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\n\r\nimport { HeaderComponent } from '../../shared/components/header/header.component';\r\n\r\n@Component({\r\n  selector: 'app-home',\r\n  imports: [\r\n    HeaderComponent,\r\n  ],\r\n  templateUrl: './home.component.html',\r\n  styleUrl: './home.component.scss'\r\n})\r\nexport class HomeComponent {\r\n\r\n}\r\n",
+            "styleUrl": "./home.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<section class=\"bg-primary-gradient\">\r\n\r\n</section>"
+        },
+        {
+            "name": "IconArrowDownLeftComponent",
+            "id": "component-IconArrowDownLeftComponent-231c51e080289452d04061d02a62ffe0206f6fb9875085b569ea5ce2a690cb713ef31c9289b4532abd15446821c95f4bdb6ec057a2b29ebf8114388900f89246",
+            "file": "src/app/shared/assets/icons/icon-arrow-down-left.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-icon-arrow-down-left",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./icon-arrow-down-left.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-icon-arrow-down-left',\r\n  imports: [],\r\n  templateUrl: './icon-arrow-down-left.component.html',\r\n  styleUrl: './icon-arrow-down-left.component.scss'\r\n})\r\nexport class IconArrowDownLeftComponent {\r\n\r\n}\r\n",
+            "styleUrl": "./icon-arrow-down-left.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\">\r\n    <g clip-path=\"url(#clip0_24_1161)\">\r\n        <path d=\"M13.3333 15H5V6.66667H7.5V10.6417L13.3167 5L15 6.69167L9.29167 12.5H13.3333V15Z\" fill=\"currentColor\" />\r\n    </g>\r\n    <defs>\r\n        <clipPath id=\"clip0_24_1161\">\r\n            <rect width=\"20\" height=\"20\" fill=\"white\" />\r\n        </clipPath>\r\n    </defs>\r\n</svg>"
+        },
+        {
+            "name": "IconArrowPencilComponent",
+            "id": "component-IconArrowPencilComponent-44973e226ce366ec58735f57d18aabacbd074102400a4d8b6352c01daf90ba6f791885f2dfe50a6ac8bfe89eda98ed41a681592c6a811997a6e917431fe785a7",
+            "file": "src/app/shared/assets/icons/icon-arrow-pencil.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-icon-arrow-pencil",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./icon-arrow-pencil.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-icon-arrow-pencil',\r\n  imports: [],\r\n  templateUrl: './icon-arrow-pencil.component.html',\r\n  styleUrl: './icon-arrow-pencil.component.scss'\r\n})\r\nexport class IconArrowPencilComponent {\r\n\r\n}\r\n",
+            "styleUrl": "./icon-arrow-pencil.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"21\" height=\"20\" viewBox=\"0 0 21 20\" fill=\"none\">\r\n    <path d=\"M16.6834 7.43749L13.1418 3.93749L14.3084 2.77082C14.6279 2.45138 15.0204 2.29166 15.4859 2.29166C15.9509 2.29166 16.3432 2.45138 16.6626 2.77082L17.8293 3.93749C18.1487 4.25693 18.3154 4.64249 18.3293 5.09416C18.3432 5.54527 18.1904 5.93055 17.8709 6.24999L16.6834 7.43749ZM3.93343 17.5C3.69732 17.5 3.49954 17.42 3.3401 17.26C3.1801 17.1005 3.1001 16.9028 3.1001 16.6667V14.3125C3.1001 14.2014 3.12093 14.0939 3.1626 13.99C3.20426 13.8855 3.26676 13.7917 3.3501 13.7083L11.9334 5.12499L15.4751 8.66666L6.89176 17.25C6.80843 17.3333 6.71482 17.3958 6.61093 17.4375C6.50649 17.4792 6.39871 17.5 6.2876 17.5H3.93343Z\" fill=\"currentColor\"/>\r\n  </svg>"
+        },
+        {
+            "name": "IconBinComponent",
+            "id": "component-IconBinComponent-462972c1ab46f90a8b0cbb36e4b681c58a16c9dc8334e32977cd6f7ede82f4210568e331c9380e74b33af0727f55f1eb6c528e8a666a4fd49ff159028064ffd7",
+            "file": "src/app/shared/assets/icons/icon-bin.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-icon-bin",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./icon-bin.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-icon-bin',\r\n  imports: [],\r\n  templateUrl: './icon-bin.component.html',\r\n  styleUrl: './icon-bin.component.scss'\r\n})\r\nexport class IconBinComponent {\r\n\r\n}\r\n",
+            "styleUrl": "./icon-bin.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\">\r\n    <g clip-path=\"url(#clip0_24_1169)\">\r\n      <path d=\"M4.99984 15.8333C4.99984 16.75 5.74984 17.5 6.6665 17.5H13.3332C14.2498 17.5 14.9998 16.75 14.9998 15.8333V5.83333H4.99984V15.8333ZM15.8332 3.33333H12.9165L12.0832 2.5H7.9165L7.08317 3.33333H4.1665V5H15.8332V3.33333Z\" fill=\"currentColor\"/>\r\n    </g>\r\n    <defs>\r\n      <clipPath id=\"clip0_24_1169\">\r\n        <rect width=\"20\" height=\"20\" fill=\"white\"/>\r\n      </clipPath>\r\n    </defs>\r\n  </svg>"
+        },
+        {
+            "name": "IconCardComponent",
+            "id": "component-IconCardComponent-d4429959563e663f31d5ee71a30e52dea3d1e9e19a9d83ced9e201e17a3480e39ec0337c3b0cb3a413cf955bfac6ac8dcedf7ada4354ca0216b35a8853d6494c",
+            "file": "src/app/shared/assets/icons/icon-card.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-icon-card",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./icon-card.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-icon-card',\r\n  imports: [],\r\n  templateUrl: './icon-card.component.html',\r\n  styleUrl: './icon-card.component.scss'\r\n})\r\nexport class IconCardComponent {\r\n\r\n}\r\n",
+            "styleUrl": "./icon-card.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\">\r\n    <g clip-path=\"url(#clip0_13_25)\">\r\n      <path d=\"M20 4H4C2.89 4 2.01 4.89 2.01 6L2 18C2 19.11 2.89 20 4 20H20C21.11 20 22 19.11 22 18V6C22 4.89 21.11 4 20 4ZM20 18H4V12H20V18ZM20 8H4V6H20V8Z\" fill=\"currentColor\"/>\r\n    </g>\r\n    <defs>\r\n      <clipPath id=\"clip0_13_25\">\r\n        <rect width=\"24\" height=\"24\" fill=\"white\"/>\r\n      </clipPath>\r\n    </defs>\r\n  </svg>"
+        },
+        {
+            "name": "IconDollarComponent",
+            "id": "component-IconDollarComponent-558f4858cd2f96251cb0204833a0d7e970c3d19b672716f7e973f4ef1e6f2e073cb449fd633a73b8b6f5d7cf272b41ede2abd8b95f92fb73eddecaa0080a1a17",
+            "file": "src/app/shared/assets/icons/icon-dollar.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-icon-dollar",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./icon-dollar.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-icon-dollar',\r\n  imports: [],\r\n  templateUrl: './icon-dollar.component.html',\r\n  styleUrl: './icon-dollar.component.scss'\r\n})\r\nexport class IconDollarComponent {\r\n\r\n}\r\n",
+            "styleUrl": "./icon-dollar.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\">\r\n    <g clip-path=\"url(#clip0_13_19)\">\r\n        <path\r\n            d=\"M11.8001 10.9C9.53007 10.31 8.80007 9.7 8.80007 8.75C8.80007 7.66 9.81007 6.9 11.5001 6.9C13.2801 6.9 13.9401 7.75 14.0001 9H16.2101C16.1401 7.28 15.0901 5.7 13.0001 5.19V3H10.0001V5.16C8.06007 5.58 6.50007 6.84 6.50007 8.77C6.50007 11.08 8.41007 12.23 11.2001 12.9C13.7001 13.5 14.2001 14.38 14.2001 15.31C14.2001 16 13.7101 17.1 11.5001 17.1C9.44007 17.1 8.63007 16.18 8.52007 15H6.32007C6.44007 17.19 8.08007 18.42 10.0001 18.83V21H13.0001V18.85C14.9501 18.48 16.5001 17.35 16.5001 15.3C16.5001 12.46 14.0701 11.49 11.8001 10.9Z\"\r\n            fill=\"currentColor\" />\r\n    </g>\r\n    <defs>\r\n        <clipPath id=\"clip0_13_19\">\r\n            <rect width=\"24\" height=\"24\" fill=\"white\" />\r\n        </clipPath>\r\n    </defs>\r\n</svg>"
+        },
+        {
+            "name": "IconExitComponent",
+            "id": "component-IconExitComponent-29b405ce7c742512f1b203680fcc5e7c2147d598076db28dcf0f7fda6acd2ede31ecbdcefb59bd600bc091f07f60ba300cf4e207694730099aec20d7b7102305",
+            "file": "src/app/shared/assets/icons/icon-exit.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-icon-exit",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./icon-exit.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-icon-exit',\r\n  imports: [],\r\n  templateUrl: './icon-exit.component.html',\r\n  styleUrl: './icon-exit.component.scss'\r\n})\r\nexport class IconExitComponent {\r\n\r\n}\r\n",
+            "styleUrl": "./icon-exit.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"19\" viewBox=\"0 0 20 19\" fill=\"none\">\r\n    <path d=\"M15 4.625L13.59 6.035L16.17 8.625H6V10.625H16.17L13.59 13.205L15 14.625L20 9.625L15 4.625ZM2 2.625H10V0.625H2C0.9 0.625 0 1.525 0 2.625V16.625C0 17.725 0.9 18.625 2 18.625H10V16.625H2V2.625Z\" fill=\"currentColor\"/>\r\n  </svg>"
+        },
+        {
+            "name": "IconHomeComponent",
+            "id": "component-IconHomeComponent-15a873fa5199297c51ba0f709fe889ce9e2c85f2fda8297a07e71b1534f9f3a89b3294f3a5b3e146ae4b9e635edf384661af6963f2de5a1c08bb1f19527d116b",
+            "file": "src/app/shared/assets/icons/icon-home.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-icon-home",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./icon-home.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-icon-home',\r\n  imports: [],\r\n  templateUrl: './icon-home.component.html',\r\n  styleUrl: './icon-home.component.scss'\r\n})\r\nexport class IconHomeComponent {\r\n\r\n}\r\n",
+            "styleUrl": "./icon-home.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<svg width=\"17\" height=\"19\" viewBox=\"0 0 17 19\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n    <path id=\"Vector\" d=\"M2.80005 18.375C2.25005 18.375 1.77938 18.1793 1.38805 17.788C0.996049 17.396 0.800049 16.925 0.800049 16.375V7.375C0.800049 7.05833 0.871049 6.75833 1.01305 6.475C1.15438 6.19167 1.35005 5.95833 1.60005 5.775L7.60005 1.275C7.78338 1.14167 7.97505 1.04167 8.17505 0.975C8.37505 0.908333 8.58338 0.875 8.80005 0.875C9.01672 0.875 9.22505 0.908333 9.42505 0.975C9.62505 1.04167 9.81672 1.14167 10 1.275L16 5.775C16.25 5.95833 16.446 6.19167 16.588 6.475C16.7294 6.75833 16.8 7.05833 16.8 7.375V16.375C16.8 16.925 16.6044 17.396 16.213 17.788C15.821 18.1793 15.35 18.375 14.8 18.375H10.8V11.375H6.80005V18.375H2.80005Z\" fill=\"currentColor\"/>\r\n</svg>\r\n    "
+        },
+        {
+            "name": "IconListComponent",
+            "id": "component-IconListComponent-f0c499a2e4692dfbc4d6f76b7c3af4dd3b76a353fc1d037c5ad3935099d672d1c4e7d20e6c6298f28f9c5227193b86d86465f6e239094e3db50f29021ab0dd63",
+            "file": "src/app/shared/assets/icons/icon-list.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-icon-list",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./icon-list.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-icon-list',\r\n  imports: [],\r\n  templateUrl: './icon-list.component.html',\r\n  styleUrl: './icon-list.component.scss'\r\n})\r\nexport class IconListComponent {\r\n\r\n}\r\n",
+            "styleUrl": "./icon-list.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\">\r\n    <g clip-path=\"url(#clip0_13_22)\">\r\n      <path d=\"M19 5V19H5V5H19ZM20.1 3H3.9C3.4 3 3 3.4 3 3.9V20.1C3 20.5 3.4 21 3.9 21H20.1C20.5 21 21 20.5 21 20.1V3.9C21 3.4 20.5 3 20.1 3ZM11 7H17V9H11V7ZM11 11H17V13H11V11ZM11 15H17V17H11V15ZM7 7H9V9H7V7ZM7 11H9V13H7V11ZM7 15H9V17H7V15Z\" fill=\"currentColor\"/>\r\n    </g>\r\n    <defs>\r\n      <clipPath id=\"clip0_13_22\">\r\n        <rect width=\"24\" height=\"24\" fill=\"white\"/>\r\n      </clipPath>\r\n    </defs>\r\n  </svg>"
+        },
+        {
+            "name": "IconSettingsComponent",
+            "id": "component-IconSettingsComponent-b793049d85fd9e53b9c4da4d98f17c42ee6eb46c2af2d94ecaa614c2e6ba4916444b5226dc3309f293b89672e206c557400c8d8e2a6eded85ab12d4b37ef4140",
+            "file": "src/app/shared/assets/icons/icon-settings.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-icon-settings",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./icon-settings.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-icon-settings',\r\n  imports: [],\r\n  templateUrl: './icon-settings.component.html',\r\n  styleUrl: './icon-settings.component.scss'\r\n})\r\nexport class IconSettingsComponent {\r\n\r\n}\r\n",
+            "styleUrl": "./icon-settings.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\">\r\n    <path\r\n        d=\"M13.8751 22H10.1251C9.87509 22 9.65843 21.9167 9.47509 21.75C9.29176 21.5833 9.18343 21.375 9.15009 21.125L8.85009 18.8C8.63343 18.7167 8.42943 18.6167 8.23809 18.5C8.04609 18.3833 7.85843 18.2583 7.67509 18.125L5.50009 19.025C5.26676 19.1083 5.03343 19.1167 4.80009 19.05C4.56676 18.9833 4.38343 18.8417 4.25009 18.625L2.40009 15.4C2.26676 15.1833 2.22509 14.95 2.27509 14.7C2.32509 14.45 2.45009 14.25 2.65009 14.1L4.52509 12.675C4.50843 12.5583 4.50009 12.4457 4.50009 12.337V11.662C4.50009 11.554 4.50843 11.4417 4.52509 11.325L2.65009 9.9C2.45009 9.75 2.32509 9.55 2.27509 9.3C2.22509 9.05 2.26676 8.81667 2.40009 8.6L4.25009 5.375C4.36676 5.14167 4.54576 4.99567 4.78709 4.937C5.02909 4.879 5.26676 4.89167 5.50009 4.975L7.67509 5.875C7.85843 5.74167 8.05009 5.61667 8.25009 5.5C8.45009 5.38333 8.65009 5.28333 8.85009 5.2L9.15009 2.875C9.18343 2.625 9.29176 2.41667 9.47509 2.25C9.65843 2.08333 9.87509 2 10.1251 2H13.8751C14.1251 2 14.3418 2.08333 14.5251 2.25C14.7084 2.41667 14.8168 2.625 14.8501 2.875L15.1501 5.2C15.3668 5.28333 15.5711 5.38333 15.7631 5.5C15.9544 5.61667 16.1418 5.74167 16.3251 5.875L18.5001 4.975C18.7334 4.89167 18.9668 4.88333 19.2001 4.95C19.4334 5.01667 19.6168 5.15833 19.7501 5.375L21.6001 8.6C21.7334 8.81667 21.7751 9.05 21.7251 9.3C21.6751 9.55 21.5501 9.75 21.3501 9.9L19.4751 11.325C19.4918 11.4417 19.5001 11.554 19.5001 11.662V12.337C19.5001 12.4457 19.4834 12.5583 19.4501 12.675L21.3251 14.1C21.5251 14.25 21.6501 14.45 21.7001 14.7C21.7501 14.95 21.7084 15.1833 21.5751 15.4L19.7251 18.6C19.5918 18.8167 19.4044 18.9627 19.1631 19.038C18.9211 19.1127 18.6834 19.1083 18.4501 19.025L16.3251 18.125C16.1418 18.2583 15.9501 18.3833 15.7501 18.5C15.5501 18.6167 15.3501 18.7167 15.1501 18.8L14.8501 21.125C14.8168 21.375 14.7084 21.5833 14.5251 21.75C14.3418 21.9167 14.1251 22 13.8751 22ZM12.0501 15.5C13.0168 15.5 13.8418 15.1583 14.5251 14.475C15.2084 13.7917 15.5501 12.9667 15.5501 12C15.5501 11.0333 15.2084 10.2083 14.5251 9.525C13.8418 8.84167 13.0168 8.5 12.0501 8.5C11.0668 8.5 10.2374 8.84167 9.56209 9.525C8.88743 10.2083 8.55009 11.0333 8.55009 12C8.55009 12.9667 8.88743 13.7917 9.56209 14.475C10.2374 15.1583 11.0668 15.5 12.0501 15.5Z\"\r\n        fill=\"currentColor\" />\r\n</svg>"
+        },
+        {
+            "name": "InputComponent",
+            "id": "component-InputComponent-13140c88d716b6914b609db83094627be3608965d752dce395b77b17c22ece21c25650ae80197b28d2bd55dcad8e9468e50bf11cf7dbdca6db7de992ead89670",
+            "file": "src/app/shared/components/input/input.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-input",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./input.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "options",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "string[]",
+                    "decorators": []
+                },
+                {
+                    "name": "placeholder",
+                    "defaultValue": "'Selecione o tipo de transação'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'G'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "\"G\" | \"P\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "isOpen",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                },
+                {
+                    "name": "selectedOption",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | null",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "selectOption",
+                    "args": [
+                        {
+                            "name": "option",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 24,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "option",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "toggleDropdown",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 20,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, Input  } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-input',\r\n  imports: [\r\n    CommonModule\r\n  ],\r\n  templateUrl: './input.component.html',\r\n  styleUrl: './input.component.scss'\r\n})\r\nexport class InputComponent {\r\n  @Input() options: string[] = [];\r\n  @Input() size: 'G' | 'P' = 'G';\r\n  @Input() placeholder = 'Selecione o tipo de transação';\r\n\r\n  isOpen = false;\r\n  selectedOption: string | null = null;\r\n\r\n  toggleDropdown() {\r\n    this.isOpen = !this.isOpen;\r\n  }\r\n\r\n  selectOption(option: string) {\r\n    this.selectedOption = option;\r\n    this.isOpen = false;\r\n  }\r\n}\r\n",
+            "styleUrl": "./input.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div\r\n  class=\"relative inline-block w-full\"\r\n  [ngClass]=\"{\r\n    'max-w-[355px]': size === 'G',\r\n    'max-w-[290px]': size === 'P'\r\n  }\"\r\n>\r\n  <!-- Campo do select -->\r\n  <button\r\n    type=\"button\"\r\n    [class]=\"\r\n      'w-full bg-gray-100 border border-cyan-blue-500 text-cyan-blue-500 font-lato font-medium rounded-md p-4 flex items-center justify-between ' +\r\n      (size === 'G' ? 'gap-[66px]' : 'gap-2')\r\n    \"\r\n    (click)=\"toggleDropdown()\"\r\n  >\r\n    {{ selectedOption || placeholder }}\r\n    <svg\r\n      class=\"w-4 h-4 transition-transform\"\r\n      [ngClass]=\"{ 'rotate-180': isOpen }\"\r\n      fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"\r\n      viewBox=\"0 0 24 24\"\r\n    >\r\n      <path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M19 9l-7 7-7-7\" />\r\n    </svg>\r\n  </button>\r\n\r\n  <!-- Dropdown -->\r\n  <div\r\n  *ngIf=\"isOpen\"\r\n  class=\"absolute z-10 mt-0 w-full bg-gray-100 border border-green-dark border-t-0 rounded-b-md shadow-lg\"\r\n>\r\n  <ul>\r\n    <li\r\n      *ngFor=\"let option of options\"\r\n      (click)=\"selectOption(option)\"\r\n      class=\"px-4 py-2 text- cursor-pointer transition-colors font-lato text-center text-cyan-blue-500\"\r\n      [ngClass]=\"{\r\n        'bg-gray-100 font-semibold': option === selectedOption,\r\n        'hover:bg-cyan-blue-500 hover:text-white hover:font-bold': option !== selectedOption\r\n      }\"\r\n    >\r\n      {{ option }}\r\n    </li>\r\n  </ul>\r\n</div>\r\n</div>"
+        },
+        {
+            "name": "MenuItemComponent",
+            "id": "component-MenuItemComponent-a27433e9de7aea7b216859495a18d587666bb5e6857eef7a2138663b85508c5ae3dc885f87f9453814bf21779cfe997436e3af14f5b855d1928c1dda59196eb1",
+            "file": "src/app/shared/components/menu-item/menu-item.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-menu-item",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./menu-item.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "active",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "iconComponent",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "Type<any>",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "route",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "RouterModule",
+                    "type": "module"
+                },
+                {
+                    "name": "NgClass"
+                },
+                {
+                    "name": "NgComponentOutlet",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Type } from '@angular/core';\r\nimport { RouterModule } from '@angular/router';\r\nimport { NgClass, NgComponentOutlet } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'app-menu-item',\r\n  standalone: true,\r\n  imports: [RouterModule, NgClass, NgComponentOutlet],\r\n  templateUrl: './menu-item.component.html',\r\n})\r\nexport class MenuItemComponent {\r\n  @Input() label!: string;\r\n  @Input() route!: string;\r\n  @Input() active: boolean = false;\r\n  @Input() iconComponent!: Type<any>;\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<!-- <a\r\n  [routerLink]=\"route\"\r\n  routerLinkActive=\"bg-cyan-blue-500 text-white\"\r\n  class=\"flex items-center gap-3 px-4 py-3 rounded-lg text-cyan-blue-900 font-medium transition-colors duration-200\"\r\n  [ngClass]=\"{\r\n    'bg-cyan-blue-500 text-white': active,\r\n    'text-cyan-blue-900 hover:text-white hover:bg-cyan-blue-900': !active\r\n  }\"\r\n>\r\n  <img [src]=\"icon\" alt=\"Ícone\" class=\"w-5 h-5\" />\r\n  <span>{{ label }}</span>\r\n</a> -->\r\n\r\n\r\n<!-- <a\r\n  [routerLink]=\"route\"\r\n  routerLinkActive=\"bg-cyan-blue-500 text-white\"\r\n  class=\"flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors duration-200\"\r\n  [ngClass]=\"{\r\n    'bg-cyan-blue-500 text-white': active,\r\n    'text-cyan-blue-900 hover:text-white hover:bg-cyan-blue-900': !active\r\n  }\"\r\n>\r\n  <img\r\n    [src]=\"icon\"\r\n    alt=\"\"\r\n    class=\"w-5 h-5 transition-all duration-300\"\r\n    [ngClass]=\"{\r\n      'invert': isActive,\r\n      'invert brightness-0 saturate-100 hue-rotate-[180deg]': !isActive\r\n    }\"\r\n  />\r\n  <span>{{ label }}</span>\r\n</a> -->\r\n\r\n\r\n<!-- <a\r\n  [routerLink]=\"route\"\r\n  routerLinkActive=\"bg-cyan-blue-500 text-white\"\r\n  class=\"flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors duration-200\"\r\n  [ngClass]=\"{\r\n    'bg-cyan-blue-500 text-white': active,\r\n    'text-cyan-blue-900 hover:text-white hover:bg-cyan-blue-900': !active\r\n  }\"\r\n>\r\n    <app-icon-home [ngClass]=\"active ? 'text-white' : 'hover:text-cyan-blue-900'\"></app-icon-home>\r\n    <span>{{ label }}</span>\r\n</a> -->\r\n\r\n\r\n<!-- <a\r\n  [routerLink]=\"route\"\r\n  routerLinkActive=\"bg-cyan-blue-500 text-white\"\r\n  class=\"flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors duration-200\"\r\n  [ngClass]=\"{\r\n    'bg-cyan-blue-500 text-white': active,\r\n    'text-cyan-blue-900 hover:text-white hover:bg-cyan-blue-900': !active\r\n  }\"\r\n>\r\n  <ng-container *ngComponentOutlet=\"iconComponent\" [ngClass]=\"active ? 'text-white' : 'hover:text-cyan-blue-900'\"></ng-container>\r\n\r\n  <span>{{ label }}</span>\r\n</a> -->\r\n\r\n<!-- <a\r\n  [routerLink]=\"route\"\r\n  routerLinkActive=\"bg-cyan-blue-500 text-white\"\r\n  class=\"flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors duration-200\"\r\n  [ngClass]=\"{\r\n    'bg-cyan-blue-500 text-white': active,\r\n    'text-cyan-blue-900 hover:text-white hover:bg-cyan-blue-900': !active\r\n  }\"\r\n>\r\n  <ng-container\r\n    *ngComponentOutlet=\"iconComponent\"\r\n    [ngClass]=\"active ? 'text-white' : 'hover:text-cyan-blue-900'\"\r\n  ></ng-container>\r\n\r\n  <span>{{ label }}</span>\r\n</a> -->\r\n\r\n\r\n<a\r\n  [routerLink]=\"route\"\r\n  routerLinkActive=\"bg-cyan-blue-500 text-white\"\r\n  class=\"flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors duration-200\"\r\n  [ngClass]=\"{\r\n    'bg-cyan-blue-500 text-white': active,\r\n    'text-cyan-blue-900 hover:text-white hover:bg-cyan-blue-900': !active\r\n  }\"\r\n>\r\n  <span [ngClass]=\"active ? 'text-white' : 'hover:text-cyan-blue-900'\">\r\n    <ng-container *ngComponentOutlet=\"iconComponent\"></ng-container>\r\n  </span>\r\n  <span>{{ label }}</span>\r\n</a>\r\n\r\n"
+        },
+        {
+            "name": "StatementComponent",
+            "id": "component-StatementComponent-1b5d5164beec5bfb9567ca57b5bc303bb3abb5b192c5003a15fe13d4804a395056c21207e9052c9acbdb1caa79150130534baa2094b7b375ae7b835437147bb3",
+            "file": "src/app/shared/components/statement/statement.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-statement",
+            "styleUrls": [
+                "./statement.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./statement.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "items",
+                    "defaultValue": "[\r\n    { type: 'deposit', description: 'Depósito', amount: 100, date: '11/02/2025' },\r\n    { type: 'withdraw', description: 'Saque', amount: 100, date: '11/02/2025' },\r\n    { type: 'deposit', description: 'Depósito', amount: 200, date: '11/02/2025' },\r\n    { type: 'withdraw', description: 'Saque', amount: 200, date: '11/02/2025' },\r\n    { type: 'deposit', description: 'Depósito', amount: 300, date: '11/02/2025' },\r\n    { type: 'withdraw', description: 'Saque', amount: 300, date: '11/02/2025' },\r\n    { type: 'deposit', description: 'Depósito', amount: 400, date: '11/02/2025' },\r\n    { type: 'withdraw', description: 'Saque', amount: 400, date: '11/02/2025' },\r\n    { type: 'deposit', description: 'Depósito', amount: 500, date: '11/02/2025' },\r\n    { type: 'withdraw', description: 'Saque', amount: 500, date: '11/02/2025' },\r\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StatementItem[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 30
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "TextComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "IconArrowPencilComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "IconBinComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "IconDollarComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "IconArrowDownLeftComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n// import { AppSubtitleComponent } from \"../../typography/app-subtitle.component\";\r\n// import { AppTextRegularComponent } from \"../../typography/app-text-regular.component\";\r\n\r\nimport { TextComponent } from \"../text/text.component\"\r\n\r\nimport { IconArrowPencilComponent } from \"../../assets/icons/icon-arrow-pencil.component\";\r\nimport { IconBinComponent } from \"../../assets/icons/icon-bin.component\";\r\nimport { IconDollarComponent } from \"../../assets/icons/icon-dollar.component\";\r\nimport { IconArrowDownLeftComponent } from \"../../assets/icons/icon-arrow-down-left.component\";\r\n\r\nexport interface StatementItem {\r\n  type: 'deposit' | 'withdraw';\r\n  description: string;\r\n  amount: number;\r\n  date: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'app-statement',\r\n  standalone: true,\r\n  imports: [CommonModule, TextComponent, IconArrowPencilComponent, IconBinComponent, IconDollarComponent, IconArrowDownLeftComponent],\r\n  templateUrl: './statement.component.html',\r\n  styleUrls: ['./statement.component.scss'],\r\n})\r\n\r\nexport class StatementComponent {\r\n  items: StatementItem[] = [\r\n    { type: 'deposit', description: 'Depósito', amount: 100, date: '11/02/2025' },\r\n    { type: 'withdraw', description: 'Saque', amount: 100, date: '11/02/2025' },\r\n    { type: 'deposit', description: 'Depósito', amount: 200, date: '11/02/2025' },\r\n    { type: 'withdraw', description: 'Saque', amount: 200, date: '11/02/2025' },\r\n    { type: 'deposit', description: 'Depósito', amount: 300, date: '11/02/2025' },\r\n    { type: 'withdraw', description: 'Saque', amount: 300, date: '11/02/2025' },\r\n    { type: 'deposit', description: 'Depósito', amount: 400, date: '11/02/2025' },\r\n    { type: 'withdraw', description: 'Saque', amount: 400, date: '11/02/2025' },\r\n    { type: 'deposit', description: 'Depósito', amount: 500, date: '11/02/2025' },\r\n    { type: 'withdraw', description: 'Saque', amount: 500, date: '11/02/2025' },\r\n  ];\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./statement.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"rounded-xl shadow p-6 bg-white\">\r\n  <app-text variant=\"subtitle\" as=\"h2\">Extrato</app-text>\r\n  \r\n    <table class=\"w-full text-sm border-t-2 mt-3 pt-3\">\r\n      <tbody>\r\n        <tr *ngFor=\"let item of items\" class=\"border-b-2 last:border-none\">\r\n          <!-- icone -->\r\n          <td class=\"py-4\">\r\n            <ng-container [ngSwitch]=\"item.type\">\r\n              <app-icon-dollar\r\n                *ngSwitchCase=\"'deposit'\"\r\n                class=\"w-4 h-4\"\r\n                [ngClass]=\"'text-green-600'\"\r\n              ></app-icon-dollar>\r\n            \r\n              <app-icon-arrow-down-left\r\n                *ngSwitchCase=\"'withdraw'\"\r\n                class=\"w-4 h-4\"\r\n                [ngClass]=\"'text-red-600'\"\r\n              ></app-icon-arrow-down-left>\r\n            </ng-container>          \r\n          </td>\r\n          <!-- Deposito ou Saque -->\r\n          <td class=\"py-4\">\r\n            <app-text [color]=\"item.type === 'deposit' ? 'text-green-600' : 'text-red-600'\">{{ item.description }}</app-text>\r\n            <!-- <app-app-text-regular [color]=\"item.type === 'deposit' ? 'text-green-600' : 'text-red-600'\">\r\n              {{ item.description }}\r\n            </app-app-text-regular> -->\r\n          </td>\r\n          <!-- Valor -->\r\n          <td class=\"py-4\">\r\n            <app-text [color]=\"item.type === 'deposit' ? 'text-green-600' : 'text-red-600'\"> R$ {{ item.amount.toFixed(2) }}</app-text>\r\n            <!-- <app-app-text-regular [color]=\"item.type === 'deposit' ? 'text-green-600' : 'text-red-600'\">\r\n              R$ {{ item.amount.toFixed(2) }}\r\n            </app-app-text-regular> -->\r\n          </td>\r\n          <!-- Data -->\r\n          <td class=\"py-4\">\r\n            <app-text color=\"text-gray-600\"> R$ {{ item.amount.toFixed(2) }}</app-text>\r\n            <!-- <app-app-text-regular color=\"text-gray-600\">\r\n              {{ item.date }}\r\n            </app-app-text-regular> -->\r\n          </td>\r\n          <!-- Icone de Lápís -->\r\n          <td class=\"py-4 text-center\">\r\n            <app-icon-arrow-pencil [ngClass]=\"item.type === 'deposit' ? 'text-green-600' : 'text-red-600'\" class=\"w-4 h-4\"></app-icon-arrow-pencil>\r\n          </td>\r\n          <!-- Icone de Lixeira -->\r\n          <td class=\"py-4 text-center\">\r\n            <app-icon-bin [ngClass]=\"item.type === 'deposit' ? 'text-green-600' : 'text-red-600'\" class=\"w-4 h-4\"></app-icon-bin>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  \r\n    <div class=\"flex justify-end mt-4\">\r\n      <a href=\"#\" class=\"inline-flex items-center gap-2 text-cyan-blue-500 hover:underline\" >\r\n        Listar\r\n        <img src=\"assets/icons/arrow-right.svg\" alt=\"Ir para listagem\" class=\"w-4 h-4\" />\r\n      </a>\r\n    </div>\r\n    \r\n  </div>\r\n  "
+        },
+        {
+            "name": "TextComponent",
+            "id": "component-TextComponent-10b34160d98878a39c9ff808086f2438aaeb7b9ba4eceae6054c7158121860ec70b50f1def8e2ecb209f7a563ce4fb8404e4f5646325ad2b5ffbf1e5d9b9a83b",
+            "file": "src/app/shared/components/text/text.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-text",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./text.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "color",
+                    "defaultValue": "'text-black-900'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "tag",
+                    "defaultValue": "'p'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 22,
+                    "type": "\"p\" | \"h1\" | \"h2\" | \"span\"",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'text-regular'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "\"title-bold\" | \"title-regular\" | \"subtitle\" | \"text-regular\" | \"text-regular-special\" | \"text-small\" | \"text-small-bold\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'app-text',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './text.component.html',\r\n})\r\nexport class TextComponent {\r\n  @Input() variant:\r\n    | 'title-bold'\r\n    | 'title-regular'\r\n    | 'subtitle'\r\n    | 'text-regular'\r\n    | 'text-regular-special'\r\n    | 'text-small'\r\n    | 'text-small-bold' = 'text-regular';\r\n\r\n  @Input() color: string = 'text-black-900';\r\n\r\n  @Input() tag: 'p' | 'h1' | 'h2' | 'span' = 'p';\r\n\r\n  get classes(): string {\r\n    const base = 'font-lato leading-[20px]';\r\n\r\n    const variants: Record<string, string> = {\r\n      'title-bold': 'text-[24px] font-bold',\r\n      'title-regular': 'text-[24px] font-normal',\r\n      'subtitle': 'text-[20px] font-normal',\r\n      'text-regular': 'text-[16px] font-normal',\r\n      'text-regular-special': 'text-[16px] font-normal',\r\n      'text-small': 'text-[14px] font-normal',\r\n      'text-small-bold': 'text-[14px] font-bold',\r\n    };\r\n\r\n    return `${base} ${variants[this.variant]} ${this.color}`;\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "classes": {
+                    "name": "classes",
+                    "getSignature": {
+                        "name": "classes",
+                        "type": "string",
+                        "returnType": "string",
+                        "line": 24
+                    }
+                }
+            },
+            "templateData": "<ng-container [ngSwitch]=\"tag\">\r\n    <h1 *ngSwitchCase=\"'h1'\" [ngClass]=\"classes\"><ng-content></ng-content></h1>\r\n    <h2 *ngSwitchCase=\"'h2'\" [ngClass]=\"classes\"><ng-content></ng-content></h2>\r\n    <span *ngSwitchCase=\"'span'\" [ngClass]=\"classes\"><ng-content></ng-content></span>\r\n    <p *ngSwitchDefault [ngClass]=\"classes\"><ng-content></ng-content></p>\r\n  </ng-container>"
+        }
+    ],
+    "modules": [],
+    "miscellaneous": {
+        "variables": [
+            {
+                "name": "apiConfig",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/app.config.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\r\n  baseUrl: 'http://localhost:8080',\r\n  usersEndpoint: '/users',\r\n  transactionsEndpoint: '/transactions',\r\n}"
+            },
+            {
+                "name": "appConfig",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/app.config.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "ApplicationConfig",
+                "defaultValue": "{\r\n  providers: [\r\n    provideZoneChangeDetection({ eventCoalescing: true }),\r\n    provideRouter(routes),\r\n    provideHttpClient(), // ✅ adicionado aqui para habilitar o HttpClient globalmente\r\n  ],\r\n}"
+            },
+            {
+                "name": "CREDIT_TYPES",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/shared/models/transaction.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "TransactionType[]",
+                "defaultValue": "[\r\n  TransactionType.Exchange,\r\n  TransactionType.Loan,\r\n]"
+            },
+            {
+                "name": "DEBIT_TYPES",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/shared/models/transaction.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "TransactionType[]",
+                "defaultValue": "[TransactionType.Transfer]"
+            }
+        ],
+        "functions": [
+            {
+                "name": "isCredit",
+                "file": "src/app/shared/models/transaction.ts",
+                "ctype": "miscellaneous",
+                "subtype": "function",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "args": [
+                    {
+                        "name": "type",
+                        "type": "TransactionType",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "returnType": "boolean",
+                "jsdoctags": [
+                    {
+                        "name": "type",
+                        "type": "TransactionType",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "isDebit",
+                "file": "src/app/shared/models/transaction.ts",
+                "ctype": "miscellaneous",
+                "subtype": "function",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "args": [
+                    {
+                        "name": "type",
+                        "type": "TransactionType",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "returnType": "boolean",
+                "jsdoctags": [
+                    {
+                        "name": "type",
+                        "type": "TransactionType",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            }
+        ],
+        "typealiases": [],
+        "enumerations": [
+            {
+                "name": "TransactionType",
+                "childs": [
+                    {
+                        "name": "Exchange",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "exchange"
+                    },
+                    {
+                        "name": "Transfer",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "transfer"
+                    },
+                    {
+                        "name": "Loan",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "loan"
+                    }
+                ],
+                "ctype": "miscellaneous",
+                "subtype": "enum",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "file": "src/app/shared/models/transaction.ts"
+            }
+        ],
+        "groupedVariables": {
+            "src/app/app.config.ts": [
+                {
+                    "name": "apiConfig",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app.config.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\r\n  baseUrl: 'http://localhost:8080',\r\n  usersEndpoint: '/users',\r\n  transactionsEndpoint: '/transactions',\r\n}"
+                },
+                {
+                    "name": "appConfig",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app.config.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ApplicationConfig",
+                    "defaultValue": "{\r\n  providers: [\r\n    provideZoneChangeDetection({ eventCoalescing: true }),\r\n    provideRouter(routes),\r\n    provideHttpClient(), // ✅ adicionado aqui para habilitar o HttpClient globalmente\r\n  ],\r\n}"
+                }
+            ],
+            "src/app/shared/models/transaction.ts": [
+                {
+                    "name": "CREDIT_TYPES",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/shared/models/transaction.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "TransactionType[]",
+                    "defaultValue": "[\r\n  TransactionType.Exchange,\r\n  TransactionType.Loan,\r\n]"
+                },
+                {
+                    "name": "DEBIT_TYPES",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/shared/models/transaction.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "TransactionType[]",
+                    "defaultValue": "[TransactionType.Transfer]"
+                }
+            ]
+        },
+        "groupedFunctions": {
+            "src/app/shared/models/transaction.ts": [
+                {
+                    "name": "isCredit",
+                    "file": "src/app/shared/models/transaction.ts",
+                    "ctype": "miscellaneous",
+                    "subtype": "function",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "args": [
+                        {
+                            "name": "type",
+                            "type": "TransactionType",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "returnType": "boolean",
+                    "jsdoctags": [
+                        {
+                            "name": "type",
+                            "type": "TransactionType",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "isDebit",
+                    "file": "src/app/shared/models/transaction.ts",
+                    "ctype": "miscellaneous",
+                    "subtype": "function",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "args": [
+                        {
+                            "name": "type",
+                            "type": "TransactionType",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "returnType": "boolean",
+                    "jsdoctags": [
+                        {
+                            "name": "type",
+                            "type": "TransactionType",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "groupedEnumerations": {
+            "src/app/shared/models/transaction.ts": [
+                {
+                    "name": "TransactionType",
+                    "childs": [
+                        {
+                            "name": "Exchange",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "exchange"
+                        },
+                        {
+                            "name": "Transfer",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "transfer"
+                        },
+                        {
+                            "name": "Loan",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "loan"
+                        }
+                    ],
+                    "ctype": "miscellaneous",
+                    "subtype": "enum",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "file": "src/app/shared/models/transaction.ts"
+                }
+            ]
+        },
+        "groupedTypeAliases": {}
+    },
+    "routes": [],
+    "coverage": {
+        "count": 0,
+        "status": "low",
+        "files": [
+            {
+                "filePath": "src/app/app.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AppComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.config.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "apiConfig",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.config.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "appConfig",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pages/dashboard/dashboard.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DashboardComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/22",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pages/dashboard/dashboard.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "TransactionData",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pages/home/home.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "HomeComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/assets/icons/icon-arrow-down-left.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "IconArrowDownLeftComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/assets/icons/icon-arrow-pencil.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "IconArrowPencilComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/assets/icons/icon-bin.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "IconBinComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/assets/icons/icon-card.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "IconCardComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/assets/icons/icon-dollar.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "IconDollarComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/assets/icons/icon-exit.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "IconExitComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/assets/icons/icon-home.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "IconHomeComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/assets/icons/icon-list.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "IconListComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/assets/icons/icon-settings.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "IconSettingsComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/button/button.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ButtonComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/header/header.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "HeaderComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/input/input.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "InputComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/8",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/menu-item/menu-item.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MenuItemComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/statement/statement.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "StatementComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/statement/statement.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "StatementItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/text/text.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TextComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/models/balance.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "Balance",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/models/transaction.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "Transaction",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/models/transaction.ts",
+                "type": "function",
+                "linktype": "miscellaneous",
+                "linksubtype": "function",
+                "name": "isCredit",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/models/transaction.ts",
+                "type": "function",
+                "linktype": "miscellaneous",
+                "linksubtype": "function",
+                "name": "isDebit",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/models/transaction.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "CREDIT_TYPES",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/models/transaction.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "DEBIT_TYPES",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/models/user.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "User",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/services/Transaction/transaction-service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "TransactionService",
+                "coveragePercent": 0,
+                "coverageCount": "0/13",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/services/User/user-service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "UserService",
+                "coveragePercent": 0,
+                "coverageCount": "0/9",
+                "status": "low"
+            }
+        ]
+    }
+}

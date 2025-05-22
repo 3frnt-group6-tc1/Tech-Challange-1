@@ -7,7 +7,7 @@ export const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'painel',
+    path: 'panel',
     loadComponent: () => import('./pages/panel/panel.component').then(m => m.PainelComponent),
   },
 ];

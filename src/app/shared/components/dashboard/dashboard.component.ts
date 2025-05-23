@@ -6,6 +6,7 @@ import { TransactionData } from '../../models/transaction-data';
 import { GraficComponent } from '../grafic/grafic.component';
 import { User } from '../../models/user';
 import { Transaction, TransactionType } from '../../models/transaction';
+import { systemConfig } from '../../../app.config';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,6 +16,7 @@ import { Transaction, TransactionType } from '../../models/transaction';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent {
+  userId: string = systemConfig.userId;
   userName: string = '';
   currentDate: string = '';
   balance: string = '';
@@ -66,7 +68,7 @@ export class DashboardComponent {
 
   fetchUser(): void {
     this.isLoading = true;
-    this.userService.getById('u2').subscribe(
+    this.userService.getById(this.userId).subscribe(
       (response) => this.onUserFetchSuccess(response),
       (error) => {
         this.isLoading = false;

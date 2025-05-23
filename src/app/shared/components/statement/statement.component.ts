@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-// import { AppSubtitleComponent } from "../../typography/app-subtitle.component";
-// import { AppTextRegularComponent } from "../../typography/app-text-regular.component";
-
 import { TextComponent } from "../text/text.component"
 
 import { IconArrowPencilComponent } from "../../assets/icons/icon-arrow-pencil.component";

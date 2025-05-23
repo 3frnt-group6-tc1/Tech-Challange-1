@@ -25,10 +25,10 @@ export class TextComponent {
     const base = 'font-lato leading-[20px]';
 
     const variants: Record<string, string> = {
-      'title-bold': 'text-[24px] font-bold',
+      'title-bold': 'text-[24px] font-bold leading-[1.5]',
       'title-regular': 'text-[24px] font-normal',
       'subtitle': 'text-[20px] font-normal',
-      'text-regular': 'text-[16px] font-normal',
+      'text-regular': 'text-[16px]  font-bold',
       'text-regular-special': 'text-[16px] font-normal',
       'text-small': 'text-[14px] font-normal',
       'text-small-bold': 'text-[14px] font-bold',

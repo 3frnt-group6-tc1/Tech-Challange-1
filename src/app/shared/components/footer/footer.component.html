@@ -1,0 +1,65 @@
+<footer class="bg-cyan-blue-500">
+    <div class="container">
+        @if(!isLoggedIn) {
+            <div class="flex p-12 justify-center gap-9">
+                <div class="flex flex-col gap-4 w-72">
+                    <app-text variant="text-regular" as="p" color="text-white">
+                        Serviços
+                    </app-text>
+                    <ul>
+                        <li class="flex flex-col gap-4">
+                            <app-text variant="text-regular-special" as="p" color="text-white">
+                                Conta corrente
+                            </app-text >
+                            <app-text variant="text-regular-special" as="p" color="text-white">
+                                Conta PJ
+                            </app-text>
+                            <app-text variant="text-regular-special" as="p" color="text-white">
+                                Cartão de crédito
+                            </app-text>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="flex flex-col gap-4 w-72">
+                    <app-text variant="text-regular" as="p" color="text-white">
+                        Contato
+                    </app-text>
+                    <ul>
+                        <li class="flex flex-col gap-4">
+                            <app-text variant="text-regular-special" as="p" color="text-white">
+                                0800 004 250 08
+                            </app-text >
+                            <app-text variant="text-regular-special" as="p" color="text-white">
+                                meajuda&#64;bytebank.com.br
+                            </app-text>
+                            <app-text variant="text-regular-special" as="p" color="text-white">
+                                ouvidoria&#64;bytebank.com.br
+                            </app-text>
+                        </li>
+                    </ul>
+                </div>
+    
+                <div class="flex flex-col gap-6 w-72 text-center">
+                    <app-text variant="text-regular" as="p" color="text-white">
+                        © Copyright 2025 CDJMV
+                    </app-text>
+    
+                    <app-icon-logo class="text-white m-auto"></app-icon-logo>
+    
+                    <div class="flex flex-row gap-6 items-center justify-center">
+                        <app-icon-whatsapp class="text-white"></app-icon-whatsapp>
+                        <app-icon-instagram class="text-white"></app-icon-instagram>
+                        <app-icon-youtube class="text-white"></app-icon-youtube>
+                    </div>
+                </div>
+            </div>
+        }
+        @else {
+            <div class="flex p-12 justify-between">
+                <app-text variant="text-small" as="p" color="text-white">V.1.0.0</app-text>
+                <app-text variant="text-small-bold" as="p" color="text-white">© Copyright 2025 CDJMV</app-text>
+            </div>
+        }
+    </div>
+</footer>

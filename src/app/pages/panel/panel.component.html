@@ -2,26 +2,12 @@
   <!-- Conteúdo Principal -->
   <div class="bg-[#dee9ea] flex flex-grow">
     <!-- Menu Lateral -->
-    <aside class="bg-white rounded-lg shadow-md md:block hidden w-64">
-      <div class="flex flex-col h-full p-6">
-        <app-menu-item [label]="'Início'" [route]="'/inicio'" [iconComponent]="iconHome"
-          [active]="currentRoute === '/inicio'"></app-menu-item>
-        <app-menu-item [label]="'Transações'" [route]="'/transacoes'" [iconComponent]="iconDollar"
-          [active]="currentRoute === '/transacoes'"></app-menu-item>
-        <app-menu-item [label]="'Extrato'" [route]="'/extrato'" [iconComponent]="iconList"
-          [active]="currentRoute === '/extrato'"></app-menu-item>
-        <app-menu-item [label]="'Meus Cartões'" [route]="'/meus-cartoes'" [iconComponent]="iconCard"
-          [active]="currentRoute === '/meus-cartoes'"></app-menu-item>
-        <app-menu-item [label]="'Configurações'" [route]="'/configuracoes'" [iconComponent]="iconSettings"
-          [active]="currentRoute === '/configuracoes'"></app-menu-item>
-      </div>
-    </aside>
+    <app-aside></app-aside>
 
     <!-- Dashboard, Extrato e Nova Transação -->
     <main class="flex-grow px-6 pt-6 pb-6">
       <!-- Container para todos os componentes -->
       <div class="flex flex-col 2md:block gap-6 relative">
-
         <!-- Dashboard sempre em cima -->
         <div class="w-full 2md:w-2/3 2md:pr-6">
           <app-dashboard></app-dashboard>
@@ -29,11 +15,13 @@
 
         <!-- Nova Transação (segundo em telas pequenas, abaixo em telas grandes) -->
         <div class="order-2 2md:mt-6 2md:order-none">
-          <app-new-transaction></app-new-transaction>
+          <app-transaction-form></app-transaction-form>
         </div>
 
         <!-- Extrato (terceiro em telas pequenas, lado direito em telas grandes) -->
-        <div class="order-3 2md:order-none 2md:absolute 2md:top-0 2md:right-0 2md:w-1/3">
+        <div
+          class="order-3 2md:order-none 2md:absolute 2md:top-0 2md:right-0 2md:w-1/3"
+        >
           <div class="mx-auto overflow-x-auto rounded-xl shadow-md">
             <app-statement></app-statement>
           </div>
@@ -41,5 +29,7 @@
       </div>
     </main>
   </div>
-</div>
 
+  <!-- Rodapé -->
+  <app-footer></app-footer>
+</div>

@@ -31,7 +31,7 @@ describe('TransactionService', () => {
   });
 
   it('should create a transaction', () => {
-    const newTransaction: Transaction = {
+    const TransactionForm: Transaction = {
       id: '3',
       type: TransactionType.Exchange,
       amount: 200,
@@ -40,14 +40,14 @@ describe('TransactionService', () => {
       id_user: 'u3',
     };
 
-    service.create(newTransaction).subscribe((transaction) => {
-      expect(transaction).toEqual(newTransaction);
+    service.create(TransactionForm).subscribe((transaction) => {
+      expect(transaction).toEqual(TransactionForm);
     });
 
     const req = httpMock.expectOne(transactionsUrl);
     expect(req.request.method).toBe('POST');
-    expect(req.request.body).toEqual(newTransaction);
-    req.flush(newTransaction);
+    expect(req.request.body).toEqual(TransactionForm);
+    req.flush(TransactionForm);
   });
 
   it('should read a transaction by id', () => {

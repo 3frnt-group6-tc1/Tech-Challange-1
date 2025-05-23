@@ -3,14 +3,17 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-button',
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   templateUrl: './button.component.html',
-  styleUrl: './button.component.scss'
+  styleUrl: './button.component.scss',
 })
 export class ButtonComponent {
-  @Input() theme: string = 'primary';
+  @Input() theme:
+    | 'primary'
+    | 'secondary'
+    | 'outline-cyan-blue'
+    | 'ghost-cyan-blue'
+    | 'ghost-white' = 'primary';
   @Input() size: 'P' | 'G' | 'GG' = 'G';
   @Input() disabled: boolean = false;
   @Input() label: string = 'Button';

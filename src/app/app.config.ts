@@ -10,6 +10,18 @@ export const apiConfig = {
   transactionsEndpoint: '/transactions',
 };
 
+export const systemConfig: {
+  version: string;
+  company: string;
+  year: number;
+  userId: string;
+} = {
+  version: '1.0.0',
+  company: 'CDJMV',
+  year: new Date().getFullYear(),
+  userId: 'u2',
+};
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),

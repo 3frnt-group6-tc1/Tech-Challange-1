@@ -1,7 +1,7 @@
 export enum TransactionType {
   Exchange = 'exchange',
-  Transfer = 'transfer',
   Loan = 'loan',
+  Transfer = 'transfer',
 }
 
 export const CREDIT_TYPES: TransactionType[] = [
@@ -26,3 +26,9 @@ export function isCredit(type: TransactionType): boolean {
 export function isDebit(type: TransactionType): boolean {
   return DEBIT_TYPES.includes(type);
 }
+
+export const TRANSACTION_TYPE_LABELS: Record<string, TransactionType> = {
+  'Câmbio de Moeda': TransactionType.Exchange,
+  'Empréstimo e Financiamento': TransactionType.Loan,
+  'DOC/TED': TransactionType.Transfer,
+};

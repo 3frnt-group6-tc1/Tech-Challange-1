@@ -12,6 +12,9 @@ module.exports = {
       },
     },
     extend: {
+      screens: {
+        '2md': '1440px',
+      },
       backgroundImage: {
         'primary-gradient': 'linear-gradient(to bottom, #004D61, #ffffff)',
         'secondary-gradient': 'linear-gradient(to bottom, #dee9ea, #ffffff)',
@@ -33,7 +36,7 @@ module.exports = {
         "black-600": "#767676",
         "black-700": "#444444",
         "black-900": "#131313",
-        
+
         "green-600": "#157f40",
         "red-600": "#ce3426",
       }

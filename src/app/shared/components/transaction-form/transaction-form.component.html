@@ -1,0 +1,80 @@
+<!-- transaction-form.component.html -->
+<div class="rounded-xl shadow p-6 bg-white pb-[80px]">
+  <!-- Título e borda (sem interferência do layout flex) -->
+  <div class="pb-4">
+    <div class="border-b-2">
+      <app-text variant="title-bold" as="h1" class="mb-4 border-gray-200 block">
+        Nova Transação
+      </app-text>
+    </div>
+  </div>
+
+  <!-- Container flex com layout responsivo -->
+  <div class="flex flex-col md:flex-row">
+    <!-- Container de inputs: centralizado apenas em telas pequenas -->
+    <div
+      class="w-full md:w-1/2 md:pr-4 flex flex-col items-center md:items-start md:justify-start"
+    >
+      <!-- Inputs e botão -->
+      <form
+        class="w-full max-w-sm md:max-w-none mt-8"
+        (ngSubmit)="submitForm()"
+        #transactionForm="ngForm"
+      >
+        <div class="mb-4">
+          <app-input
+            class="w-full"
+            [(ngModel)]="form.type"
+            name="type"
+            required
+            [options]="transactionOptions"
+            placeholder="Selecione o tipo de transação"
+            size="G"
+          >
+          </app-input>
+        </div>
+
+        <div class="mb-4">
+          <div class="relative inline-block w-full">
+            <div
+              class="w-full bg-gray-100 border border-cyan-blue-500 text-cyan-blue-500 font-lato font-medium rounded-md p-4 flex items-center"
+              [ngClass]="{
+                'max-w-[360px]': true
+              }"
+            >
+              <span class="text-cyan-blue-500 mr-2">R$</span>
+              <input
+                type="text"
+                placeholder="00,00"
+                class="bg-transparent w-full outline-none text-cyan-blue-500 placeholder-cyan-blue-500 placeholder-opacity-70"
+                [(ngModel)]="form.amount"
+                name="amount"
+                autocomplete="off"
+                inputmode="numeric"
+                (click)="form.amount = ''"
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <app-button
+          theme="primary"
+          size="GG"
+          label="Concluir Transação"
+          class="w-full"
+          type="submit"
+        ></app-button>
+      </form>
+    </div>
+
+    <!-- Imagem alinhada ao primeiro input e centralizada -->
+    <div class="w-full md:w-1/2 pl-4 mt-[20px] flex justify-center">
+      <img
+        src="assets/icons/vector.svg"
+        alt="Ilustração de Transação"
+        class="max-w-full h-auto"
+      />
+    </div>
+  </div>
+</div>

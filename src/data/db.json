@@ -17,6 +17,24 @@
       "name": "Carlos Lima",
       "email": "carlos.lima@email.com",
       "password": "senha789"
+    },
+    {
+      "id": "u4",
+      "name": "Ana Pereira",
+      "email": "ana.pereira@email.com",
+      "password": "senha321"
+    },
+    {
+      "id": "u5",
+      "name": "Lucas Oliveira",
+      "email": "lucas.oliveira@email.com",
+      "password": "senha654"
+    },
+    {
+      "id": "u6",
+      "name": "Mariano Oliveira",
+      "email": "mariano.oliveira@email.com",
+      "password": "senha435"
     }
   ],
   "transactions": [
@@ -147,6 +165,86 @@
       "date": "2025-04-30T20:00:00.000Z",
       "description": "Lanche",
       "id_user": "u3"
+    },
+    {
+      "id": "17",
+      "type": "exchange",
+      "amount": 180,
+      "date": "2025-05-16T09:00:00.000Z",
+      "description": "Bônus",
+      "id_user": "u4"
+    },
+    {
+      "id": "18",
+      "type": "transfer",
+      "amount": 90,
+      "date": "2025-05-15T13:00:00.000Z",
+      "description": "Supermercado",
+      "id_user": "u4"
+    },
+    {
+      "id": "19",
+      "type": "transfer",
+      "amount": 20,
+      "date": "2025-05-14T19:00:00.000Z",
+      "description": "Uber",
+      "id_user": "u4"
+    },
+    {
+      "id": "20",
+      "type": "exchange",
+      "amount": 220,
+      "date": "2025-05-13T11:00:00.000Z",
+      "description": "Projeto Freelancer",
+      "id_user": "u4"
+    },
+    {
+      "id": "21",
+      "type": "transfer",
+      "amount": 50,
+      "date": "2025-05-12T15:00:00.000Z",
+      "description": "Farmácia",
+      "id_user": "u4"
+    },
+    {
+      "id": "22",
+      "type": "exchange",
+      "amount": 500,
+      "date": "2025-05-11T10:00:00.000Z",
+      "description": "Venda de Equipamentos",
+      "id_user": "u5"
+    },
+    {
+      "id": "23",
+      "type": "transfer",
+      "amount": 150,
+      "date": "2025-05-10T14:30:00.000Z",
+      "description": "Aluguel",
+      "id_user": "u5"
+    },
+    {
+      "id": "24",
+      "type": "transfer",
+      "amount": 80,
+      "date": "2025-05-09T18:00:00.000Z",
+      "description": "Restaurante",
+      "id_user": "u5"
+    },
+    {
+      "id": "25",
+      "type": "exchange",
+      "amount": 100,
+      "date": "2025-05-08T09:00:00.000Z",
+      "description": "Freelance",
+      "id_user": "u5"
+    },
+    {
+      "id": "26",
+      "type": "transfer",
+      "amount": 60,
+      "date": "2025-05-07T12:00:00.000Z",
+      "description": "Cinema",
+      "id_user": "u5"
     }
   ]
 }

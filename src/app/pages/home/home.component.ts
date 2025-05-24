@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-<<<<<<< HEAD
 import { TextComponent } from '../../shared/components/text/text.component';
-=======
-// import { HeaderComponent } from '../../shared/components/header/header.component';
->>>>>>> origin
 
 import { IconGiftComponent } from "../../shared/assets/icons/icon-gift.component";
 import { IconOnComponent } from '../../shared/assets/icons/icon-on.component';
@@ -14,20 +10,15 @@ import { IconNotebookComponent } from '../../shared/assets/icons/icon-notebook.c
 import { FooterComponent } from "../../shared/components/footer/footer.component";
 @Component({
   selector: 'app-home',
-<<<<<<< HEAD
   standalone: true,
   imports: [
     CommonModule,
     TextComponent,
     FooterComponent
 ],
-=======
-  // imports: [HeaderComponent],
->>>>>>> origin
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-<<<<<<< HEAD
 export class HomeComponent {
   vantagens = [
     {
@@ -56,6 +47,3 @@ export class HomeComponent {
     class: 'text-white w-24 h-24',
   };
 }
-=======
-export class HomeComponent {}
->>>>>>> origin

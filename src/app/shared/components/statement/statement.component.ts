@@ -1,18 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TextComponent } from "../text/text.component";
+import { IconArrowPencilComponent } from "../../assets/icons/icon-arrow-pencil.component";
+import { IconBinComponent } from "../../assets/icons/icon-bin.component";
+import { IconDollarComponent } from "../../assets/icons/icon-dollar.component";
+import { IconArrowDownLeftComponent } from "../../assets/icons/icon-arrow-down-left.component";
 
-import { TextComponent } from '../text/text.component';
-
-import { IconArrowPencilComponent } from '../../assets/icons/icon-arrow-pencil.component';
-import { IconBinComponent } from '../../assets/icons/icon-bin.component';
-import { IconDollarComponent } from '../../assets/icons/icon-dollar.component';
-import { IconArrowDownLeftComponent } from '../../assets/icons/icon-arrow-down-left.component';
-import { IconArrowRightComponent } from '../../assets/icons/icon-arrow-right.component';
+import { Transaction } from '../../models/transaction';
 import { TransactionService } from '../../services/Transaction/transaction-service';
 import { systemConfig } from '../../../app.config';
-import { StatementItem } from '../../models/statement';
-import { isCredit, isDebit, Transaction } from '../../models/transaction';
-import { BrlPipe } from '../../pipes/brl.pipe';
+import { NewStatementItem } from '../../models/statement';
 
 @Component({
   selector: 'app-statement',
@@ -23,64 +20,83 @@ import { BrlPipe } from '../../pipes/brl.pipe';
     IconArrowPencilComponent,
     IconBinComponent,
     IconDollarComponent,
-    IconArrowDownLeftComponent,
-    IconArrowRightComponent,
-    BrlPipe,
+    IconArrowDownLeftComponent
   ],
   templateUrl: './statement.component.html',
   styleUrls: ['./statement.component.scss'],
 })
-export class StatementComponent {
-  userId: string = systemConfig.userId;
-  items: StatementItem[] = [];
-  errorMessage: string = '';
+export class StatementComponent implements OnInit {
+  items: NewStatementItem[] = [];
+
+  // Propriedade computada para retornar apenas os 6 itens mais recentes
+  get recentItems(): NewStatementItem[] {
+    return this.items
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, 6);
+  }
 
   constructor(private transactionService: TransactionService) {}
 
   ngOnInit(): void {
-    this.fetchTransactions();
+    this.loadUserTransactions();
   }
 
-  fetchTransactions(): void {
-    this.transactionService.getByUserId(this.userId).subscribe(
-      (response) => this.onTransactionsFetchSuccess(response),
-      (error) => {
-        this.errorMessage = 'Erro ao buscar transações.';
-        console.error('Error fetching transactions:', error);
+  loadUserTransactions(): void {
+    const userId = systemConfig.userId;
+
+    this.transactionService.getByUserId(userId).subscribe({
+      next: (transactions) => {
+        const validTransactions = transactions.filter(t => t.id);
+        this.items = this.mapTransactionsToStatementItems(validTransactions);
+        console.log(this.items);
+      },
+      error: (error) => {
+        console.error('Error fetching user transactions:', error);
       }
-    );
+    });
   }
 
-  onTransactionsFetchSuccess(response: any[]): void {
-    this.errorMessage = '';
+  mapTransactionsToStatementItems(transactions: Transaction[]): NewStatementItem[] {
+    return transactions.map(transaction => {
+      const id = transaction.id as string;
 
-    const sorted = response
-      .slice()
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-      .slice(0, 6);
+      let type: 'deposit' | 'withdraw';
 
-    this.items = sorted.map(
-      (t: Transaction): StatementItem => ({
-        id: t.id,
-        description: t.description,
-        amount: t.amount,
-        date: this.formatDate(t.date),
-        credit: isCredit(t.type),
-        debit: isDebit(t.type),
-      })
-    );
+      if (transaction.type === 'exchange' ||
+          transaction.type === 'loan') {
+        type = 'deposit';
+      } else {
+        type = 'withdraw';
+      }
+
+      const dateObj = transaction.date instanceof Date ?
+        transaction.date : new Date(transaction.date);
+      const date = dateObj.toLocaleDateString();
+
+      return {
+        id: id,
+        type: type,
+        description: transaction.description,
+        amount: transaction.amount,
+        date: date
+      };
+    });
   }
 
-  formatDate(date: string | Date): string {
-    const d = new Date(date);
-    return d.toLocaleDateString('pt-BR');
+  deleteTransaction(id: string): void {
+    this.transactionService.delete(id).subscribe({
+      next: () => {
+        this.items = this.items.filter(item => item.id !== id);
+      },
+      error: (error) => {
+        console.error('Error deleting transaction:', error);
+      }
+    });
   }
 
-  deleteTransaction(id: string) {
-    if (confirm('Tem certeza que deseja excluir esta transação?')) {
-      this.transactionService.delete(id).subscribe(() => {
-        this.fetchTransactions();
-      });
-    }
+  editTransaction(id: string): void {
+    // Implement navigation to edit page or show edit modal
+    console.log('Edit transaction:', id);
+    // This would typically navigate to an edit form or open a dialog
   }
 }

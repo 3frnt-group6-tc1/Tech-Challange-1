@@ -11,7 +11,7 @@ export const CREDIT_TYPES: TransactionType[] = [
 export const DEBIT_TYPES: TransactionType[] = [TransactionType.Transfer];
 
 export interface Transaction {
-  id: string;
+  id?: string;
   type: TransactionType;
   amount: number;
   date: Date;

@@ -1,188 +1,212 @@
-<div class="bg-gray-100 font-lato rounded-xl">
-  <div class="mx-auto bg-white rounded-xl shadow-md overflow-visible">
-    <!-- Cabeçalho com saldo -->
-    <div class="p-6">
-      <!-- Layout para telas maiores (Desktop) -->
-      <div class="hidden sm:flex flex-col sm:flex-row justify-between items-start gap-6">
-        <div>
-          <h1 class="text-xl sm:text-2xl text-gray-900 font-bold">
-            Olá, {{ userName }}!
-          </h1>
-          <!-- <app-text variant="title-bold" as="h1" class="sm:text-2xl">Olá, {{ userName }}!</app-text> -->
-          <p class="text-gray-500 mt-2 sm:mt-3 text-xs sm:text-sm">{{ currentDate }}</p>
-          <!-- <div class="mt-2">
-            <app-text variant="text-small" color="text-gray-500">{{ currentDate }}!</app-text>
-          </div> -->
+<div class="p-6">
+  <!-- Layout para telas maiores (Desktop) -->
+  <div
+    class="hidden sm:flex flex-col sm:flex-row justify-between items-start gap-6"
+  >
+    <div>
+      <h1 class="text-xl sm:text-2xl text-gray-900 font-bold">
+        Olá, {{ userName }}!
+      </h1>
+      <p class="text-gray-500 mt-2 sm:mt-3 text-xs sm:text-sm">
+        {{ currentDate }}
+      </p>
+    </div>
+    <div class="text-right w-full sm:w-auto mt-4 sm:mt-0">
+      <div class="flex items-center justify-end">
+        <p class="font-medium text-gray-700 mr-3 text-xl sm:text-2xl">Saldo</p>
+        <button (click)="toggleBalance()" class="focus:outline-none">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 text-gray-700"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+            />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+            />
+          </svg>
+        </button>
+      </div>
+      <p class="text-gray-500 mt-1 text-xs sm:text-sm">{{ accountType }}</p>
+      <p
+        class="text-gray-900 mt-2 sm:mt-3 text-xl sm:text-2xl font-bold"
+        *ngIf="showBalance"
+      >
+        {{ balance }}
+      </p>
+      <p
+        class="text-gray-500 mt-2 sm:mt-3 text-xl sm:text-2xl font-bold"
+        *ngIf="!showBalance"
+      >
+        ****
+      </p>
+    </div>
+  </div>
 
+  <!-- Layout para telas pequenas (Mobile) -->
+  <div class="flex flex-col sm:hidden items-center text-center">
+    <div class="flex flex-col mb-4">
+      <h1 class="text-xl text-gray-900 font-bold">Olá, {{ userName }}!</h1>
+      <p class="text-gray-500 text-xs">{{ currentDate }}</p>
+    </div>
+
+    <!-- Separador entre saudação e saldo (apenas mobile) -->
+    <div class="w-full border-t border-gray-200 mb-4"></div>
+
+    <!-- Saldo -->
+    <div class="flex flex-col">
+      <div class="flex items-center justify-center">
+        <p class="font-medium text-gray-700 text-lg">Saldo</p>
+        <button (click)="toggleBalance()" class="focus:outline-none ml-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 text-gray-700"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+            />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+            />
+          </svg>
+        </button>
+      </div>
+      <p class="text-gray-500 mt-1 text-xs">{{ accountType }}</p>
+      <p class="text-gray-900 text-lg font-bold" *ngIf="showBalance">
+        {{ balance }}
+      </p>
+      <p class="text-gray-500 text-lg font-bold" *ngIf="!showBalance">****</p>
+    </div>
+  </div>
+</div>
+
+<!-- Separador principal entre cabeçalho e gráfico -->
+<div class="px-6">
+  <div class="border-t border-gray-200"></div>
+</div>
+
+<!-- Gráfico de transações -->
+<div class="p-6 sm:pb-12">
+  <h2 class="text-gray-900 mb-4 text-base font-bold text-center sm:text-left">
+    Transações de Maio
+  </h2>
+
+  <div class="flex flex-col lg:flex-row gap-8">
+    <div class="relative h-48 mx-auto w-full sm:w-4/5 lg:w-4/5">
+      <div class="relative h-full">
+        <div
+          class="absolute left-0 h-full flex flex-col justify-between pointer-events-none"
+        >
+          <span class="text-right text-xs text-gray-500 pr-1 w-10">2000</span>
+          <span class="text-right text-xs text-gray-500 pr-1 w-10">1500</span>
+          <span class="text-right text-xs text-gray-500 pr-1 w-10">1000</span>
+          <span class="text-right text-xs text-gray-500 pr-1 w-10">500</span>
+          <span class="text-right text-xs text-gray-500 pr-1 w-10">0</span>
         </div>
-        <div class="text-right w-full sm:w-auto mt-4 sm:mt-0">
-          <div class="flex items-center justify-end">
-            <p class="font-medium text-gray-700 mr-3 text-xl sm:text-2xl">Saldo</p>
-            <!-- <app-text variant="title-bold" as="h1" class="sm:text-2xl">Olá, {{ userName }}!</app-text> -->
-            <button (click)="toggleBalance()" class="focus:outline-none">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 text-gray-700"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                />
-              </svg>
-            </button>
-          </div>
-          <p class="text-gray-500 mt-1 text-xs sm:text-sm">{{ accountType }}</p>
-          <p
-            class="text-gray-900 mt-2 sm:mt-3 text-xl sm:text-2xl font-bold"
-            *ngIf="showBalance"
-          >
-            {{ balance }}
-          </p>
-          <p
-            class="text-gray-500 mt-2 sm:mt-3 text-xl sm:text-2xl font-bold"
-            *ngIf="!showBalance"
-          >
-            ****
-          </p>
+
+        <div class="absolute inset-0 ml-10 border border-gray-200">
+          <div class="absolute w-full h-1/4 border-b border-gray-200"></div>
+          <div class="absolute w-full h-2/4 border-b border-gray-200"></div>
+          <div class="absolute w-full h-3/4 border-b border-gray-200"></div>
+
+          <div class="absolute h-full w-1/4 border-r border-gray-200"></div>
+          <div class="absolute h-full w-1/2 border-r border-gray-200"></div>
+          <div class="absolute h-full w-3/4 border-r border-gray-200"></div>
+        </div>
+
+        <div class="absolute inset-0 ml-10 flex justify-around items-end">
+          <ng-container *ngFor="let data of transactionData; let i = index">
+            <div
+              class="flex items-end justify-center w-1/4 h-full"
+              *ngIf="data.day !== ''"
+            >
+              <div class="flex items-end space-x-1 sm:space-x-2 mb-0">
+                <div
+                  class="w-3 sm:w-5 md:w-7"
+                  [style.height.px]="(data.exits / 2000) * 170"
+                  [style.backgroundColor]="'#FF5031'"
+                ></div>
+                <div
+                  class="w-3 sm:w-5 md:w-7"
+                  [style.height.px]="(data.entries / 2000) * 170"
+                  [style.backgroundColor]="'#004D61'"
+                ></div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+
+        <div
+          class="absolute w-full -bottom-6 ml-10 pr-8 grid grid-cols-4 text-center"
+        >
+          <ng-container *ngFor="let data of transactionData">
+            <span class="text-gray-600 text-xs" *ngIf="data.day !== ''">{{
+              data.day
+            }}</span>
+          </ng-container>
         </div>
       </div>
+    </div>
 
-      <!-- Layout para telas pequenas (Mobile) -->
-      <div class="flex flex-col sm:hidden items-center text-center">
-        <div class="flex flex-col mb-4">
-          <h1 class="text-xl text-gray-900 font-bold">
-            Olá, {{ userName }}!
-          </h1>
-          <p class="text-gray-500 text-xs">{{ currentDate }}</p>
-        </div>
-
-        <!-- Separador entre saudação e saldo (apenas mobile) -->
-        <div class="w-full border-t border-gray-200 mb-4"></div>
-
-        <!-- Saldo -->
+    <!-- Legenda -->
+    <div class="flex flex-col sm:hidden justify-center gap-2 items-center mt-8">
+      <!-- Entradas -->
+      <div class="flex items-center space-x-3">
+        <div class="w-4 h-4 rounded-full bg-[#004d61]"></div>
         <div class="flex flex-col">
-          <div class="flex items-center justify-center">
-            <p class="font-medium text-gray-700 text-lg">Saldo</p>
-            <button (click)="toggleBalance()" class="focus:outline-none ml-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 text-gray-700"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                />
-              </svg>
-            </button>
-          </div>
-          <p class="text-gray-500 mt-1 text-xs">{{ accountType }}</p>
-          <p
-            class="text-gray-900 text-lg font-bold"
-            *ngIf="showBalance"
-          >
-            {{ balance }}
-          </p>
-          <p
-            class="text-gray-500 text-lg font-bold"
-            *ngIf="!showBalance"
-          >
-            ****
-          </p>
+          <span class="text-xs">Entradas</span>
+          <span class="text-sm font-bold">{{ totalEntries }}</span>
+        </div>
+      </div>
+      <!-- Saídas -->
+      <div class="flex items-center space-x-3">
+        <div class="w-4 h-4 rounded-full bg-[#ff5031]"></div>
+        <div class="flex flex-col">
+          <span class="text-xs">Saídas</span>
+          <span class="text-sm font-bold">{{ totalExits }}</span>
         </div>
       </div>
     </div>
 
-    <!-- Separador principal entre cabeçalho e gráfico -->
-    <div class="px-6">
-      <div class="border-t border-gray-200"></div>
-    </div>
-
-    <!-- Gráfico de transações -->
-    <div class="p-6 sm:pb-12">
-      <h2 class="text-gray-900 mb-4 text-base font-bold text-center sm:text-left">
-        Transações de Maio
-      </h2>
-      <div class="gap-8 flex-row">
-        <div>
-          <app-grafic
-          [transactionData]="transactionData"
-          [maxChartValue]="maxChartValue"
-          [barMaxHeight]="barMaxHeight">
-          </app-grafic>
-        </div>
-        <!-- Legenda -->
-        <div class="flex flex-col sm:hidden justify-center gap-2 items-center mt-8">
-          <!-- Entradas -->
-          <div class="flex items-center space-x-3">
-            <div class="w-4 h-4 rounded-full bg-[#004d61]"></div>
-            <div class="flex flex-col">
-              <span class="text-xs">Entradas</span>
-              <span class="text-sm font-bold">{{ totalEntries }}</span>
-            </div>
-          </div>
-          <!-- Saídas -->
-          <div class="flex items-center space-x-3">
-            <div class="w-4 h-4 rounded-full bg-[#ff5031]"></div>
-            <div class="flex flex-col">
-              <span class="text-xs">Saídas</span>
-              <span class="text-sm font-bold">{{ totalExits }}</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Legenda para telas maiores -->
-        <div class="hidden sm:flex sm:flex-row lg:flex-col gap-4 sm:justify-center sm:items-center">
-          <!-- Entradas -->
-          <div class="flex items-center space-x-3">
-            <div class="w-4 h-4 rounded-full bg-[#004d61]"></div>
-            <div class="flex flex-col">
-              <span class="text-xs">Entradas</span>
-              <span class="text-sm font-bold">{{ totalEntries }}</span>
-            </div>
-          </div>
-          <!-- Saídas -->
-          <div class="flex items-center space-x-3">
-            <div class="w-4 h-4 rounded-full bg-[#ff5031]"></div>
-            <div class="flex flex-col">
-              <span class="text-xs">Saídas</span>
-              <span class="text-sm font-bold">{{ totalExits }}</span>
-            </div>
-          </div>
+    <!-- Legenda para telas maiores -->
+    <div
+      class="hidden sm:flex sm:flex-row lg:flex-col gap-4 sm:justify-center sm:items-center"
+    >
+      <!-- Entradas -->
+      <div class="flex items-center space-x-3">
+        <div class="w-4 h-4 rounded-full bg-[#004d61]"></div>
+        <div class="flex flex-col">
+          <span class="text-xs">Entradas</span>
+          <span class="text-sm font-bold">{{ totalEntries }}</span>
         </div>
       </div>
-    </div>
-
-    <div *ngIf="isLoading" class="flex flex-col items-center text-gray-500 my-4">
-      <svg class="animate-spin h-5 w-5 mb-2" viewBox="0 0 24 24">
-        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
-        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
-      </svg>
-      Carregando...
-    </div>
-    <div *ngIf="!isLoading && transactionData.length === 0" role="alert" class="bg-red-100 text-red-700 p-2 rounded mb-4 text-center">
-      Nenhuma transação encontrada.
+      <!-- Saídas -->
+      <div class="flex items-center space-x-3">
+        <div class="w-4 h-4 rounded-full bg-[#ff5031]"></div>
+        <div class="flex flex-col">
+          <span class="text-xs">Saídas</span>
+          <span class="text-sm font-bold">{{ totalExits }}</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>

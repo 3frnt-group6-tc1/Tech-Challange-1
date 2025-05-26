@@ -1,3 +1,4 @@
+<!-- input.component.html -->
 <div
   class="relative inline-block w-full"
   [ngClass]="{
@@ -27,21 +28,21 @@
 
   <!-- Dropdown -->
   <div
-  *ngIf="isOpen"
-  class="absolute z-10 mt-0 w-full bg-gray-100 border border-green-dark border-t-0 rounded-b-md shadow-lg"
->
-  <ul>
-    <li
-      *ngFor="let option of options"
-      (click)="selectOption(option)"
-      class="px-4 py-2 text- cursor-pointer transition-colors font-lato text-center text-cyan-blue-500"
-      [ngClass]="{
-        'bg-gray-100 font-semibold': option === selectedOption,
-        'hover:bg-cyan-blue-500 hover:text-white hover:font-bold': option !== selectedOption
-      }"
-    >
-      {{ option }}
-    </li>
-  </ul>
-</div>
+    *ngIf="isOpen"
+    class="absolute z-10 mt-0 w-full bg-gray-100 border border-green-dark border-t-0 rounded-b-md shadow-lg"
+  >
+    <ul>
+      <li
+        *ngFor="let option of options"
+        (click)="selectOption(option)"
+        class="px-4 py-2 cursor-pointer transition-colors font-lato text-center text-cyan-blue-500"
+        [ngClass]="{
+          'bg-gray-100 font-semibold': getDisplayValue(option) === selectedOption,
+          'hover:bg-cyan-blue-500 hover:text-white hover:font-bold': getDisplayValue(option) !== selectedOption
+        }"
+      >
+        {{ getDisplayValue(option) }}
+      </li>
+    </ul>
+  </div>
 </div>

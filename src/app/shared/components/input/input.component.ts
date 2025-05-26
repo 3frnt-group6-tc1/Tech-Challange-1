@@ -1,5 +1,11 @@
+// input.component.ts
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+
+interface OptionItem {
+  display: string;
+  value: any;
+}
 
 @Component({
   selector: 'app-input',
@@ -8,9 +14,10 @@ import { Component, Input } from '@angular/core';
   styleUrl: './input.component.scss',
 })
 export class InputComponent {
-  @Input() options: string[] = [];
+  @Input() options: (string | OptionItem)[] = [];
   @Input() size: 'G' | 'P' = 'G';
   @Input() placeholder = 'Selecione o tipo de transação';
+  @Output() selectionChange = new EventEmitter<any>();
 
   isOpen = false;
   selectedOption: string | null = null;
@@ -19,8 +26,13 @@ export class InputComponent {
     this.isOpen = !this.isOpen;
   }
 
-  selectOption(option: string) {
-    this.selectedOption = option;
+  selectOption(option: string | OptionItem) {
+    this.selectedOption = typeof option === 'string' ? option : option.display;
     this.isOpen = false;
+    this.selectionChange.emit(typeof option === 'string' ? option : option.value);
+  }
+
+  getDisplayValue(option: string | OptionItem): string {
+    return typeof option === 'string' ? option : option.display;
   }
 }

@@ -1,34 +1,26 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-<<<<<<< HEAD
 import { TextComponent } from "../text/text.component"
 
 import { IconArrowPencilComponent } from "../../assets/icons/icon-arrow-pencil.component";
 import { IconBinComponent } from "../../assets/icons/icon-bin.component";
 import { IconDollarComponent } from "../../assets/icons/icon-dollar.component";
 import { IconArrowDownLeftComponent } from "../../assets/icons/icon-arrow-down-left.component";
+import { IconArrowRightComponent } from '../../assets/icons/icon-arrow-right.component';
+import { BrlPipe } from '../../pipes/brl.pipe';
+import { systemConfig } from '../../../app.config';
+import { TransactionService } from '../../services/Transaction/transaction-service';
+import { isCredit, isDebit, Transaction } from '../../models/transaction';
 
 export interface StatementItem {
-  type: 'deposit' | 'withdraw';
+  id: string;
   description: string;
   amount: number;
   date: string;
+  credit: boolean;
+  debit: boolean;
 }
-=======
-import { TextComponent } from '../text/text.component';
-
-import { IconArrowPencilComponent } from '../../assets/icons/icon-arrow-pencil.component';
-import { IconBinComponent } from '../../assets/icons/icon-bin.component';
-import { IconDollarComponent } from '../../assets/icons/icon-dollar.component';
-import { IconArrowDownLeftComponent } from '../../assets/icons/icon-arrow-down-left.component';
-import { IconArrowRightComponent } from '../../assets/icons/icon-arrow-right.component';
-import { TransactionService } from '../../services/Transaction/transaction-service';
-import { systemConfig } from '../../../app.config';
-import { StatementItem } from '../../models/statement';
-import { isCredit, isDebit, Transaction } from '../../models/transaction';
-import { BrlPipe } from '../../pipes/brl.pipe';
->>>>>>> origin
 
 @Component({
   selector: 'app-statement',
@@ -51,7 +43,9 @@ export class StatementComponent {
   items: StatementItem[] = [];
   errorMessage: string = '';
 
-  constructor(private transactionService: TransactionService) {}
+  constructor(
+    private transactionService: TransactionService
+  ) {}
 
   ngOnInit(): void {
     this.fetchTransactions();
@@ -59,8 +53,8 @@ export class StatementComponent {
 
   fetchTransactions(): void {
     this.transactionService.getByUserId(this.userId).subscribe(
-      (response) => this.onTransactionsFetchSuccess(response),
-      (error) => {
+      (response: any) => this.onTransactionsFetchSuccess(response),
+      (error: any) => {
         this.errorMessage = 'Erro ao buscar transações.';
         console.error('Error fetching transactions:', error);
       }

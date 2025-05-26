@@ -15,5 +15,5 @@ import { TextComponent } from '../text/text.component'
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  isLoggedIn: boolean = false; // Validação para saber se o Header e da LandingPage ou da Area Logada
+  isLoggedIn: boolean = true; // Validação para saber se o Header e da LandingPage ou da Area Logada
 }

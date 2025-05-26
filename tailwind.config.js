@@ -3,6 +3,21 @@ module.exports = {
   content: [
     "./src/**/*.{html,ts}",
   ],
+  safelist: [
+    'text-white',
+    'text-black-900',
+    'text-cyan-blue-500',
+    'text-orange-500',
+    'text-green-600',
+    'text-red-600',
+    'font-bold',
+    'text-[24px]',
+    'text-[20px]',
+    'text-[16px]',
+    'text-[14px]',
+    'leading-[20px]',
+    'leading-6'
+  ],
   theme: {
     container: {
       center: true,
@@ -39,7 +54,7 @@ module.exports = {
 
         "green-600": "#157f40",
         "red-600": "#ce3426",
-      }
+      },
     },
   },
   plugins: [],

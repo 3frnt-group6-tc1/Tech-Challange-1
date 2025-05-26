@@ -2,16 +2,14 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TransactionService } from '../../services/Transaction/transaction-service';
 import { UserService } from '../../services/User/user-service';
-import { TransactionData } from '../../models/transaction-data';
-import { GraficComponent } from '../grafic/grafic.component';
-import { User } from '../../models/user';
-import { Transaction, TransactionType } from '../../models/transaction';
+import { Transaction } from '../../models/transaction';
 import { systemConfig } from '../../../app.config';
+import { TransactionData } from '../../models/transaction-data';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, GraficComponent],
+  imports: [CommonModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
@@ -23,18 +21,13 @@ export class DashboardComponent {
   accountType: string = 'Conta Corrente';
   totalEntries: string = '';
   totalExits: string = '';
-
   idUser: string = '';
 
   showBalance: boolean = true;
-  isLoading: boolean = false;
 
   transactionData: TransactionData[] = [];
 
   errorMessage: string = '';
-
-  maxChartValue = 2000;
-  barMaxHeight = 170;
 
   constructor(
     private transactionService: TransactionService,
@@ -67,19 +60,16 @@ export class DashboardComponent {
   }
 
   fetchUser(): void {
-    this.isLoading = true;
-    this.userService.getById(this.userId).subscribe(
-      (response) => this.onUserFetchSuccess(response),
+    this.userService.getById(systemConfig.userId).subscribe(
+      (response) => this.successUser(response),
       (error) => {
-        this.isLoading = false;
         this.errorMessage = 'Erro ao buscar usuário.';
         console.error('Error fetching user name:', error);
       }
     );
   }
 
-  onUserFetchSuccess(response: User): void {
-    this.isLoading = false;
+  successUser(response: any): void {
     this.errorMessage = '';
     this.userName = response.name;
     this.idUser = response.id;
@@ -87,56 +77,75 @@ export class DashboardComponent {
   }
 
   fetchTransactions(id: string): void {
-    this.isLoading = true;
-    this.errorMessage = '';
     this.transactionService.getByUserId(id).subscribe(
-      (response) => this.onTransactionFetchSuccess(response),
+      (response) => this.successTransaction(response),
       (error) => {
-        this.isLoading = false;
         this.errorMessage = 'Erro ao buscar transações.';
+        console.error('Error fetching transactions:', error);
       }
     );
   }
 
-  onTransactionFetchSuccess(response: Transaction[]): void {
-    this.isLoading = false;
-    this.errorMessage = '';
-    const totalEntries = response
-      .filter((transaction) => this.isCredit(transaction.type))
-      .reduce((acc, transaction) => acc + transaction.amount, 0);
-    const totalExits = response
-      .filter((transaction) => this.isDebit(transaction.type))
-      .reduce((acc, transaction) => acc + transaction.amount, 0);
+  successTransaction(response: Transaction[]): void {
+    let totalEntries = 0;
+    let totalExits = 0;
+
+    response.forEach((transaction) => {
+      if (this.isCredit(transaction.type)) {
+        totalEntries += transaction.amount;
+      }
+      if (this.isDebit(transaction.type)) {
+        totalExits += transaction.amount;
+      }
+    });
 
     this.totalEntries = this.formatBalance(totalEntries);
     this.totalExits = this.formatBalance(totalExits);
     this.balance = this.formatBalance(totalEntries - totalExits);
 
-    const grouped = new Map<string, { entries: number; exits: number }>();
+    const weeklyData: { [key: string]: { entries: number; exits: number } } = {
+      '1': { entries: 0, exits: 0 },
+      '2': { entries: 0, exits: 0 },
+      '3': { entries: 0, exits: 0 },
+      '4': { entries: 0, exits: 0 }
+    };
+
     response.forEach((transaction) => {
       const date = new Date(transaction.date);
-      const key = `${date.getDate().toString().padStart(2, '0')}/${(
-        date.getMonth() + 1
-      )
-        .toString()
-        .padStart(2, '0')}/${date.getFullYear()}`;
-      if (!grouped.has(key)) grouped.set(key, { entries: 0, exits: 0 });
-      if (this.isCredit(transaction.type))
-        grouped.get(key)!.entries += transaction.amount;
-      if (this.isDebit(transaction.type))
-        grouped.get(key)!.exits += transaction.amount;
+      const dayOfMonth = date.getDate();
+
+      let week = '1';
+      if (dayOfMonth >= 1 && dayOfMonth <= 7) {
+        week = '1';
+      } else if (dayOfMonth >= 8 && dayOfMonth <= 14) {
+        week = '2';
+      } else if (dayOfMonth >= 15 && dayOfMonth <= 21) {
+        week = '3';
+      } else {
+        week = '4';
+      }
+
+      if (this.isCredit(transaction.type)) {
+        weeklyData[week].entries += transaction.amount;
+      }
+      if (this.isDebit(transaction.type)) {
+        weeklyData[week].exits += transaction.amount;
+      }
     });
-    this.transactionData = Array.from(grouped, ([day, data]) => ({
-      day,
-      ...data,
+
+    this.transactionData = Object.entries(weeklyData).map(([day, data]) => ({
+      day: `Semana ${day}`,
+      entries: data.entries,
+      exits: data.exits,
     }));
+
   }
 
-  isCredit(type: TransactionType): boolean {
+  isCredit(type: string): boolean {
     return type === 'exchange' || type === 'loan';
   }
 
-  isDebit(type: TransactionType): boolean {
+  isDebit(type: string): boolean {
     return type === 'transfer';
   }
 

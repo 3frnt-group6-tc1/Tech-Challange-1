@@ -1,19 +1,21 @@
 import { Component } from '@angular/core';
 
-import { IconExitComponent } from '../../assets/icons/icon-exit.component'
-import { ButtonComponent } from '../button/button.component'
-import { TextComponent } from '../text/text.component'
+import { IconExitComponent } from '../../assets/icons/icon-exit.component';
+import { ButtonComponent } from '../button/button.component';
+import { TextComponent } from '../text/text.component';
+import { systemConfig } from '../../../app.config';
 
 @Component({
   selector: 'app-header',
-  imports: [
-    ButtonComponent,
-    TextComponent,
-    IconExitComponent
-  ],
+  imports: [ButtonComponent, TextComponent, IconExitComponent],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  isLoggedIn: boolean = true; // Validação para saber se o Header e da LandingPage ou da Area Logada
+  isLoggedIn: boolean = false; // Validação para saber se o Header e da LandingPage ou da Area Logada
+
+  constructor() {
+    const path = window.location.pathname;
+    this.isLoggedIn = systemConfig.loggedPages.includes(path);
+  }
 }

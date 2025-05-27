@@ -1,44 +1,70 @@
 <header class="bg-cyan-blue-500">
-    <div class="flex items-center justify-between h-24 container">
-        <!-- Variação para LandingPage -->
-        @if(isLoggedIn) {
-            <div class="flex gap-20">   
-                <img src="assets/icons/logo.svg" alt="Logo Bytebank">
-                <ul class="flex items-center gap-10">
-                    <li>
-                        <a href="#" class="text-white hover:text-orange-500 transition-all text-center font-lato text-[18px] font-semibold leading-normal">
-                            Sobre
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-white hover:text-orange-500 transition-all  text-center font-lato text-[18px] font-semibold leading-normal">
-                            Serviço
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="flex gap-9">
-                <app-button theme="secondary" label="Abrir minha conta" size="P"></app-button>
-                <app-button theme="ghost-white" label="Já tenho conta" size="P">
-                    <app-icon-exit icon-right color="text-white" />
-                </app-button>
-            </div>
-        }
-        <!-- Variação para usuario já logado -->
-        @else {            
-            <img src="assets/icons/logo.svg" alt="Logo Bytebank">
-            <div class="flex flex-row gap-6">
-                <app-text variant="text-small" color="text-white">Fulano da Silva</app-text>
-                <a href="#">
-                    <img src="../../../../assets/icons/dark-mode.svg" alt="Icone de Dark Mode">
-                </a>
-                <a href="#">
-                    <img src="../../../../assets/icons/bell.svg" alt="Icone de aviso">
-                </a>
-                <a href="#">
-                    <img src="../../../../assets/icons/account-circle.svg" alt="Icone de Perfil do Usuario">
-                </a>
-            </div>            
-        }
+  <div class="flex items-center justify-between h-24 container">
+    <!-- Variação para LandingPage -->
+    @if(!isLoggedIn) {
+    <div class="flex gap-20">
+      <img src="assets/icons/logo.svg" alt="Logo Bytebank" />
+      <ul class="flex items-center gap-10">
+        <li>
+          <a
+            href="#"
+            class="text-white hover:text-orange-500 transition-all text-center font-lato text-[18px] font-semibold leading-normal"
+          >
+            Sobre
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="text-white hover:text-orange-500 transition-all text-center font-lato text-[18px] font-semibold leading-normal"
+          >
+            Serviço
+          </a>
+        </li>
+      </ul>
     </div>
+    <div class="flex gap-9">
+      <app-button
+        theme="secondary"
+        label="Abrir minha conta"
+        size="P"
+      ></app-button>
+      <app-button theme="ghost-white" label="Já tenho conta" size="P">
+        <app-icon-exit icon-right color="text-white" />
+      </app-button>
+      <div class="flex items-center gap-6">
+        <a href="#">
+          <img
+            src="../../../../assets/icons/dark-mode.svg"
+            alt="Icone de Dark Mode"
+          />
+        </a>
+      </div>
+    </div>
+    }
+    <!-- Variação para usuario já logado -->
+    @else {
+    <img src="assets/icons/logo.svg" alt="Logo Bytebank" />
+    <div class="flex flex-row gap-6">
+      <app-text variant="text-small" color="text-white"
+        >Fulano da Silva</app-text
+      >
+      <a href="#">
+        <img
+          src="../../../../assets/icons/dark-mode.svg"
+          alt="Icone de Dark Mode"
+        />
+      </a>
+      <a href="#">
+        <img src="../../../../assets/icons/bell.svg" alt="Icone de aviso" />
+      </a>
+      <a href="#">
+        <img
+          src="../../../../assets/icons/account-circle.svg"
+          alt="Icone de Perfil do Usuario"
+        />
+      </a>
+    </div>
+    }
+  </div>
 </header>

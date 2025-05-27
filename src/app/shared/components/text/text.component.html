@@ -1,5 +1,4 @@
-<div class="text-xs text-gray-400">[DEBUG] tag = {{ tag }}</div>
-
+<!-- <div class="text-xs text-gray-400">[DEBUG] tag = {{ tag }}</div> -->
 
 <ng-container [ngSwitch]="tag">
   <ng-container *ngSwitchCase="'h1'">
@@ -15,4 +14,3 @@
     <p [ngClass]="classes"><ng-content></ng-content></p>
   </ng-container>
 </ng-container>
-

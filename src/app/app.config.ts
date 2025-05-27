@@ -15,11 +15,13 @@ export const systemConfig: {
   company: string;
   year: number;
   userId: string;
+  loggedPages: string[];
 } = {
   version: '1.0.0',
   company: 'CDJMV',
   year: new Date().getFullYear(),
   userId: 'u2',
+  loggedPages: ['/panel'],
 };
 
 export const appConfig: ApplicationConfig = {

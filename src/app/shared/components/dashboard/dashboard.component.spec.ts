@@ -1,28 +1,3 @@
-<<<<<<< HEAD
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { FooterComponent } from './footer.component';
-
-describe('FooterComponent', () => {
-  let component: FooterComponent;
-  let fixture: ComponentFixture<FooterComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [FooterComponent]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(FooterComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
-=======
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { DashboardComponent } from './dashboard.component';
 import { TransactionService } from '../../services/Transaction/transaction-service';
@@ -291,4 +266,3 @@ describe('DashboardComponent', () => {
     });
   });
 });
->>>>>>> a6e22894e004ea1dc124b3d4295cee4d79f10012

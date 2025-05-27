@@ -10,6 +10,7 @@ import { IconLogoComponent } from '../../assets/icons/icon-logo.component';
 
 @Component({
   selector: 'app-footer',
+  standalone: true,
   imports: [
     CommonModule,
     TextComponent,
@@ -19,10 +20,10 @@ import { IconLogoComponent } from '../../assets/icons/icon-logo.component';
     IconLogoComponent,
   ],
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.scss',
+  styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent {
-  isLoggedIn: boolean = systemConfig.isLogged; // Validação para saber se o Header e da LandingPage ou da Area Logada
+  isLoggedIn: boolean = false;
   company: string = systemConfig.company;
   version: string = systemConfig.version;
   year: number = systemConfig.year;

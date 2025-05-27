@@ -16,7 +16,7 @@ module.exports = {
     'text-[16px]',
     'text-[14px]',
     'leading-[20px]',
-    'leading-6'
+    'leading-6',
   ],
   theme: {
     container: {
@@ -31,7 +31,7 @@ module.exports = {
         '2md': '1440px',
       },
       backgroundImage: {
-        'primary-gradient': 'linear-gradient(to bottom, #004D61, #ffffff)',
+        'primary-gradient': 'linear-gradient(to bottom, #003C50 0%, #007B8F 50%, #a9c4c9 100%);',
         'secondary-gradient': 'linear-gradient(to bottom, #dee9ea, #ffffff)',
       },
       fontFamily: {

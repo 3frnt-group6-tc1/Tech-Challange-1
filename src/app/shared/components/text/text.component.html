@@ -1,16 +1,6 @@
-<!-- <div class="text-xs text-gray-400">[DEBUG] tag = {{ tag }}</div> -->
-
 <ng-container [ngSwitch]="tag">
-  <ng-container *ngSwitchCase="'h1'">
-    <h1 [ngClass]="classes"><ng-content></ng-content></h1>
-  </ng-container>
-  <ng-container *ngSwitchCase="'h2'">
-    <h2 [ngClass]="classes"><ng-content></ng-content></h2>
-  </ng-container>
-  <ng-container *ngSwitchCase="'span'">
-    <span [ngClass]="classes"><ng-content></ng-content></span>
-  </ng-container>
-  <ng-container *ngSwitchDefault>
-    <p [ngClass]="classes"><ng-content></ng-content></p>
-  </ng-container>
+  <h1 *ngSwitchCase="'h1'" [ngClass]="classes"><ng-content></ng-content></h1>
+  <h2 *ngSwitchCase="'h2'" [ngClass]="classes"><ng-content></ng-content></h2>
+  <span *ngSwitchCase="'span'" [ngClass]="classes"><ng-content></ng-content></span>
+  <p *ngSwitchDefault [ngClass]="classes"><ng-content></ng-content></p>
 </ng-container>

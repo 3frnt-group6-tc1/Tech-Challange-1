@@ -17,31 +17,18 @@ export class TextComponent {
     | 'text-small'
     | 'text-small-bold' = 'text-regular';
 
-  @Input() color: string = 'text-white'
+  @Input() color: string = 'text-white';
 
-  private _tag: 'p' | 'h1' | 'h2' | 'span' = 'p';
-
-  @Input()
-  set tag(value: 'p' | 'h1' | 'h2' | 'span') {
-    if (value) this._tag = value;
-  }
-  get tag() {
-    return this._tag;
-  }
-
-  @Input('as')
-  set asTag(value: 'p' | 'h1' | 'h2' | 'span') {
-    if (value) this._tag = value;
-  }
+  @Input() tag: 'p' | 'h1' | 'h2' | 'span' = 'p'; // unificado
 
   get classes(): string {
     const base = 'font-lato leading-[20px]';
 
     const variants: Record<string, string> = {
-      'title-bold': 'text-[24px] font-bold leading-6',
+      'title-bold': 'text-[32px] font-bold leading-[40px]',
       'title-regular': 'text-[24px] font-normal',
-      'subtitle': 'text-[20px] font-normal',
-      'text-regular': 'text-[16px]  font-bold',
+      'subtitle': 'text-[20px] font-semibold',
+      'text-regular': 'text-[16px] font-bold',
       'text-regular-special': 'text-[16px] font-normal',
       'text-small': 'text-[14px] font-normal',
       'text-small-bold': 'text-[14px] font-bold',
@@ -50,4 +37,5 @@ export class TextComponent {
     return `${base} ${variants[this.variant]} ${this.color}`;
   }
 }
+
 

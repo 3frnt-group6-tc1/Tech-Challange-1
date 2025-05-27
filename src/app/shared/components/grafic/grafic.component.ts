@@ -16,6 +16,6 @@ interface TransactionData {
 
 export class GraficComponent {
   @Input() transactionData: TransactionData[] = [];
-  @Input() maxChartValue = 2000;
+  @Input() maxChartValue = 20000;
   @Input() barMaxHeight = 170;
 }

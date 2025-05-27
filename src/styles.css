@@ -5,7 +5,7 @@
 
 @layer components {
   .container {
-    @apply w-full max-w-[1440px] mx-auto flex justify-between items-center;
+    @apply w-full max-w-[1150px] mx-auto flex justify-between items-center;
   }
 }
 

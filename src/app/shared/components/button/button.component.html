@@ -11,7 +11,8 @@
     'px-12': size === 'G',
     'px-28': size === 'GG'
   }"
-  class="py-[14px] rounded-lg font-lato text-base  font-semibold transition-colors duration-300 flex items-center justify-center gap-2"
+  [class.gap-2]="!!label"
+  class="py-[14px] rounded-lg font-lato text-base font-semibold transition-colors duration-300 flex items-center justify-center"
 >
   <!-- Ícone à esquerda -->
   <ng-content select="[icon-left]"></ng-content>

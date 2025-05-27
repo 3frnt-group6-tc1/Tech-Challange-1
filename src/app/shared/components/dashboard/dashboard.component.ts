@@ -1,10 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { TransactionService } from '../../services/Transaction/transaction-service';
 import { UserService } from '../../services/User/user-service';
-import { Transaction } from '../../models/transaction';
+import {
+  Transaction,
+  isCredit,
+  isDebit,
+  TRANSACTION_TYPE_LABELS
+} from '../../models/transaction';
 import { systemConfig } from '../../../app.config';
 import { TransactionData } from '../../models/transaction-data';
+import { TransactionEventService } from '../../services/TransactionEvent/transaction-event.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +21,7 @@ import { TransactionData } from '../../models/transaction-data';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit, OnDestroy {
   userId: string = systemConfig.userId;
   userName: string = '';
   currentDate: string = '';
@@ -22,21 +30,64 @@ export class DashboardComponent {
   totalEntries: string = '';
   totalExits: string = '';
   idUser: string = '';
+  transactionTypeLabels = TRANSACTION_TYPE_LABELS;
 
   showBalance: boolean = true;
+  isLoading: boolean = true;
 
   transactionData: TransactionData[] = [];
+  transactions: Transaction[] = [];
 
   errorMessage: string = '';
+  private destroy$ = new Subject<void>();
 
   constructor(
     private transactionService: TransactionService,
-    private userService: UserService
+    private userService: UserService,
+    private transactionEventService: TransactionEventService
   ) {}
 
   ngOnInit(): void {
     this.setCurrentDate();
     this.fetchUser();
+    this.subscribeToTransactionEvents();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  subscribeToTransactionEvents(): void {
+    this.transactionEventService.transactionCreated$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(transaction => {
+        if (transaction.id_user === this.userId) {
+          this.transactions = [...this.transactions, transaction];
+          this.updateDashboardData();
+        }
+      });
+
+    this.transactionEventService.transactionUpdated$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(transaction => {
+        if (transaction.id_user === this.userId) {
+          this.transactions = this.transactions.map(t =>
+            t.id === transaction.id ? transaction : t
+          );
+          this.updateDashboardData();
+        }
+      });
+
+    this.transactionEventService.transactionDeleted$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(transactionId => {
+        const deletedTransaction = this.transactions.find(t => t.id === transactionId);
+        if (deletedTransaction && deletedTransaction.id_user === this.userId) {
+          this.transactions = this.transactions.filter(t => t.id !== transactionId);
+          this.updateDashboardData();
+        }
+      });
   }
 
   setCurrentDate(): void {
@@ -60,13 +111,15 @@ export class DashboardComponent {
   }
 
   fetchUser(): void {
-    this.userService.getById(systemConfig.userId).subscribe(
-      (response) => this.successUser(response),
-      (error) => {
+    this.isLoading = true;
+    this.userService.getById(systemConfig.userId).subscribe({
+      next: (response) => this.successUser(response),
+      error: (error) => {
+        this.isLoading = false;
         this.errorMessage = 'Erro ao buscar usuário.';
         console.error('Error fetching user name:', error);
       }
-    );
+    });
   }
 
   successUser(response: any): void {
@@ -77,24 +130,33 @@ export class DashboardComponent {
   }
 
   fetchTransactions(id: string): void {
-    this.transactionService.getByUserId(id).subscribe(
-      (response) => this.successTransaction(response),
-      (error) => {
+    this.transactionService.getByUserId(id).subscribe({
+      next: (response) => {
+        this.transactions = response;
+        this.successTransaction(response);
+        this.isLoading = false;
+      },
+      error: (error) => {
+        this.isLoading = false;
         this.errorMessage = 'Erro ao buscar transações.';
         console.error('Error fetching transactions:', error);
       }
-    );
+    });
   }
 
   successTransaction(response: Transaction[]): void {
+    this.updateDashboardData();
+  }
+
+  updateDashboardData(): void {
     let totalEntries = 0;
     let totalExits = 0;
 
-    response.forEach((transaction) => {
-      if (this.isCredit(transaction.type)) {
+    this.transactions.forEach((transaction) => {
+      if (isCredit(transaction.type)) {
         totalEntries += transaction.amount;
       }
-      if (this.isDebit(transaction.type)) {
+      if (isDebit(transaction.type)) {
         totalExits += transaction.amount;
       }
     });
@@ -110,7 +172,7 @@ export class DashboardComponent {
       '4': { entries: 0, exits: 0 }
     };
 
-    response.forEach((transaction) => {
+    this.transactions.forEach((transaction) => {
       const date = new Date(transaction.date);
       const dayOfMonth = date.getDate();
 
@@ -125,10 +187,10 @@ export class DashboardComponent {
         week = '4';
       }
 
-      if (this.isCredit(transaction.type)) {
+      if (isCredit(transaction.type)) {
         weeklyData[week].entries += transaction.amount;
       }
-      if (this.isDebit(transaction.type)) {
+      if (isDebit(transaction.type)) {
         weeklyData[week].exits += transaction.amount;
       }
     });
@@ -138,15 +200,6 @@ export class DashboardComponent {
       entries: data.entries,
       exits: data.exits,
     }));
-
-  }
-
-  isCredit(type: string): boolean {
-    return type === 'exchange' || type === 'loan';
-  }
-
-  isDebit(type: string): boolean {
-    return type === 'transfer';
   }
 
   formatBalance(value: number): string {

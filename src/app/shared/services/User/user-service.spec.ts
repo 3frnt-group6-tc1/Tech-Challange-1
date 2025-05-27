@@ -31,6 +31,7 @@ describe('UserService', () => {
 
   it('should create a user', () => {
     const newUser: User = {
+      id: '1',
       name: 'Test User',
       email: 'test@example.com',
       password: 'password123',
@@ -48,6 +49,7 @@ describe('UserService', () => {
 
   it('should read a user by id', () => {
     const user: User = {
+      id: '1',
       name: 'Test User',
       email: 'test@example.com',
       password: 'password123',
@@ -65,6 +67,7 @@ describe('UserService', () => {
 
   it('should update a user', () => {
     const updatedUser: User = {
+      id: '1',
       name: 'Updated User',
       email: 'updated@example.com',
       password: 'newpassword',
@@ -94,8 +97,8 @@ describe('UserService', () => {
 
   it('should get all users', () => {
     const users: User[] = [
-      { name: 'User1', email: 'user1@example.com', password: 'pass1' },
-      { name: 'User2', email: 'user2@example.com', password: 'pass2' },
+      { id: '1', name: 'User1', email: 'user1@example.com', password: 'pass1' },
+      { id: '2', name: 'User2', email: 'user2@example.com', password: 'pass2' },
     ];
 
     service.getAll().subscribe((result) => {
@@ -109,6 +112,7 @@ describe('UserService', () => {
 
   it('should get user by id', () => {
     const user: User = {
+      id: '1',
       name: 'User1',
       email: 'user1@example.com',
       password: 'pass1',

@@ -6,11 +6,3 @@ export interface StatementItem {
   credit: boolean;
   debit: boolean;
 }
-
-export interface NewStatementItem {
-  id: string;
-  type: 'deposit' | 'withdraw';
-  description: string;
-  amount: number;
-  date: string;
-}

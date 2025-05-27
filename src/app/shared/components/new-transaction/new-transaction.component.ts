@@ -5,7 +5,12 @@ import { InputComponent } from "../input/input.component";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TransactionService } from '../../services/Transaction/transaction-service';
-import { Transaction, TransactionType, isCredit, isDebit } from '../../models/transaction';
+import {
+  Transaction,
+  TransactionType,
+  isCredit,
+  TRANSACTION_TYPE_LABELS,
+} from '../../models/transaction';
 import { systemConfig } from '../../../app.config';
 
 @Component({
@@ -18,16 +23,12 @@ export class NewTransactionComponent {
   private readonly fixedUserId = systemConfig.userId;
 
   transactionOptions = [
-    { display: 'Receita (Exchange)', value: 'exchange' },
-    { display: 'Despesa (Transfer)', value: 'transfer' },
-    { display: 'Empréstimo (Loan)', value: 'loan'}
+    { display: 'Receita (Câmbio de Moeda)', value: TransactionType.Exchange },
+    { display: 'Despesa (DOC/TED)', value: TransactionType.Transfer },
+    { display: 'Empréstimo (Empréstimo e Financiamento)', value: TransactionType.Loan }
   ];
 
-  newTransaction: {
-    type: TransactionType;
-    amount: number;
-    description: string;
-  } = {
+  newTransaction: Partial<Transaction> = {
     type: TransactionType.Exchange,
     amount: 0,
     description: '',
@@ -78,6 +79,13 @@ export class NewTransactionComponent {
     this.newTransaction.description = input.value;
   }
 
+  getTransactionTypeLabel(type: TransactionType): string {
+    const labels = Object.entries(TRANSACTION_TYPE_LABELS)
+      .find(([label, value]) => value === type);
+
+    return labels ? labels[0] : type;
+  }
+
   createTransaction(): void {
     if (!this.newTransaction.type) {
       this.submitStatus = {
@@ -119,9 +127,12 @@ export class NewTransactionComponent {
     this.transactionService.create(transaction).subscribe({
       next: (createdTransaction) => {
         console.log('Transação criada:', createdTransaction);
+
+        const transactionTypeLabel = this.getTransactionTypeLabel(transaction.type);
+
         this.submitStatus = {
           success: true,
-          message: `Transação ${isCredit(transaction.type) ? 'de crédito' : 'de débito'} criada com sucesso!`
+          message: `Transação de ${isCredit(transaction.type) ? 'crédito' : 'débito'} (${transactionTypeLabel}) criada com sucesso!`
         };
 
         this.resetForm();

@@ -15,6 +15,7 @@ import { FooterComponent } from '../../shared/components/footer/footer.component
   imports: [CommonModule, TextComponent, FooterComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent {
   vantagens = [

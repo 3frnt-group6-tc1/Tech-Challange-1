@@ -1,12 +1,17 @@
 <button
   [disabled]="disabled"
   [ngClass]="{
-    'bg-cyan-blue-500 hover:bg-cyan-blue-900 text-white': theme === 'primary' && !disabled,
-    'bg-orange-500 hover:bg-orange-900 !text-white': theme === 'secondary' && !disabled,
-    'bg-transparent border border-cyan-blue-500 text-cyan-blue-500 hover:bg-cyan-blue-500 hover:text-white': theme === 'outline-cyan-blue' && !disabled,
-    'bg-transparent text-cyan-blue-500 hover:text-cyan-blue-900': theme === 'ghost-cyan-blue' && !disabled,
-    'bg-transparent hover:text-orange-500 text-white': theme === 'ghost-white' && !disabled,
+    'bg-orange-500 hover:bg-orange-900 !text-white':
+      theme === 'secondary' && !disabled,
+    'bg-transparent border border-cyan-blue-500 text-cyan-blue-500 hover:bg-cyan-blue-500 hover:text-white':
+      theme === 'outline-cyan-blue' && !disabled,
+    'bg-transparent text-cyan-blue-500 hover:text-cyan-blue-900':
+      theme === 'ghost-cyan-blue' && !disabled,
+    'bg-transparent text-white hover:text-orange-500':
+      theme === 'ghost-white' && !disabled,
     'bg-gray-200 text-gray-500 cursor-not-allowed': disabled,
+    'bg-cyan-blue-500 hover:bg-cyan-blue-900 text-white':
+      theme === 'primary' && !disabled,
     'px-3': size === 'P',
     'px-12': size === 'G',
     'px-28': size === 'GG'

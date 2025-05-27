@@ -1,30 +1,33 @@
 <div class="min-h-screen bg-gray-100 flex flex-col">
   <!-- Conteúdo Principal -->
   <div class="bg-[#dee9ea] flex flex-grow">
-    <!-- Menu Lateral -->
-    <app-aside></app-aside>
+    <!-- Menu Lateral - Visível apenas em telas 2md ou maiores -->
+    <app-aside class="hidden 2md:block"></app-aside>
 
     <!-- Dashboard, Extrato e Nova Transação -->
     <main class="flex-grow px-6 pt-6 pb-6">
-      <!-- Container para todos os componentes -->
-      <div class="flex flex-col 2md:block gap-6 relative">
-        <!-- Dashboard sempre em cima -->
-        <div class="w-full 2md:w-2/3 2md:pr-6">
-          <app-dashboard></app-dashboard>
-        </div>
+      <!-- Container para os componentes com layout responsivo -->
+      <div class="flex flex-col gap-6">
 
-        <!-- Nova Transação (segundo em telas pequenas, abaixo em telas grandes) -->
-        <div class="order-2 2md:mt-6 2md:order-none">
-          <app-transaction-form></app-transaction-form>
-        </div>
+        <!-- Área superior: Dashboard e Extrato lado a lado em telas grandes -->
+        <div class="flex flex-col 2md:flex-row gap-6">
 
-        <!-- Extrato (terceiro em telas pequenas, lado direito em telas grandes) -->
-        <div
-          class="order-3 2md:order-none 2md:absolute 2md:top-0 2md:right-0 2md:w-1/3"
-        >
-          <div class="mx-auto overflow-x-auto rounded-xl shadow-md">
-            <app-statement></app-statement>
+          <!-- Dashboard (2/3 em telas grandes) -->
+          <div class="mx-auto bg-white rounded-xl shadow-md overflow-visible w-full 2md:w-2/3">
+            <app-dashboard></app-dashboard>
           </div>
+
+          <!-- Extrato (lado direito em telas grandes) -->
+          <div class="order-3 2md:order-none 2md:w-1/3">
+            <div class="mx-auto overflow-x-auto rounded-xl shadow-md">
+              <app-statement></app-statement>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nova Transação (abaixo, ocupando largura total) -->
+        <div class="order-2 2md:order-none w-full mt-6">
+          <app-new-transaction></app-new-transaction>
         </div>
       </div>
     </main>

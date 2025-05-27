@@ -13,9 +13,4 @@ import { systemConfig } from '../../../app.config';
 })
 export class HeaderComponent {
   isLoggedIn: boolean = false; // Validação para saber se o Header e da LandingPage ou da Area Logada
-
-  constructor() {
-    const path = window.location.pathname;
-    this.isLoggedIn = systemConfig.loggedPages.includes(path);
-  }
 }

@@ -12,4 +12,8 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/panel/panel.component').then((m) => m.PainelComponent),
   },
+  {
+    path: 'panel',
+    loadComponent: () => import('./pages/panel/panel.component').then(m => m.PainelComponent),
+  },
 ];

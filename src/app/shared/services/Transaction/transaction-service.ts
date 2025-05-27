@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import {
   Transaction,
-  isCredit,
-  isDebit,
   TransactionType,
   DEBIT_TYPES,
   CREDIT_TYPES,
 } from '../../models/transaction';
 import { Balance } from '../../models/balance';
 import { apiConfig } from '../../../app.config';
+import { TransactionEventService } from '../TransactionEvent/transaction-event.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,10 +18,19 @@ import { apiConfig } from '../../../app.config';
 export class TransactionService {
   private apiUrl = apiConfig.baseUrl + apiConfig.transactionsEndpoint;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private transactionEventService: TransactionEventService
+  ) {}
 
   create(transaction: Transaction): Observable<Transaction> {
-    return this.http.post<Transaction>(this.apiUrl, transaction);
+    return this.http.post<Transaction>(this.apiUrl, transaction).pipe(
+      tap((createdTransaction) => {
+        this.transactionEventService.notifyTransactionCreated(
+          createdTransaction
+        );
+      })
+    );
   }
 
   read(transactionId: string): Observable<Transaction> {
@@ -33,14 +41,23 @@ export class TransactionService {
     transactionId: string,
     transaction: Transaction
   ): Observable<Transaction> {
-    return this.http.put<Transaction>(
-      `${this.apiUrl}/${transactionId}`,
-      transaction
-    );
+    return this.http
+      .put<Transaction>(`${this.apiUrl}/${transactionId}`, transaction)
+      .pipe(
+        tap((updatedTransaction) => {
+          this.transactionEventService.notifyTransactionUpdated(
+            updatedTransaction
+          );
+        })
+      );
   }
 
   delete(transactionId: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${transactionId}`);
+    return this.http.delete<void>(`${this.apiUrl}/${transactionId}`).pipe(
+      tap(() => {
+        this.transactionEventService.notifyTransactionDeleted(transactionId);
+      })
+    );
   }
 
   getAll(): Observable<Transaction[]> {

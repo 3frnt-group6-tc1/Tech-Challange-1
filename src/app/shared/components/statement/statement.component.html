@@ -1,55 +1,61 @@
 <div class="rounded-xl shadow p-6 bg-white">
   <app-text variant="subtitle" as="h2">Extrato</app-text>
 
-  <table class="w-full text-sm border-t-2 mt-3 pt-3">
+  <div *ngIf="isLoading" class="text-center py-4">
+    <app-text color="text-gray-600">Carregando transações...</app-text>
+  </div>
+
+  <table *ngIf="!isLoading && recentTransactions.length > 0" class="w-full text-sm border-t-2 mt-3 pt-3">
     <tbody>
-      <tr *ngFor="let item of items" class="border-b-2">
-        <!-- icone -->
+      <tr *ngFor="let transaction of recentTransactions" class="border-b-2 last:border-none">
+        <!-- Ícone -->
         <td class="py-4">
-          <ng-container [ngSwitch]="item.credit">
+          <ng-container [ngSwitch]="isDeposit(transaction) ? 'deposit' : 'withdraw'">
             <app-icon-dollar
-              *ngSwitchCase="true"
+              *ngSwitchCase="'deposit'"
               class="w-4 h-4"
               [ngClass]="'text-green-600'"
             ></app-icon-dollar>
 
             <app-icon-arrow-down-left
-              *ngSwitchCase="false"
+              *ngSwitchCase="'withdraw'"
               class="w-4 h-4"
               [ngClass]="'text-red-600'"
             ></app-icon-arrow-down-left>
           </ng-container>
         </td>
-        <!-- Deposito ou Saque -->
+        <!-- Descrição -->
         <td class="py-4">
-          <app-text [color]="item.credit ? 'text-green-600' : 'text-red-600'">{{
-            item.description
-          }}</app-text>
+          <app-text [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'">
+            {{ getTransactionTypeLabel(transaction.type) }}
+          </app-text>
         </td>
         <!-- Valor -->
         <td class="py-4">
-          <app-text [color]="item.credit ? 'text-green-600' : 'text-red-600'">
-            {{ item.amount | brl }}
+          <app-text [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'">
+            R$ {{ transaction.amount.toFixed(2) }}
           </app-text>
         </td>
         <!-- Data -->
         <td class="py-4">
-          <app-text [color]="item.credit ? 'text-green-600' : 'text-red-600'">
-            {{ item.date }}</app-text
-          >
+          <app-text color="text-gray-600">
+            {{ formatDate(transaction.date) }}
+          </app-text>
         </td>
         <!-- Icone de Lápís -->
         <td class="py-4 text-center">
-          <app-icon-arrow-pencil
-            [ngClass]="item.credit ? 'text-green-600' : 'text-red-600'"
-            class="w-4 h-4"
-          ></app-icon-arrow-pencil>
+          <button (click)="editTransaction(transaction.id!)">
+            <app-icon-arrow-pencil
+              [ngClass]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
+              class="w-4 h-4"
+            ></app-icon-arrow-pencil>
+          </button>
         </td>
         <!-- Icone de Lixeira -->
         <td class="py-4 text-center">
-          <button (click)="deleteTransaction(item.id)">
+          <button (click)="deleteTransaction(transaction.id!)">
             <app-icon-bin
-              [ngClass]="item.credit ? 'text-green-600' : 'text-red-600'"
+              [ngClass]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
               class="w-4 h-4"
             ></app-icon-bin>
           </button>
@@ -58,15 +64,14 @@
     </tbody>
   </table>
 
+  <div *ngIf="!isLoading && recentTransactions.length === 0" class="text-center py-4">
+    <app-text color="text-gray-600">Nenhuma transação encontrada</app-text>
+  </div>
+
   <div class="flex justify-end mt-4">
-    <a
-      href="#"
-      class="inline-flex items-center gap-2 text-cyan-blue-500 hover:underline"
-    >
-      <app-text variant="text-regular" color="text-cyan-blue-500"
-        >Listar
-      </app-text>
-      <app-icon-arrow-right />
+    <a href="#" class="inline-flex items-center gap-2 text-cyan-blue-500 hover:underline">
+      Listar
+      <img src="assets/icons/arrow-right.svg" alt="Ir para listagem" class="w-4 h-4" />
     </a>
   </div>
 </div>

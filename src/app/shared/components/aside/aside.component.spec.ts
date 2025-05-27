@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AsideComponent } from './aside.component';
+import { provideRouter } from '@angular/router';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AsideComponent', () => {
   let component: AsideComponent;
@@ -8,7 +9,11 @@ describe('AsideComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AsideComponent]
+      imports: [AsideComponent],
+      providers: [
+        provideRouter([])
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
 

@@ -1,111 +1,119 @@
 <div class="p-6">
-  <!-- Layout para telas maiores (Desktop) -->
-  <div
-    class="hidden sm:flex flex-col sm:flex-row justify-between items-start gap-6"
-  >
-    <div>
-      <h1 class="text-xl sm:text-2xl text-gray-900 font-bold">
-        Olá, {{ userName }}!
-      </h1>
-      <p class="text-gray-500 mt-2 sm:mt-3 text-xs sm:text-sm">
-        {{ currentDate }}
-      </p>
-    </div>
-    <div class="text-right w-full sm:w-auto mt-4 sm:mt-0">
-      <div class="flex items-center justify-end">
-        <p class="font-medium text-gray-700 mr-3 text-xl sm:text-2xl">Saldo</p>
-        <button (click)="toggleBalance()" class="focus:outline-none">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 text-gray-700"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-            />
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-            />
-          </svg>
-        </button>
-      </div>
-      <p class="text-gray-500 mt-1 text-xs sm:text-sm">{{ accountType }}</p>
-      <p
-        class="text-gray-900 mt-2 sm:mt-3 text-xl sm:text-2xl font-bold"
-        *ngIf="showBalance"
-      >
-        {{ balance }}
-      </p>
-      <p
-        class="text-gray-500 mt-2 sm:mt-3 text-xl sm:text-2xl font-bold"
-        *ngIf="!showBalance"
-      >
-        ****
-      </p>
-    </div>
+  <div *ngIf="isLoading" class="flex flex-col items-center justify-center p-8">
+    <p class="text-gray-600">Carregando informações...</p>
   </div>
 
-  <!-- Layout para telas pequenas (Mobile) -->
-  <div class="flex flex-col sm:hidden items-center text-center">
-    <div class="flex flex-col mb-4">
-      <h1 class="text-xl text-gray-900 font-bold">Olá, {{ userName }}!</h1>
-      <p class="text-gray-500 text-xs">{{ currentDate }}</p>
+  <div *ngIf="!isLoading">
+    <!-- Layout para telas maiores (Desktop) -->
+    <div
+      class="hidden sm:flex flex-col sm:flex-row justify-between items-start gap-6"
+    >
+      <div>
+        <h1 class="text-xl sm:text-2xl text-gray-900 font-bold">
+          Olá, {{ userName }}!
+        </h1>
+        <p class="text-gray-500 mt-2 sm:mt-3 text-xs sm:text-sm">
+          {{ currentDate }}
+        </p>
+      </div>
+      <div class="text-right w-full sm:w-auto mt-4 sm:mt-0">
+        <div class="flex items-center justify-end">
+          <p class="font-medium text-gray-700 mr-3 text-xl sm:text-2xl">
+            Saldo
+          </p>
+          <button (click)="toggleBalance()" class="focus:outline-none">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 text-gray-700"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+              />
+            </svg>
+          </button>
+        </div>
+        <p class="text-gray-500 mt-1 text-xs sm:text-sm">{{ accountType }}</p>
+        <p
+          class="text-gray-900 mt-2 sm:mt-3 text-xl sm:text-2xl font-bold"
+          *ngIf="showBalance"
+        >
+          {{ balance }}
+        </p>
+        <p
+          class="text-gray-500 mt-2 sm:mt-3 text-xl sm:text-2xl font-bold"
+          *ngIf="!showBalance"
+        >
+          ****
+        </p>
+      </div>
     </div>
 
-    <!-- Separador entre saudação e saldo (apenas mobile) -->
-    <div class="w-full border-t border-gray-200 mb-4"></div>
-
-    <!-- Saldo -->
-    <div class="flex flex-col">
-      <div class="flex items-center justify-center">
-        <p class="font-medium text-gray-700 text-lg">Saldo</p>
-        <button (click)="toggleBalance()" class="focus:outline-none ml-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 text-gray-700"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-            />
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-            />
-          </svg>
-        </button>
+    <!-- Layout para telas pequenas (Mobile) -->
+    <div class="flex flex-col sm:hidden items-center text-center">
+      <div class="flex flex-col mb-4">
+        <h1 class="text-xl text-gray-900 font-bold">Olá, {{ userName }}!</h1>
+        <p class="text-gray-500 text-xs">{{ currentDate }}</p>
       </div>
-      <p class="text-gray-500 mt-1 text-xs">{{ accountType }}</p>
-      <p class="text-gray-900 text-lg font-bold" *ngIf="showBalance">
-        {{ balance }}
-      </p>
-      <p class="text-gray-500 text-lg font-bold" *ngIf="!showBalance">****</p>
+
+      <!-- Separador entre saudação e saldo (apenas mobile) -->
+      <div class="w-full border-t-2 border-gray-200 mb-4"></div>
+
+      <!-- Saldo -->
+      <div class="flex flex-col">
+        <div class="flex items-center justify-center">
+          <p class="font-medium text-gray-700 text-lg">Saldo</p>
+          <button (click)="toggleBalance()" class="focus:outline-none ml-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 text-gray-700"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+              />
+            </svg>
+          </button>
+        </div>
+        <p class="text-gray-500 mt-1 text-xs">{{ accountType }}</p>
+        <p class="text-gray-900 text-lg font-bold" *ngIf="showBalance">
+          {{ balance }}
+        </p>
+        <p class="text-gray-500 text-lg font-bold" *ngIf="!showBalance">****</p>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- Separador principal entre cabeçalho e gráfico -->
 <div class="px-6">
-  <div class="border-t border-gray-200"></div>
+  <div class="border-t-2 border-gray-200"></div>
 </div>
 
 <!-- Gráfico de transações -->
-<div class="p-6 sm:pb-12">
+<div class="p-6 sm:pb-12" *ngIf="!isLoading">
   <h2 class="text-gray-900 mb-4 text-base font-bold text-center sm:text-left">
     Transações de Maio
   </h2>
@@ -209,4 +217,11 @@
       </div>
     </div>
   </div>
+</div>
+
+<div
+  *ngIf="errorMessage"
+  class="p-4 bg-red-100 text-red-700 rounded-md mx-6 mb-6"
+>
+  {{ errorMessage }}
 </div>

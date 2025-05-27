@@ -1,3 +1,41 @@
 <section class="bg-primary-gradient">
+  <div class="container flex flex-col gap-12 py-12">
+    <!-- Primeira dobra -->
+    <div class="flex flex-col-reverse md:flex-col xl:flex-row justify-center items-center gap-12 xl:gap-16">
+      <div class="w-full max-w-full md:max-w-[470px] flex justify-center text-center">
+        <app-text variant="title-bold" as="h1" color="text-white">
+          Experimente mais liberdade no controle da sua vida financeira. Crie
+          sua conta com a gente!
+        </app-text>
+      </div>
+      <img src="../../../assets/imgs/grafic.svg" alt="" />
+    </div>
 
+    <!-- Segunda Dobra -->
+    <div class="flex flex-col gap-9 text-center">
+      <app-text variant="title-bold" as="h1" color="text-white">
+        Vantagens do nosso banco:
+      </app-text>
+
+      <div class="flex flex-wrap justify-center lg:justify-between gap-12 xl:py-[75px]">
+        <div class="flex flex-col items-center text-center gap-9 w-[260px]"
+          *ngFor="let vantagem of vantagens"
+        >
+          <ng-container
+            *ngComponentOutlet="vantagem.icon; inputs: inputs">
+          </ng-container>
+
+          <app-text variant="subtitle" as="h2" color="text-white">
+            {{ vantagem.titulo }}
+          </app-text>
+
+          <app-text variant="text-regular" as="p" color="text-white">
+            {{ vantagem.descricao }}
+          </app-text>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-footer></app-footer>
 </section>

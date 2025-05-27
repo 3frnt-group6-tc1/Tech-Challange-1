@@ -1,6 +1,6 @@
 <ng-container [ngSwitch]="tag">
-    <h1 *ngSwitchCase="'h1'" [ngClass]="classes"><ng-content></ng-content></h1>
-    <h2 *ngSwitchCase="'h2'" [ngClass]="classes"><ng-content></ng-content></h2>
-    <span *ngSwitchCase="'span'" [ngClass]="classes"><ng-content></ng-content></span>
-    <p *ngSwitchDefault [ngClass]="classes"><ng-content></ng-content></p>
-  </ng-container>
+  <h1 *ngSwitchCase="'h1'" [ngClass]="classes"><ng-content></ng-content></h1>
+  <h2 *ngSwitchCase="'h2'" [ngClass]="classes"><ng-content></ng-content></h2>
+  <span *ngSwitchCase="'span'" [ngClass]="classes"><ng-content></ng-content></span>
+  <p *ngSwitchDefault [ngClass]="classes"><ng-content></ng-content></p>
+</ng-container>

@@ -17,18 +17,18 @@ export class TextComponent {
     | 'text-small'
     | 'text-small-bold' = 'text-regular';
 
-  @Input() color: string = 'text-black-900';
+  @Input() color: string = 'text-white';
 
-  @Input() tag: 'p' | 'h1' | 'h2' | 'span' = 'p';
+  @Input() tag: 'p' | 'h1' | 'h2' | 'span' = 'p'; // unificado
 
   get classes(): string {
     const base = 'font-lato leading-[20px]';
 
     const variants: Record<string, string> = {
-      'title-bold': 'text-[24px] font-bold',
+      'title-bold': 'text-[32px] font-bold leading-[40px]',
       'title-regular': 'text-[24px] font-normal',
-      'subtitle': 'text-[20px] font-normal',
-      'text-regular': 'text-[16px] font-normal',
+      'subtitle': 'text-[20px] font-semibold',
+      'text-regular': 'text-[16px] font-bold',
       'text-regular-special': 'text-[16px] font-normal',
       'text-small': 'text-[14px] font-normal',
       'text-small-bold': 'text-[14px] font-bold',
@@ -37,3 +37,5 @@ export class TextComponent {
     return `${base} ${variants[this.variant]} ${this.color}`;
   }
 }
+
+

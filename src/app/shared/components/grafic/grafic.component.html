@@ -1,0 +1,50 @@
+<div class="relative h-48 mx-auto w-full sm:w-4/5 lg:w-4/5">
+  <div class="relative h-full">
+    <!-- Y-axis labels -->
+    <div class="absolute left-0 h-full flex flex-col justify-between pointer-events-none">
+      <span class="text-right text-xs text-gray-500 pr-1 w-10">{{ maxChartValue }}</span>
+      <span class="text-right text-xs text-gray-500 pr-1 w-10">{{ maxChartValue * 0.75 }}</span>
+      <span class="text-right text-xs text-gray-500 pr-1 w-10">{{ maxChartValue * 0.5 }}</span>
+      <span class="text-right text-xs text-gray-500 pr-1 w-10">{{ maxChartValue * 0.25 }}</span>
+      <span class="text-right text-xs text-gray-500 pr-1 w-10">0</span>
+    </div>
+
+    <!-- Chart grid -->
+    <div class="absolute inset-0 ml-10 border border-gray-200">
+      <div class="absolute w-full h-1/4 border-b border-gray-200"></div>
+      <div class="absolute w-full h-2/4 border-b border-gray-200"></div>
+      <div class="absolute w-full h-3/4 border-b border-gray-200"></div>
+      <div class="absolute h-full w-1/5 border-r border-gray-200"></div>
+      <div class="absolute h-full w-2/5 border-r border-gray-200 left-1/5"></div>
+      <div class="absolute h-full w-3/5 border-r border-gray-200 left-2/5"></div>
+      <div class="absolute h-full w-4/5 border-r border-gray-200 left-3/5"></div>
+    </div>
+
+    <!-- Bars -->
+    <div class="absolute inset-0 ml-10 flex justify-around items-end">
+      <ng-container *ngFor="let data of transactionData; let i = index">
+        <div class="flex items-end justify-center w-1/5 h-full">
+          <div class="flex items-end space-x-1 sm:space-x-2 mb-0">
+            <div
+              class="w-3 sm:w-5 md:w-7"
+              [style.height.px]="(data.exits / maxChartValue) * 170"
+              [style.backgroundColor]="'#FF5031'"
+            ></div>
+            <div
+              class="w-3 sm:w-5 md:w-7"
+              [style.height.px]="(data.entries / maxChartValue) * barMaxHeight"
+              [style.backgroundColor]="'#004D61'"
+            ></div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- X-axis labels -->
+    <div class="absolute w-full -bottom-6 ml-10 pr-8 grid grid-cols-5 text-center">
+      <ng-container *ngFor="let data of transactionData">
+        <span class="text-gray-600 text-xs">{{ data.day }}</span>
+      </ng-container>
+    </div>
+  </div>
+</div>

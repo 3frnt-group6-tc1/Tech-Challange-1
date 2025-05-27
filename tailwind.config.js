@@ -3,20 +3,41 @@ module.exports = {
   content: [
     "./src/**/*.{html,ts}",
   ],
+  safelist: [
+    'text-white',
+    'text-black-900',
+    'text-cyan-blue-500',
+    'text-orange-500',
+    'text-green-600',
+    'text-red-600',
+    'font-bold',
+    'text-[24px]',
+    'text-[20px]',
+    'text-[16px]',
+    'text-[14px]',
+    'leading-[20px]',
+    'leading-6',
+  ],
   theme: {
     container: {
       center: true,
-      padding: '1rem',
+      padding: {
+        DEFAULT: '1.5rem',
+        lg: '1rem',
+      },
       screens: {
-        xl: '1440px',
+        lg: '1024px',
+        xl: '1326px',
       },
     },
+
+
     extend: {
       screens: {
         '2md': '1440px',
       },
       backgroundImage: {
-        'primary-gradient': 'linear-gradient(to bottom, #004D61, #ffffff)',
+        'primary-gradient': 'linear-gradient(to bottom, #003C50 0%, #007B8F 50%, #a9c4c9 100%);',
         'secondary-gradient': 'linear-gradient(to bottom, #dee9ea, #ffffff)',
       },
       fontFamily: {
@@ -39,7 +60,7 @@ module.exports = {
 
         "green-600": "#157f40",
         "red-600": "#ce3426",
-      }
+      },
     },
   },
   plugins: [],

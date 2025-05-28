@@ -35,6 +35,15 @@
           </ng-container>
         </td>
         <!-- Descrição -->
+        <td class="py-4" *ngIf="showDetails">
+          <app-text
+            [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
+          >
+            {{ transaction.description }}
+          </app-text>
+        </td>
+
+        <!-- Tipo -->
         <td class="py-4">
           <app-text
             [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
@@ -91,7 +100,7 @@
     <app-text color="text-gray-600">Nenhuma transação encontrada</app-text>
   </div>
 
-  <div class="flex justify-end mt-4" *ngIf="showListButton">
+  <div class="flex justify-end mt-4" *ngIf="!showDetails">
     <a
       href="/transactions"
       class="inline-flex items-center gap-2 text-cyan-blue-500 hover:underline"

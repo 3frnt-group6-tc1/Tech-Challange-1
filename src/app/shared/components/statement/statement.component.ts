@@ -36,7 +36,7 @@ import { IconArrowRightComponent } from '../../assets/icons/icon-arrow-right.com
   styleUrls: ['./statement.component.scss'],
 })
 export class StatementComponent implements OnInit, OnDestroy {
-  @Input() showListButton = true;
+  @Input() showDetails = true;
   transactions: Transaction[] = [];
   transactionLabels = TRANSACTION_TYPE_LABELS;
   isLoading = false;

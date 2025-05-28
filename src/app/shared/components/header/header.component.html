@@ -1,4 +1,4 @@
-<header class="bg-cyan-blue-500">
+<header class="bg-cyan-blue-500 relative">
   <div class="flex items-center justify-between h-24 container">
     <!-- Variação para LandingPage -->
     @if(!isLoggedIn) { 
@@ -25,10 +25,9 @@
           </ul>
         </div>
         <div class="flex gap-9">
-          <app-button theme="secondary" label="Abrir minha conta" size="P">
-          </app-button>
+          <app-button theme="secondary" label="Abrir minha conta" size="P"></app-button>
           <app-button theme="ghost-white" label="Já tenho conta" size="P">
-            <app-icon-exit icon-right color="text-white" />
+            <app-icon-exit icon-right class="text-white" />
           </app-button>
           <app-button size="P" label="">
             <app-icon-darkmode icon-left class="text-white"></app-icon-darkmode>
@@ -41,7 +40,7 @@
           <app-button size="P" label="">
             <app-icon-darkmode icon-left class="text-white"></app-icon-darkmode>
           </app-button>
-          <app-button size="P" label="">
+          <app-button size="P" label="" (click)="toggleMenu()" aria-label="Abrir menu">
             <app-icon-hamburger icon-left class="text-white"></app-icon-hamburger>
           </app-button>
         </div>
@@ -72,4 +71,25 @@
     </div>
     }
   </div>
+
+
+
+  <!-- Novo menu que sobrepõe com fundo escuro -->
+  <div
+    *ngIf="menuOpen"
+    class="fixed inset-0 z-50 bg-black/60 flex flex-col justify-start items-center pt-24"
+  >
+    <div #menuRef class="bg-white rounded-lg w-full p-9 flex flex-col gap-4 text-center shadow-xl">
+      <a href="#" class="text-cyan-blue-500 text-[18px] font-semibold">Sobre</a>
+      <a href="#" class="text-cyan-blue-500 text-[18px] font-semibold">Serviços</a>
+
+      <div class="px-6 flex flex-col justify-center items-center gap-4">
+        <app-button theme="secondary" label="Abrir minha conta" size="G"></app-button>
+        <app-button theme="primary" label="Já tenho conta" size="G">
+          <app-icon-exit icon-right class="text-white" />
+        </app-button>
+      </div>
+    </div>
+  </div>
+
 </header>

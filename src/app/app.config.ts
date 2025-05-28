@@ -23,9 +23,8 @@ export const systemConfig: {
   year: new Date().getFullYear(),
   userId: 'u2',
   isLogged: false,
-  loggedPages: ['/home', '/dashboard', '/perfil'] // adicione aqui os caminhos que indicam login
+  loggedPages: ['/panel', '/transactions', '/cards', '/configurations'],
 };
-
 
 export const appConfig: ApplicationConfig = {
   providers: [

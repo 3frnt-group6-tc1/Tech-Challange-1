@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TextComponent } from '../text/text.component';
 import { IconArrowPencilComponent } from '../../assets/icons/icon-arrow-pencil.component';
@@ -18,6 +18,7 @@ import {
 import { TransactionService } from '../../services/Transaction/transaction-service';
 import { systemConfig } from '../../../app.config';
 import { TransactionEventService } from '../../services/TransactionEvent/transaction-event.service';
+import { IconArrowRightComponent } from '../../assets/icons/icon-arrow-right.component';
 
 @Component({
   selector: 'app-statement',
@@ -29,11 +30,13 @@ import { TransactionEventService } from '../../services/TransactionEvent/transac
     IconBinComponent,
     IconDollarComponent,
     IconArrowDownLeftComponent,
+    IconArrowRightComponent,
   ],
   templateUrl: './statement.component.html',
   styleUrls: ['./statement.component.scss'],
 })
 export class StatementComponent implements OnInit, OnDestroy {
+  @Input() showListButton = true;
   transactions: Transaction[] = [];
   transactionLabels = TRANSACTION_TYPE_LABELS;
   isLoading = false;
@@ -56,7 +59,7 @@ export class StatementComponent implements OnInit, OnDestroy {
     // Listen for created transactions
     this.transactionEventService.transactionCreated$
       .pipe(takeUntil(this.destroy$))
-      .subscribe(transaction => {
+      .subscribe((transaction) => {
         if (transaction.id_user === systemConfig.userId) {
           // Add the new transaction to our list
           this.transactions = [transaction, ...this.transactions];
@@ -66,10 +69,10 @@ export class StatementComponent implements OnInit, OnDestroy {
     // Listen for updated transactions
     this.transactionEventService.transactionUpdated$
       .pipe(takeUntil(this.destroy$))
-      .subscribe(transaction => {
+      .subscribe((transaction) => {
         if (transaction.id_user === systemConfig.userId) {
           // Update the transaction in our list
-          this.transactions = this.transactions.map(t =>
+          this.transactions = this.transactions.map((t) =>
             t.id === transaction.id ? transaction : t
           );
         }
@@ -78,9 +81,11 @@ export class StatementComponent implements OnInit, OnDestroy {
     // Listen for deleted transactions
     this.transactionEventService.transactionDeleted$
       .pipe(takeUntil(this.destroy$))
-      .subscribe(transactionId => {
+      .subscribe((transactionId) => {
         // Remove the transaction from our list
-        this.transactions = this.transactions.filter(t => t.id !== transactionId);
+        this.transactions = this.transactions.filter(
+          (t) => t.id !== transactionId
+        );
       });
   }
 
@@ -95,7 +100,7 @@ export class StatementComponent implements OnInit, OnDestroy {
 
     this.transactionService.getByUserId(userId).subscribe({
       next: (transactions) => {
-        this.transactions = transactions.filter(t => t.id);
+        this.transactions = transactions.filter((t) => t.id);
         this.isLoading = false;
         console.log('Loaded transactions:', this.transactions);
       },
@@ -121,8 +126,9 @@ export class StatementComponent implements OnInit, OnDestroy {
   }
 
   getTransactionTypeLabel(type: TransactionType): string {
-    const entry = Object.entries(TRANSACTION_TYPE_LABELS)
-      .find(([_, value]) => value === type);
+    const entry = Object.entries(TRANSACTION_TYPE_LABELS).find(
+      ([_, value]) => value === type
+    );
 
     return entry ? entry[0] : type;
   }

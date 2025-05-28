@@ -7,6 +7,7 @@ import { IconWhatsappComponent } from '../../assets/icons/icon-whatsapp.componen
 import { IconInstagramComponent } from '../../assets/icons/icon-instagram.component';
 import { IconYoutubeComponent } from '../../assets/icons/icon-youtube.component';
 import { IconLogoComponent } from '../../assets/icons/icon-logo.component';
+import { ButtonComponent } from "../button/button.component";
 
 @Component({
   selector: 'app-footer',
@@ -18,7 +19,8 @@ import { IconLogoComponent } from '../../assets/icons/icon-logo.component';
     IconInstagramComponent,
     IconYoutubeComponent,
     IconLogoComponent,
-  ],
+    ButtonComponent
+],
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
 })

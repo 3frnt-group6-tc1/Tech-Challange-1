@@ -1,8 +1,8 @@
 <footer class="bg-cyan-blue-500">
   @if(!isLoggedIn) {
   <div class="container">
-    <div class="flex p-12 justify-center gap-9">
-      <div class="flex flex-col gap-4 w-72">
+    <div class="flex flex-col lg:flex-row p-12 justify-center text-center gap-9">
+      <div class="flex flex-col gap-4 w-full lg:w-72">
         <app-text variant="text-regular" as="p" color="text-white">
           Serviços
         </app-text>
@@ -21,7 +21,7 @@
         </ul>
       </div>
 
-      <div class="flex flex-col gap-4 w-72">
+      <div class="flex flex-col gap-4 w-full lg:w-72">
         <app-text variant="text-regular" as="p" color="text-white">
           Contato
         </app-text>
@@ -40,7 +40,7 @@
         </ul>
       </div>
 
-      <div class="flex flex-col gap-6 w-72 text-center">
+      <div class="flex flex-col gap-6 w-full lg:w-72 text-center">
         <app-text variant="text-regular" as="p" color="text-white">
           © Copyright {{ year }} {{ company }}
         </app-text>
@@ -48,9 +48,15 @@
         <app-icon-logo class="text-white m-auto"></app-icon-logo>
 
         <div class="flex flex-row gap-6 items-center justify-center">
-          <app-icon-whatsapp class="text-white"></app-icon-whatsapp>
-          <app-icon-instagram class="text-white"></app-icon-instagram>
-          <app-icon-youtube class="text-white"></app-icon-youtube>
+          <app-button size="P" label="">
+            <app-icon-whatsapp icon-left class="text-white"></app-icon-whatsapp>
+          </app-button>
+          <app-button size="P" label="">
+            <app-icon-instagram icon-left class="text-white"></app-icon-instagram>
+          </app-button>
+          <app-button size="P" label="">
+            <app-icon-youtube icon-left class="text-white"></app-icon-youtube>
+          </app-button>
         </div>
       </div>
     </div>

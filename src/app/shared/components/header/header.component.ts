@@ -7,22 +7,29 @@ import { TextComponent } from '../text/text.component';
 import { systemConfig } from '../../../app.config';
 import { IconHamburgerComponent } from "../../assets/icons/icon-hamburger.component";
 import { IconDarkmodeComponent } from "../../assets/icons/icon-darkmode.component";
+import { IconBinComponent } from "../../assets/icons/icon-bin.component";
+import { IconBellComponent } from "../../assets/icons/icon-bell.component";
+import { IconAccountCircleComponent } from "../../assets/icons/icon-account-circle.component";
 
 @Component({
   selector: 'app-header',
+  standalone: true,
   imports: [
     CommonModule,
     ButtonComponent,
     TextComponent,
     IconExitComponent,
     IconHamburgerComponent,
-    IconDarkmodeComponent
+    IconDarkmodeComponent,
+    IconBinComponent,
+    IconBellComponent,
+    IconAccountCircleComponent
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  isLoggedIn = false;
+  isLoggedIn = true;
   mobile = false;
   menuOpen = false;
 
@@ -71,5 +78,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.menuOpen = false;
       this.enableScroll();
     }
+  }
+
+  get showLandingMobileMenu(): boolean {
+    return !this.isLoggedIn && this.mobile && this.menuOpen;
+  }
+
+  get showLandingDesktopMenu(): boolean {
+    return !this.isLoggedIn && !this.mobile;
+  }
+
+  get showLoggedMobileMenu(): boolean {
+    return this.isLoggedIn && this.mobile && this.menuOpen;
+  }
+
+  get showLoggedTabletMenu(): boolean {
+    return this.isLoggedIn && !this.mobile;
   }
 }

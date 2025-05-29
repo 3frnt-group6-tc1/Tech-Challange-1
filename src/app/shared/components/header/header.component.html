@@ -1,88 +1,59 @@
 <header class="bg-cyan-blue-500 relative">
-  <div class="flex items-center justify-between h-24 container">
-    <!-- Variação para LandingPage -->
-    @if(!isLoggedIn) { 
-      @if(!mobile) {
-        <div class="flex gap-20">
-          <img src="assets/icons/logo.svg" alt="Logo Bytebank" />
+  <div class="flex items-center justify-between container" [ngClass]="{ 'h-24': !isLoggedIn, 'h-[70px]': isLoggedIn }">
+    <img src="assets/icons/logo.svg" alt="Logo Bytebank" />
+    <!-- Usuário não logado (LandingPage) -->
+      @if(!isLoggedIn) {
+        @if(!mobile) {
           <ul class="flex items-center gap-10">
-            <li>
-              <a
-                href="#"
-                class="text-white hover:text-orange-500 transition-all text-center font-lato text-[18px] font-semibold leading-normal"
-              >
-                Sobre
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                class="text-white hover:text-orange-500 transition-all text-center font-lato text-[18px] font-semibold leading-normal"
-              >
-                Serviço
-              </a>
-            </li>
+            <li><a href="#" class="text-white hover:text-orange-500 font-lato text-[18px] font-semibold">Sobre</a></li>
+            <li><a href="#" class="text-white hover:text-orange-500 font-lato text-[18px] font-semibold">Serviço</a></li>
           </ul>
-        </div>
-        <div class="flex gap-9">
-          <app-button theme="secondary" label="Abrir minha conta" size="P"></app-button>
-          <app-button theme="ghost-white" label="Já tenho conta" size="P">
-            <app-icon-exit icon-right class="text-white" />
-          </app-button>
+          <div class="flex items-center gap-6">
+            <app-button theme="secondary" label="Abrir minha conta" size="P"></app-button>
+            <app-button theme="ghost-white" label="Já tenho conta" size="P">
+              <app-icon-exit icon-right class="text-white" />
+            </app-button>
+            <app-button size="P" label="">
+              <app-icon-darkmode icon-left class="text-white"></app-icon-darkmode>
+            </app-button>
+          </div>
+        } @else { 
+          <div class="flex gap-6">
+            <app-button size="P" label="">
+              <app-icon-darkmode icon-left class="text-white"></app-icon-darkmode>
+            </app-button>
+            <app-button size="P" label="" (click)="toggleMenu()">
+              <app-icon-hamburger icon-left class="text-white"></app-icon-hamburger>
+            </app-button>
+          </div>
+        }
+      } @else {
+        <div class="flex items-center gap-2">
+          <app-text variant="text-small" color="text-white">Fulano da Silva</app-text>
           <app-button size="P" label="">
             <app-icon-darkmode icon-left class="text-white"></app-icon-darkmode>
           </app-button>
+          <app-button size="P" label="">
+            <app-icon-bell icon-left class="text-white"></app-icon-bell>
+          </app-button>
+          <app-button size="P" label="">
+            <app-icon-account-circle icon-left class="text-white"></app-icon-account-circle>
+          </app-button>
+          <!-- <ng-container *ngIf="mobile">
+            <app-button size="P" label="" (click)="toggleMenu()">
+              <app-icon-hamburger icon-left class="text-white"></app-icon-hamburger>
+            </app-button>
+          </ng-container> -->
         </div>
       }
-      @else {
-        <img src="assets/icons/logo.svg" alt="Logo Bytebank" />
-        <div class="flex gap-9">
-          <app-button size="P" label="">
-            <app-icon-darkmode icon-left class="text-white"></app-icon-darkmode>
-          </app-button>
-          <app-button size="P" label="" (click)="toggleMenu()" aria-label="Abrir menu">
-            <app-icon-hamburger icon-left class="text-white"></app-icon-hamburger>
-          </app-button>
-        </div>
-      } 
-    }
-    <!-- Variação para usuario já logado -->
-    @else {
-    <img src="assets/icons/logo.svg" alt="Logo Bytebank" />
-    <div class="flex flex-row gap-6">
-      <app-text variant="text-small" color="text-white"
-        >Fulano da Silva</app-text
-      >
-      <a href="#">
-        <img
-          src="../../../../assets/icons/dark-mode.svg"
-          alt="Icone de Dark Mode"
-        />
-      </a>
-      <a href="#">
-        <img src="../../../../assets/icons/bell.svg" alt="Icone de aviso" />
-      </a>
-      <a href="#">
-        <img
-          src="../../../../assets/icons/account-circle.svg"
-          alt="Icone de Perfil do Usuario"
-        />
-      </a>
-    </div>
-    }
   </div>
 
-
-
-  <!-- Novo menu que sobrepõe com fundo escuro -->
-  <div
-    *ngIf="menuOpen"
-    class="fixed inset-0 z-50 bg-black/60 flex flex-col justify-start items-center pt-24"
-  >
+  <!-- Menu da landing mobile -->
+  <!-- Menu da landing mobile -->
+  <div *ngIf="showLandingMobileMenu" class="fixed inset-0 z-50 bg-black/60 flex justify-center items-start pt-24">
     <div #menuRef class="bg-white rounded-lg w-full p-9 flex flex-col gap-4 text-center shadow-xl">
       <a href="#" class="text-cyan-blue-500 text-[18px] font-semibold">Sobre</a>
       <a href="#" class="text-cyan-blue-500 text-[18px] font-semibold">Serviços</a>
-
       <div class="px-6 flex flex-col justify-center items-center gap-4">
         <app-button theme="secondary" label="Abrir minha conta" size="G"></app-button>
         <app-button theme="primary" label="Já tenho conta" size="G">
@@ -92,4 +63,23 @@
     </div>
   </div>
 
+  <!-- Menu logado mobile -->
+  <div *ngIf="showLoggedMobileMenu" class="absolute top-full left-0 bg-white w-full py-6 flex flex-col items-center gap-4 shadow-md z-50 xl:hidden">
+    <a href="#" class="text-cyan-blue-500 text-[18px] font-normal">Início</a>
+    <a href="#" class="text-cyan-blue-500 text-[18px] font-normal">Transações</a>
+    <a href="#" class="text-cyan-blue-500 text-[18px] font-normal">Extrato</a>
+    <a href="#" class="text-cyan-blue-500 text-[18px] font-normal">Meus Cartões</a>
+    <a href="#" class="text-cyan-blue-500 text-[18px] font-normal">Configurações</a>
+    <a href="#" class="text-cyan-blue-500 text-[18px] font-normal">Sair</a>
+  </div>
+
+  <!-- Menu logado tablet (entre 640px e 1024px) -->
+  <nav *ngIf="showLoggedTabletMenu" class="fixed top-[70px] left-0 w-full bg-white py-4 flex flex-row items-center justify-center gap-4 shadow z-40 xl:hidden">
+    <a href="#" class="text-cyan-blue-500 text-[18px] font-normal w-[131px] flex justify-center">Início</a>
+    <a href="#" class="text-cyan-blue-500 text-[18px] font-normal w-[131px] flex justify-center">Transações</a>
+    <a href="#" class="text-cyan-blue-500 text-[18px] font-normal w-[131px] flex justify-center">Extrato</a>
+    <a href="#" class="text-cyan-blue-500 text-[18px] font-normal w-[131px] flex justify-center">Meus Cartões</a>
+    <a href="#" class="text-cyan-blue-500 text-[18px] font-normal w-[131px] flex justify-center">Configurações</a>
+    <a href="#" class="text-cyan-blue-500 text-[18px] font-normal w-[131px] flex justify-center">Sair</a>
+  </nav>
 </header>

@@ -1,3 +1,7 @@
+<div *ngIf="showAlert" class="fixed top-0 left-0 right-0 bg-white text-cyan-blue-500 p-4 text-center z-50">
+  {{ alertMessage }}
+</div>
+
 <div class="rounded-xl shadow p-6 bg-white">
   <app-text variant="subtitle" as="h2" color="text-gray-900"
     >Transações</app-text
@@ -80,7 +84,7 @@
         </td>
         <!-- Icone de Lixeira -->
         <td class="py-4 text-center">
-          <button (click)="deleteTransaction(transaction.id!)">
+          <button (click)="openDeleteModal(transaction.id!)">
             <app-icon-bin
               [ngClass]="
                 isDeposit(transaction) ? 'text-green-600' : 'text-red-600'
@@ -110,3 +114,9 @@
     </a>
   </div>
 </div>
+
+<app-delete-modal
+  [isOpen]="isModalOpen"
+  (confirm)="onConfirmDelete()"
+  (cancel)="onCancelDelete()"
+></app-delete-modal>

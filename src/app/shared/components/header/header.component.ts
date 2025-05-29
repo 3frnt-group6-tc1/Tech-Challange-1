@@ -7,9 +7,10 @@ import { TextComponent } from '../text/text.component';
 import { systemConfig } from '../../../app.config';
 import { IconHamburgerComponent } from "../../assets/icons/icon-hamburger.component";
 import { IconDarkmodeComponent } from "../../assets/icons/icon-darkmode.component";
-import { IconBinComponent } from "../../assets/icons/icon-bin.component";
 import { IconBellComponent } from "../../assets/icons/icon-bell.component";
 import { IconAccountCircleComponent } from "../../assets/icons/icon-account-circle.component";
+import { IconArrowDownLeftComponent } from "../../assets/icons/icon-arrow-down-left.component";
+import { IconArrowdownComponent } from '../../assets/icons/icon-arrowdown.component';
 
 @Component({
   selector: 'app-header',
@@ -21,17 +22,19 @@ import { IconAccountCircleComponent } from "../../assets/icons/icon-account-circ
     IconExitComponent,
     IconHamburgerComponent,
     IconDarkmodeComponent,
-    IconBinComponent,
     IconBellComponent,
-    IconAccountCircleComponent
-  ],
+    IconAccountCircleComponent,
+    IconArrowDownLeftComponent,
+    IconArrowdownComponent
+],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  isLoggedIn = true;
-  mobile = false;
-  menuOpen = false;
+  isLoggedIn: boolean = true;
+  mobile: boolean = false;
+  tablet: boolean = false;
+  menuOpen: boolean = false;
 
   @ViewChild('menuRef') menuRef?: ElementRef;
   private resizeListener = () => this.checkScreen();
@@ -52,7 +55,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   checkScreen(): void {
-    this.mobile = window.innerWidth <= 1024;
+    const width = window.innerWidth;
+    this.mobile = width <= 639;
+    this.tablet = width >= 640 && width <= 1279;
   }
 
   toggleMenu(): void {
@@ -81,7 +86,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   get showLandingMobileMenu(): boolean {
-    return !this.isLoggedIn && this.mobile && this.menuOpen;
+    return !this.isLoggedIn && (this.mobile || this.tablet) && this.menuOpen;
   }
 
   get showLandingDesktopMenu(): boolean {
@@ -93,6 +98,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   get showLoggedTabletMenu(): boolean {
-    return this.isLoggedIn && !this.mobile;
+    return this.isLoggedIn && this.tablet;
   }
 }

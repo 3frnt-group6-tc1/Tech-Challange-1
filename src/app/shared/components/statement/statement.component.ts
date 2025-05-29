@@ -7,6 +7,7 @@ import { IconDollarComponent } from '../../assets/icons/icon-dollar.component';
 import { IconArrowDownLeftComponent } from '../../assets/icons/icon-arrow-down-left.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { DeleteModalComponent } from '../modal/delete-modal.component';
 
 import {
   Transaction,
@@ -31,6 +32,7 @@ import { IconArrowRightComponent } from '../../assets/icons/icon-arrow-right.com
     IconDollarComponent,
     IconArrowDownLeftComponent,
     IconArrowRightComponent,
+    DeleteModalComponent,
   ],
   templateUrl: './statement.component.html',
   styleUrls: ['./statement.component.scss'],
@@ -41,6 +43,10 @@ export class StatementComponent implements OnInit, OnDestroy {
   transactionLabels = TRANSACTION_TYPE_LABELS;
   isLoading = false;
   private destroy$ = new Subject<void>();
+  isModalOpen = false;
+  transactionToDelete: string | null = null;
+  showAlert = false;
+  alertMessage = '';
 
   get recentTransactions(): Transaction[] {
     return this.transactions
@@ -131,6 +137,29 @@ export class StatementComponent implements OnInit, OnDestroy {
     );
 
     return entry ? entry[0] : type;
+  }
+
+  openDeleteModal(id: string): void {
+    this.transactionToDelete = id;
+    this.isModalOpen = true;
+  }
+
+  onConfirmDelete(): void {
+    if (this.transactionToDelete) {
+      this.deleteTransaction(this.transactionToDelete);
+      this.isModalOpen = false;
+      this.transactionToDelete = null;
+      this.showAlert = true;
+      this.alertMessage = 'Transação deletada com sucesso!';
+      setTimeout(() => {
+        this.showAlert = false;
+      }, 2000);
+    }
+  }
+
+  onCancelDelete(): void {
+    this.isModalOpen = false;
+    this.transactionToDelete = null;
   }
 
   deleteTransaction(id: string): void {

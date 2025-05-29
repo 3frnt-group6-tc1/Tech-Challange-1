@@ -1,0 +1,101 @@
+<div class="flex flex-col lg:flex-row gap-8">
+  <div class="relative h-48 mx-auto w-full sm:w-4/5 lg:w-4/5" #chartContainer>
+    <div class="relative h-full">
+      <div
+        class="absolute left-0 h-full flex flex-col justify-between pointer-events-none"
+      >
+        <ng-container *ngFor="let label of yAxisLabels">
+          <span class="text-right text-xs text-gray-500 pr-1 w-10">{{
+            formatAxisLabel(label)
+          }}</span>
+        </ng-container>
+      </div>
+
+      <div class="absolute inset-0 ml-10 border border-gray-200">
+        <div class="absolute w-full h-1/4 border-b border-gray-200"></div>
+        <div class="absolute w-full h-2/4 border-b border-gray-200"></div>
+        <div class="absolute w-full h-3/4 border-b border-gray-200"></div>
+
+        <div class="absolute h-full w-1/4 border-r border-gray-200"></div>
+        <div class="absolute h-full w-1/2 border-r border-gray-200"></div>
+        <div class="absolute h-full w-3/4 border-r border-gray-200"></div>
+      </div>
+
+      <div class="absolute inset-0 ml-10 flex justify-around items-end">
+        <ng-container *ngFor="let data of transactionData; let i = index">
+          <div
+            class="flex items-end justify-center w-1/4 h-full"
+            *ngIf="data.day !== ''"
+          >
+            <div class="flex items-end space-x-1 sm:space-x-2 mb-0">
+              <div
+                class="w-3 sm:w-5 md:w-7"
+                [style.height.px]="calculateBarHeight(data.exits)"
+                [style.backgroundColor]="'#FF5031'"
+                [title]="'Saídas: ' + formatBalance(data.exits)"
+              ></div>
+              <div
+                class="w-3 sm:w-5 md:w-7"
+                [style.height.px]="calculateBarHeight(data.entries)"
+                [style.backgroundColor]="'#004D61'"
+                [title]="'Entradas: ' + formatBalance(data.entries)"
+              ></div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+
+      <div
+        class="absolute w-full -bottom-6 ml-10 pr-8 grid grid-cols-4 text-center"
+      >
+        <ng-container *ngFor="let data of transactionData">
+          <span class="text-gray-600 text-xs" *ngIf="data.day !== ''">{{
+            data.day
+          }}</span>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legenda -->
+  <div class="flex flex-col sm:hidden justify-center gap-2 items-center mt-8">
+    <!-- Entradas -->
+    <div class="flex items-center space-x-3">
+      <div class="w-4 h-4 rounded-full bg-[#004d61]"></div>
+      <div class="flex flex-col">
+        <span class="text-xs">Entradas</span>
+        <span class="text-sm font-bold">{{ totalEntries }}</span>
+      </div>
+    </div>
+    <!-- Saídas -->
+    <div class="flex items-center space-x-3">
+      <div class="w-4 h-4 rounded-full bg-[#ff5031]"></div>
+      <div class="flex flex-col">
+        <span class="text-xs">Saídas</span>
+        <span class="text-sm font-bold">{{ totalExits }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legenda para telas maiores -->
+  <div
+    class="hidden sm:flex sm:flex-row lg:flex-col gap-4 sm:justify-center sm:items-center"
+  >
+    <!-- Entradas -->
+    <div class="flex items-center space-x-3">
+      <div class="w-4 h-4 rounded-full bg-[#004d61]"></div>
+      <div class="flex flex-col">
+        <span class="text-xs">Entradas</span>
+        <span class="text-sm font-bold">{{ totalEntries }}</span>
+      </div>
+    </div>
+    <!-- Saídas -->
+    <div class="flex items-center space-x-3">
+      <div class="w-4 h-4 rounded-full bg-[#ff5031]"></div>
+      <div class="flex flex-col">
+        <span class="text-xs">Saídas</span>
+        <span class="text-sm font-bold">{{ totalExits }}</span>
+      </div>
+    </div>
+  </div>
+</div>

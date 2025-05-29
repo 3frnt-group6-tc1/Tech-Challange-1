@@ -13,11 +13,12 @@ import {
 import { systemConfig } from '../../../app.config';
 import { TransactionData } from '../../models/transaction-data';
 import { TransactionEventService } from '../../services/TransactionEvent/transaction-event.service';
+import { TransactionChartComponent } from '../../components/transaction-chart/transaction-chart.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TransactionChartComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
@@ -25,6 +26,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   userId: string = systemConfig.userId;
   userName: string = '';
   currentDate: string = '';
+  currentMonthName: string = '';
   balance: string = '';
   accountType: string = 'Conta Corrente';
   totalEntries: string = '';
@@ -37,7 +39,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   transactionData: TransactionData[] = [];
   transactions: Transaction[] = [];
-
+  currentMonthTransactions: Transaction[] = [];
   errorMessage: string = '';
   private destroy$ = new Subject<void>();
 
@@ -64,6 +66,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .subscribe(transaction => {
         if (transaction.id_user === this.userId) {
           this.transactions = [...this.transactions, transaction];
+          this.filterCurrentMonthTransactions();
           this.updateDashboardData();
         }
       });
@@ -75,6 +78,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.transactions = this.transactions.map(t =>
             t.id === transaction.id ? transaction : t
           );
+          this.filterCurrentMonthTransactions();
           this.updateDashboardData();
         }
       });
@@ -85,6 +89,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         const deletedTransaction = this.transactions.find(t => t.id === transactionId);
         if (deletedTransaction && deletedTransaction.id_user === this.userId) {
           this.transactions = this.transactions.filter(t => t.id !== transactionId);
+          this.filterCurrentMonthTransactions();
           this.updateDashboardData();
         }
       });
@@ -100,6 +105,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
       'Sexta-feira',
       'Sábado',
     ];
+
+    const months = [
+      'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+    ];
+
     const today = new Date();
     const weekDay = weekDays[today.getDay()];
     const day = String(today.getDate()).padStart(2, '0');
@@ -107,7 +118,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const year = today.getFullYear();
     const hour = String(today.getHours()).padStart(2, '0');
     const minute = String(today.getMinutes()).padStart(2, '0');
+
     this.currentDate = `${weekDay}, ${day}/${month}/${year} ${hour}:${minute}`;
+    this.currentMonthName = months[today.getMonth()];
   }
 
   fetchUser(): void {
@@ -133,7 +146,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.transactionService.getByUserId(id).subscribe({
       next: (response) => {
         this.transactions = response;
-        this.successTransaction(response);
+        this.filterCurrentMonthTransactions();
+        this.successTransaction();
         this.isLoading = false;
       },
       error: (error) => {
@@ -144,7 +158,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
 
-  successTransaction(response: Transaction[]): void {
+  filterCurrentMonthTransactions(): void {
+    const today = new Date();
+    const currentMonth = today.getMonth();
+    const currentYear = today.getFullYear();
+
+    this.currentMonthTransactions = this.transactions.filter(transaction => {
+      const transactionDate = new Date(transaction.date);
+      return transactionDate.getMonth() === currentMonth &&
+             transactionDate.getFullYear() === currentYear;
+    });
+  }
+
+  successTransaction(): void {
     this.updateDashboardData();
   }
 
@@ -152,7 +178,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     let totalEntries = 0;
     let totalExits = 0;
 
-    this.transactions.forEach((transaction) => {
+    this.currentMonthTransactions.forEach((transaction) => {
       if (isCredit(transaction.type)) {
         totalEntries += transaction.amount;
       }
@@ -172,7 +198,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       '4': { entries: 0, exits: 0 }
     };
 
-    this.transactions.forEach((transaction) => {
+    this.currentMonthTransactions.forEach((transaction) => {
       const date = new Date(transaction.date);
       const dayOfMonth = date.getDate();
 

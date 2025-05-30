@@ -1,0 +1,34 @@
+@if(!isLoggedIn && (mobile || tablet) && menuOpen) {
+    <div class="fixed inset-0 z-50 bg-black/60 flex justify-center items-start pt-24">
+        <div #menuRef class="bg-white rounded-lg w-full p-9 flex flex-col gap-4 text-center shadow-xl">
+            <a href="#" class="text-cyan-blue-500 text-[18px] font-semibold">Sobre</a>
+            <a href="#" class="text-cyan-blue-500 text-[18px] font-semibold">Serviços</a>
+            <div class="px-6 flex flex-col justify-center items-center gap-4">
+            <app-button theme="secondary" label="Abrir minha conta" size="G"></app-button>
+            <app-button theme="primary" label="Já tenho conta" size="G">
+                <app-icon-exit icon-right class="text-white" />
+            </app-button>
+            </div>
+        </div>
+    </div>
+<!-- Menu logado tablet (entre 640px e 1279px) -->
+} @else if(isLoggedIn && tablet) {
+    <nav class="absolute top-[70px] left-0 w-full bg-white py-4 flex flex-row items-center justify-center gap-4 shadow z-50">
+        <a href="#" class="text-cyan-blue-500 text-sm font-normal w-full max-w-[131px] flex justify-center">Início</a>
+        <a href="#" class="text-cyan-blue-500 text-sm font-normal w-full max-w-[131px] flex justify-center">Transações</a>
+        <a href="#" class="text-cyan-blue-500 text-sm font-normal w-full max-w-[131px] flex justify-center">Extrato</a>
+        <a href="#" class="text-cyan-blue-500 text-sm font-normal w-full max-w-[131px] flex justify-center">Meus Cartões</a>
+        <a href="#" class="text-cyan-blue-500 text-sm font-normal w-full max-w-[131px] flex justify-center">Configurações</a>
+        <a href="#" class="text-cyan-blue-500 text-sm font-normal w-full max-w-[131px] flex justify-center">Sair</a>
+    </nav>
+<!-- Menu logado mobile -->
+} @else if(isLoggedIn && mobile && menuOpen) {
+    <div class="absolute top-full left-0 bg-white w-full p-6 flex flex-col items-center gap-4 shadow-md z-50">
+        <a href="#" class="text-cyan-blue-500 hover:text-white hover:bg-cyan-blue-500 text-2xl font-normal p-2 w-full text-center transition-all rounded-lg">Início</a>
+        <a href="#" class="text-cyan-blue-500 hover:text-white hover:bg-cyan-blue-500 text-2xl font-normal p-2 w-full text-center transition-all rounded-lg">Transações</a>
+        <a href="#" class="text-cyan-blue-500 hover:text-white hover:bg-cyan-blue-500 text-2xl font-normal p-2 w-full text-center transition-all rounded-lg">Extrato</a>
+        <a href="#" class="text-cyan-blue-500 hover:text-white hover:bg-cyan-blue-500 text-2xl font-normal p-2 w-full text-center transition-all rounded-lg">Meus Cartões</a>
+        <a href="#" class="text-cyan-blue-500 hover:text-white hover:bg-cyan-blue-500 text-2xl font-normal p-2 w-full text-center transition-all rounded-lg">Configurações</a>
+        <a href="#" class="text-cyan-blue-500 hover:text-white hover:bg-cyan-blue-500 text-2xl font-normal p-2 w-full text-center transition-all rounded-lg">Sair</a>
+    </div>
+}

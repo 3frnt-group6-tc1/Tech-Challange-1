@@ -9,8 +9,8 @@ import { IconHamburgerComponent } from "../../assets/icons/icon-hamburger.compon
 import { IconDarkmodeComponent } from "../../assets/icons/icon-darkmode.component";
 import { IconBellComponent } from "../../assets/icons/icon-bell.component";
 import { IconAccountCircleComponent } from "../../assets/icons/icon-account-circle.component";
-import { IconArrowDownLeftComponent } from "../../assets/icons/icon-arrow-down-left.component";
 import { IconArrowdownComponent } from '../../assets/icons/icon-arrowdown.component';
+import { MenuComponent } from "../menu/menu.component";
 
 @Component({
   selector: 'app-header',
@@ -24,8 +24,8 @@ import { IconArrowdownComponent } from '../../assets/icons/icon-arrowdown.compon
     IconDarkmodeComponent,
     IconBellComponent,
     IconAccountCircleComponent,
-    IconArrowDownLeftComponent,
-    IconArrowdownComponent
+    IconArrowdownComponent,
+    MenuComponent
 ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',

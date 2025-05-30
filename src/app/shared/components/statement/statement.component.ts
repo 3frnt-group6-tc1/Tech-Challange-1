@@ -8,6 +8,7 @@ import { IconArrowDownLeftComponent } from '../../assets/icons/icon-arrow-down-l
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DeleteModalComponent } from '../modal/delete-modal.component';
+import { EditModalComponent } from '../modal/edit-modal.component';
 
 import {
   Transaction,
@@ -33,6 +34,7 @@ import { IconArrowRightComponent } from '../../assets/icons/icon-arrow-right.com
     IconArrowDownLeftComponent,
     IconArrowRightComponent,
     DeleteModalComponent,
+    EditModalComponent,
   ],
   templateUrl: './statement.component.html',
   styleUrls: ['./statement.component.scss'],
@@ -47,6 +49,8 @@ export class StatementComponent implements OnInit, OnDestroy {
   transactionToDelete: string | null = null;
   showAlert = false;
   alertMessage = '';
+  isEditModalOpen = false;
+  transactionToEdit: Transaction | null = null;
 
   get recentTransactions(): Transaction[] {
     return this.transactions
@@ -176,8 +180,40 @@ export class StatementComponent implements OnInit, OnDestroy {
     });
   }
 
+  openEditModal(transaction: Transaction): void {
+    this.transactionToEdit = transaction;
+    this.isEditModalOpen = true;
+  }
+
+  onSaveEdit(updatedTransaction: { id: string; amount: number; description: string }): void {
+    if (this.transactionToEdit) {
+      const updated = { ...this.transactionToEdit, ...updatedTransaction };
+      this.transactionService.update(updated.id, updated).subscribe({
+        next: () => {
+          this.isEditModalOpen = false;
+          this.transactionToEdit = null;
+          this.showAlert = true;
+          this.alertMessage = 'Transação atualizada com sucesso!';
+          setTimeout(() => {
+            this.showAlert = false;
+          }, 2000);
+        },
+        error: (error) => {
+          console.error('Error updating transaction:', error);
+        },
+      });
+    }
+  }
+
+  onCancelEdit(): void {
+    this.isEditModalOpen = false;
+    this.transactionToEdit = null;
+  }
+
   editTransaction(id: string): void {
-    console.log('Edit transaction:', id);
-    // Implement your edit logic here
+    const transaction = this.transactions.find(t => t.id === id);
+    if (transaction) {
+      this.openEditModal(transaction);
+    }
   }
 }

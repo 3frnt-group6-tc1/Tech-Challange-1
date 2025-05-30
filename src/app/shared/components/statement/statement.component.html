@@ -120,3 +120,10 @@
   (confirm)="onConfirmDelete()"
   (cancel)="onCancelDelete()"
 ></app-delete-modal>
+
+<app-edit-modal
+  [isOpen]="isEditModalOpen"
+  [transaction]="transactionToEdit"
+  (save)="onSaveEdit($event)"
+  (cancel)="onCancelEdit()"
+></app-edit-modal>

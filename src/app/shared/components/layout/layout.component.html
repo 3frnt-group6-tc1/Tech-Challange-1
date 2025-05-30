@@ -1,0 +1,15 @@
+<div class="min-h-screen bg-gray-100 flex flex-col">
+  <!-- Conteúdo Principal -->
+  <div class="bg-[#dee9ea] flex flex-grow">
+    <!-- Menu Lateral - Visível apenas em telas 2md ou maiores -->
+    <app-aside class="hidden xl:block"></app-aside>
+
+    <!-- Content -->
+    <main class="flex-grow px-6 pt-6 pb-6">
+      <ng-content></ng-content>
+    </main>
+  </div>
+
+  <!-- Rodapé -->
+  <app-footer></app-footer>
+</div>

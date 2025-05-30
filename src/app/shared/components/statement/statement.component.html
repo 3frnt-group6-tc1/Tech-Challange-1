@@ -1,16 +1,30 @@
+<div *ngIf="showAlert" class="fixed top-0 left-0 right-0 bg-white text-cyan-blue-500 p-4 text-center z-50">
+  {{ alertMessage }}
+</div>
+
 <div class="rounded-xl shadow p-6 bg-white">
-  <app-text variant="subtitle" as="h2">Extrato</app-text>
+  <app-text variant="subtitle" as="h2" color="text-gray-900"
+    >Transações</app-text
+  >
 
   <div *ngIf="isLoading" class="text-center py-4">
     <app-text color="text-gray-600">Carregando transações...</app-text>
   </div>
 
-  <table *ngIf="!isLoading && recentTransactions.length > 0" class="w-full text-sm border-t-2 mt-3 pt-3">
+  <table
+    *ngIf="!isLoading && recentTransactions.length > 0"
+    class="w-full text-sm border-t-2 mt-3 pt-3"
+  >
     <tbody>
-      <tr *ngFor="let transaction of recentTransactions" class="border-b-2 last:border-none">
+      <tr
+        *ngFor="let transaction of recentTransactions"
+        class="border-b-2 last:border-none"
+      >
         <!-- Ícone -->
         <td class="py-4">
-          <ng-container [ngSwitch]="isDeposit(transaction) ? 'deposit' : 'withdraw'">
+          <ng-container
+            [ngSwitch]="isDeposit(transaction) ? 'deposit' : 'withdraw'"
+          >
             <app-icon-dollar
               *ngSwitchCase="'deposit'"
               class="w-4 h-4"
@@ -25,20 +39,35 @@
           </ng-container>
         </td>
         <!-- Descrição -->
+        <td class="py-4" *ngIf="showDetails">
+          <app-text
+            [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
+          >
+            {{ transaction.description }}
+          </app-text>
+        </td>
+
+        <!-- Tipo -->
         <td class="py-4">
-          <app-text [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'">
+          <app-text
+            [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
+          >
             {{ getTransactionTypeLabel(transaction.type) }}
           </app-text>
         </td>
         <!-- Valor -->
         <td class="py-4">
-          <app-text [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'">
+          <app-text
+            [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
+          >
             R$ {{ transaction.amount.toFixed(2) }}
           </app-text>
         </td>
         <!-- Data -->
         <td class="py-4">
-          <app-text color="text-gray-600">
+          <app-text
+            [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
+          >
             {{ formatDate(transaction.date) }}
           </app-text>
         </td>
@@ -46,16 +75,20 @@
         <td class="py-4 text-center">
           <button (click)="editTransaction(transaction.id!)">
             <app-icon-arrow-pencil
-              [ngClass]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
+              [ngClass]="
+                isDeposit(transaction) ? 'text-green-600' : 'text-red-600'
+              "
               class="w-4 h-4"
             ></app-icon-arrow-pencil>
           </button>
         </td>
         <!-- Icone de Lixeira -->
         <td class="py-4 text-center">
-          <button (click)="deleteTransaction(transaction.id!)">
+          <button (click)="openDeleteModal(transaction.id!)">
             <app-icon-bin
-              [ngClass]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
+              [ngClass]="
+                isDeposit(transaction) ? 'text-green-600' : 'text-red-600'
+              "
               class="w-4 h-4"
             ></app-icon-bin>
           </button>
@@ -64,14 +97,33 @@
     </tbody>
   </table>
 
-  <div *ngIf="!isLoading && recentTransactions.length === 0" class="text-center py-4">
+  <div
+    *ngIf="!isLoading && recentTransactions.length === 0"
+    class="text-center py-4"
+  >
     <app-text color="text-gray-600">Nenhuma transação encontrada</app-text>
   </div>
 
-  <div class="flex justify-end mt-4">
-    <a href="#" class="inline-flex items-center gap-2 text-cyan-blue-500 hover:underline">
+  <div class="flex justify-end mt-4" *ngIf="!showDetails">
+    <a
+      href="/transactions"
+      class="inline-flex items-center gap-2 text-cyan-blue-500 hover:underline"
+    >
       Listar
-      <img src="assets/icons/arrow-right.svg" alt="Ir para listagem" class="w-4 h-4" />
+      <app-icon-arrow-right />
     </a>
   </div>
 </div>
+
+<app-delete-modal
+  [isOpen]="isModalOpen"
+  (confirm)="onConfirmDelete()"
+  (cancel)="onCancelDelete()"
+></app-delete-modal>
+
+<app-edit-modal
+  [isOpen]="isEditModalOpen"
+  [transaction]="transactionToEdit"
+  (save)="onSaveEdit($event)"
+  (cancel)="onCancelEdit()"
+></app-edit-modal>

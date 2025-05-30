@@ -1,12 +1,25 @@
 <header class="bg-cyan-blue-500 relative">
   <div class="flex items-center justify-between container" [ngClass]="{ 'h-24': !isLoggedIn, 'h-[70px]': isLoggedIn }">
-    <img src="assets/icons/logo.svg" alt="Logo Bytebank" />
     <!-- Usuário não logado (LandingPage) -->
       @if(!isLoggedIn) {
         @if(!mobile && !tablet) {
           <ul class="flex items-center gap-10">
-            <li><a href="#" class="text-white hover:text-orange-500 font-lato text-[18px] font-semibold">Sobre</a></li>
-            <li><a href="#" class="text-white hover:text-orange-500 font-lato text-[18px] font-semibold">Serviço</a></li>
+            <li>
+              <a href="/">
+                <img src="assets/icons/logo.svg" alt="Logo Bytebank" />
+              </a>
+            </li>
+            
+            <li>
+              <a href="#" class="text-white hover:text-orange-500 font-lato text-[18px] font-semibold">
+                Sobre
+              </a>
+            </li>
+            <li>
+              <a href="#" class="text-white hover:text-orange-500 font-lato text-[18px] font-semibold">
+                Serviço
+              </a>
+            </li>
           </ul>
           <div class="flex items-center gap-6">
             <app-button theme="secondary" label="Abrir minha conta" size="P"></app-button>
@@ -18,17 +31,25 @@
             </app-button>
           </div>
         } @else { 
-          <div class="flex gap-6">
-            <app-button size="P" label="">
-              <app-icon-darkmode icon-left class="text-white"></app-icon-darkmode>
-            </app-button>
-            <app-button size="P" label="" (click)="toggleMenu()">
-              <app-icon-hamburger icon-left class="text-white"></app-icon-hamburger>
-            </app-button>
+          <div class="flex justify-between items-center w-full">
+            <a href="/">
+              <img src="assets/icons/logo.svg" alt="Logo Bytebank" />
+            </a>
+            <div class="flex gap-6">
+              <app-button size="P" label="">
+                <app-icon-darkmode icon-left class="text-white"></app-icon-darkmode>
+              </app-button>
+              <app-button size="P" label="" (click)="toggleMenu()">
+                <app-icon-hamburger icon-left class="text-white"></app-icon-hamburger>
+              </app-button>
+            </div>
           </div>
         }
       } @else {
         @if(!mobile && !tablet) {
+          <a href="/">
+            <img src="assets/icons/logo.svg" alt="Logo Bytebank" />
+          </a>
           <div class="flex items-center gap-2">
             <app-text variant="text-small" color="text-white">Fulano da Silva</app-text>
             <app-button size="P" label="">
@@ -43,6 +64,9 @@
             </app-button>
           </div>
         } @else if(tablet) {
+          <a href="/">
+            <img src="assets/icons/logo.svg" alt="Logo Bytebank" />
+          </a>
           <div class="flex items-center gap-6">
             <app-text variant="text-small" color="text-white">Fulano da Silva</app-text>
             <div>
@@ -53,6 +77,9 @@
             </div>
           </div>
         } @else {
+          <a href="/">
+            <img src="assets/icons/logo.svg" alt="Logo Bytebank" />
+          </a>
           <app-button size="P" label="" (click)="toggleMenu()">
             <app-icon-hamburger icon-left class="text-white"></app-icon-hamburger>
           </app-button>

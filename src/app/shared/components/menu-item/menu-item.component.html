@@ -11,7 +11,6 @@
   <span>{{ label }}</span>
 </a> -->
 
-
 <!-- <a
   [routerLink]="route"
   routerLinkActive="bg-cyan-blue-500 text-white"
@@ -33,7 +32,6 @@
   <span>{{ label }}</span>
 </a> -->
 
-
 <!-- <a
   [routerLink]="route"
   routerLinkActive="bg-cyan-blue-500 text-white"
@@ -46,7 +44,6 @@
     <app-icon-home [ngClass]="active ? 'text-white' : 'hover:text-cyan-blue-900'"></app-icon-home>
     <span>{{ label }}</span>
 </a> -->
-
 
 <!-- <a
   [routerLink]="route"
@@ -79,11 +76,10 @@
   <span>{{ label }}</span>
 </a> -->
 
-
 <a
   [routerLink]="route"
   routerLinkActive="bg-cyan-blue-500 text-white"
-  class="flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors duration-200"
+  class="flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors duration-200 m-1"
   [ngClass]="{
     'bg-cyan-blue-500 text-white': active,
     'text-cyan-blue-900 hover:text-white hover:bg-cyan-blue-900': !active
@@ -94,4 +90,3 @@
   </span>
   <span>{{ label }}</span>
 </a>
-

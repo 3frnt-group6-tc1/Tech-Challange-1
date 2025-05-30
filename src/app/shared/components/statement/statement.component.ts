@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TextComponent } from '../text/text.component';
 import { IconArrowPencilComponent } from '../../assets/icons/icon-arrow-pencil.component';
@@ -7,6 +7,8 @@ import { IconDollarComponent } from '../../assets/icons/icon-dollar.component';
 import { IconArrowDownLeftComponent } from '../../assets/icons/icon-arrow-down-left.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { DeleteModalComponent } from '../modal/delete-modal.component';
+import { EditModalComponent } from '../modal/edit-modal.component';
 
 import {
   Transaction,
@@ -18,6 +20,7 @@ import {
 import { TransactionService } from '../../services/Transaction/transaction-service';
 import { systemConfig } from '../../../app.config';
 import { TransactionEventService } from '../../services/TransactionEvent/transaction-event.service';
+import { IconArrowRightComponent } from '../../assets/icons/icon-arrow-right.component';
 
 @Component({
   selector: 'app-statement',
@@ -29,15 +32,25 @@ import { TransactionEventService } from '../../services/TransactionEvent/transac
     IconBinComponent,
     IconDollarComponent,
     IconArrowDownLeftComponent,
+    IconArrowRightComponent,
+    DeleteModalComponent,
+    EditModalComponent,
   ],
   templateUrl: './statement.component.html',
   styleUrls: ['./statement.component.scss'],
 })
 export class StatementComponent implements OnInit, OnDestroy {
+  @Input() showDetails = true;
   transactions: Transaction[] = [];
   transactionLabels = TRANSACTION_TYPE_LABELS;
   isLoading = false;
   private destroy$ = new Subject<void>();
+  isModalOpen = false;
+  transactionToDelete: string | null = null;
+  showAlert = false;
+  alertMessage = '';
+  isEditModalOpen = false;
+  transactionToEdit: Transaction | null = null;
 
   get recentTransactions(): Transaction[] {
     return this.transactions
@@ -56,7 +69,7 @@ export class StatementComponent implements OnInit, OnDestroy {
     // Listen for created transactions
     this.transactionEventService.transactionCreated$
       .pipe(takeUntil(this.destroy$))
-      .subscribe(transaction => {
+      .subscribe((transaction) => {
         if (transaction.id_user === systemConfig.userId) {
           // Add the new transaction to our list
           this.transactions = [transaction, ...this.transactions];
@@ -66,10 +79,10 @@ export class StatementComponent implements OnInit, OnDestroy {
     // Listen for updated transactions
     this.transactionEventService.transactionUpdated$
       .pipe(takeUntil(this.destroy$))
-      .subscribe(transaction => {
+      .subscribe((transaction) => {
         if (transaction.id_user === systemConfig.userId) {
           // Update the transaction in our list
-          this.transactions = this.transactions.map(t =>
+          this.transactions = this.transactions.map((t) =>
             t.id === transaction.id ? transaction : t
           );
         }
@@ -78,9 +91,11 @@ export class StatementComponent implements OnInit, OnDestroy {
     // Listen for deleted transactions
     this.transactionEventService.transactionDeleted$
       .pipe(takeUntil(this.destroy$))
-      .subscribe(transactionId => {
+      .subscribe((transactionId) => {
         // Remove the transaction from our list
-        this.transactions = this.transactions.filter(t => t.id !== transactionId);
+        this.transactions = this.transactions.filter(
+          (t) => t.id !== transactionId
+        );
       });
   }
 
@@ -95,7 +110,7 @@ export class StatementComponent implements OnInit, OnDestroy {
 
     this.transactionService.getByUserId(userId).subscribe({
       next: (transactions) => {
-        this.transactions = transactions.filter(t => t.id);
+        this.transactions = transactions.filter((t) => t.id);
         this.isLoading = false;
         console.log('Loaded transactions:', this.transactions);
       },
@@ -121,10 +136,34 @@ export class StatementComponent implements OnInit, OnDestroy {
   }
 
   getTransactionTypeLabel(type: TransactionType): string {
-    const entry = Object.entries(TRANSACTION_TYPE_LABELS)
-      .find(([_, value]) => value === type);
+    const entry = Object.entries(TRANSACTION_TYPE_LABELS).find(
+      ([_, value]) => value === type
+    );
 
     return entry ? entry[0] : type;
+  }
+
+  openDeleteModal(id: string): void {
+    this.transactionToDelete = id;
+    this.isModalOpen = true;
+  }
+
+  onConfirmDelete(): void {
+    if (this.transactionToDelete) {
+      this.deleteTransaction(this.transactionToDelete);
+      this.isModalOpen = false;
+      this.transactionToDelete = null;
+      this.showAlert = true;
+      this.alertMessage = 'Transação deletada com sucesso!';
+      setTimeout(() => {
+        this.showAlert = false;
+      }, 2000);
+    }
+  }
+
+  onCancelDelete(): void {
+    this.isModalOpen = false;
+    this.transactionToDelete = null;
   }
 
   deleteTransaction(id: string): void {
@@ -141,8 +180,40 @@ export class StatementComponent implements OnInit, OnDestroy {
     });
   }
 
+  openEditModal(transaction: Transaction): void {
+    this.transactionToEdit = transaction;
+    this.isEditModalOpen = true;
+  }
+
+  onSaveEdit(updatedTransaction: { id: string; amount: number; description: string }): void {
+    if (this.transactionToEdit) {
+      const updated = { ...this.transactionToEdit, ...updatedTransaction };
+      this.transactionService.update(updated.id, updated).subscribe({
+        next: () => {
+          this.isEditModalOpen = false;
+          this.transactionToEdit = null;
+          this.showAlert = true;
+          this.alertMessage = 'Transação atualizada com sucesso!';
+          setTimeout(() => {
+            this.showAlert = false;
+          }, 2000);
+        },
+        error: (error) => {
+          console.error('Error updating transaction:', error);
+        },
+      });
+    }
+  }
+
+  onCancelEdit(): void {
+    this.isEditModalOpen = false;
+    this.transactionToEdit = null;
+  }
+
   editTransaction(id: string): void {
-    console.log('Edit transaction:', id);
-    // Implement your edit logic here
+    const transaction = this.transactions.find(t => t.id === id);
+    if (transaction) {
+      this.openEditModal(transaction);
+    }
   }
 }

@@ -36,6 +36,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   tablet: boolean = false;
   menuOpen: boolean = false;
 
+  constructor() {
+    const path = window.location.pathname;
+    this.isLoggedIn = systemConfig.loggedPages.includes(path);
+  }
+
   @ViewChild('menuRef') menuRef?: ElementRef;
   private resizeListener = () => this.checkScreen();
   private clickListener!: (event: MouseEvent) => void;

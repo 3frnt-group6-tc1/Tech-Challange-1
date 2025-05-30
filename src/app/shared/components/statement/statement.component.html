@@ -60,7 +60,7 @@
           <app-text
             [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
           >
-            R$ {{ transaction.amount.toFixed(2) }}
+             {{ transaction.amount | brl }}
           </app-text>
         </td>
         <!-- Data -->

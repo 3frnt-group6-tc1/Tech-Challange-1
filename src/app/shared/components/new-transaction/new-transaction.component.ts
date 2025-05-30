@@ -55,23 +55,24 @@ export class NewTransactionComponent {
 
   onAmountChange(event: Event): void {
     const input = event.target as HTMLInputElement;
-    let value = input.value;
+    let value = input.value.replace(/\D/g, '');
 
-    value = value.replace(/[^\d,]/g, '');
+    value = value.substring(0, 12);
 
-    const parts = value.split(',');
-    if (parts.length > 2) {
-      value = parts[0] + ',' + parts.slice(1).join('');
+    while (value.length < 3) {
+      value = '0' + value;
     }
 
-    if (parts.length === 2 && parts[1].length > 2) {
-      parts[1] = parts[1].substring(0, 2);
-      value = parts.join(',');
-    }
+    const cents = value.slice(-2);
+    let integer = value.slice(0, -2);
+    integer = integer.replace(/^0+/, '') || '0';
 
-    this.valorTransacao = value;
+    integer = integer.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
-    this.newTransaction.amount = Number(value.replace(',', '.'));
+    const formatted = `${integer},${cents}`;
+
+    this.valorTransacao = formatted;
+    this.newTransaction.amount = Number(integer.replace(/\./g, '') + '.' + cents);
   }
 
   onDescriptionChange(event: Event): void {

@@ -3,7 +3,12 @@
     <h2 class="text-black-900 text-lg mb-4 text-center">Editar Transação</h2>
     <div class="mb-4">
       <label class="block text-black-900 mb-2">Valor</label>
-      <input type="number" [(ngModel)]="amount" class="w-full p-2 border border-gray-300 rounded" />
+      <input
+        type="text"
+        [value]="amountFormatted"
+        (input)="onAmountInput($event)"
+        class="w-full p-2 border border-gray-300 rounded"
+      />
     </div>
     <div class="mb-4">
       <label class="block text-black-900 mb-2">Descrição</label>
@@ -14,4 +19,4 @@
       <app-button theme="primary" size="G" label="Salvar" (click)="onSave()" class="text-white"></app-button>
     </div>
   </div>
-</div> 
+</div>

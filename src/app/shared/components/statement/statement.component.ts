@@ -21,6 +21,7 @@ import { TransactionService } from '../../services/Transaction/transaction-servi
 import { systemConfig } from '../../../app.config';
 import { TransactionEventService } from '../../services/TransactionEvent/transaction-event.service';
 import { IconArrowRightComponent } from '../../assets/icons/icon-arrow-right.component';
+import { BrlPipe } from '../../pipes/brl.pipe';
 
 @Component({
   selector: 'app-statement',
@@ -35,6 +36,7 @@ import { IconArrowRightComponent } from '../../assets/icons/icon-arrow-right.com
     IconArrowRightComponent,
     DeleteModalComponent,
     EditModalComponent,
+    BrlPipe
   ],
   templateUrl: './statement.component.html',
   styleUrls: ['./statement.component.scss'],

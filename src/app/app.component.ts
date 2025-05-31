@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/components/header/header.component';
-
+import { ThemeService } from './shared/services/Theme/theme.service'; // ajuste o path se necessário
 
 @Component({
   selector: 'app-root',
@@ -18,4 +18,6 @@ import { HeaderComponent } from './shared/components/header/header.component';
 })
 export class AppComponent {
   title = 'TechChallenge - FIAP';
+
+  constructor(private themeService: ThemeService) {}
 }

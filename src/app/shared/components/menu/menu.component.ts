@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+
 import { ButtonComponent } from '../button/button.component';
 import { IconExitComponent } from '../../assets/icons/icon-exit.component';
 
@@ -21,9 +23,23 @@ export class MenuComponent implements AfterViewInit {
   @Output() menuRefReady = new EventEmitter<ElementRef>();
   @Output() closeMenu = new EventEmitter<void>();
 
+  constructor(
+    private readonly router: Router,
+  ) {}
+
   ngAfterViewInit() {
     if (this.menuRefElement) {
       this.menuRefReady.emit(this.menuRefElement);
     }
+  }
+
+  onLinkClick(event: MouseEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.closeMenu.emit();
+  }
+
+  goToPanel(): void {
+    this.router.navigate(['/panel']);
   }
 }

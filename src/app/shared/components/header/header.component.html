@@ -3,8 +3,7 @@
     <!-- Usuário não logado (LandingPage) -->
       @if(!isLoggedIn) {
         @if(!mobile && !tablet) {
-          <ul class="flex items-center gap-10">
-            
+          <ul class="flex items-center gap-10">            
             <li>
               <a href="/">
                 <app-icon-logo class="text-white m-auto"></app-icon-logo>
@@ -37,14 +36,14 @@
         } @else { 
           <div class="flex justify-between items-center w-full">
             <a href="/">
-              <app-icon-logo class="text-white dark:text-gray-250 m-auto"></app-icon-logo>
+              <app-icon-logo class="text-white m-auto"></app-icon-logo>
             </a>
             <div class="flex gap-6">
               <app-button (click)="toggleDarkMode()" size="P" label="">
-                <app-icon-darkmode icon-left class="text-white dark:text-gray-250"></app-icon-darkmode>
+                <app-icon-darkmode icon-left class="text-white"></app-icon-darkmode>
               </app-button>
               <app-button size="P" label="" (click)="toggleMenu()">
-                <app-icon-hamburger icon-left class="text-white dark:text-gray-250"></app-icon-hamburger>
+                <app-icon-hamburger icon-left class="text-white"></app-icon-hamburger>
               </app-button>
             </div>
           </div>
@@ -52,40 +51,40 @@
       } @else {
         @if(!mobile && !tablet) {
           <a href="/">
-            <app-icon-logo class="text-white dark:text-gray-250 m-auto"></app-icon-logo>
+            <app-icon-logo class="text-white m-auto"></app-icon-logo>
           </a>
           <div class="flex items-center gap-2">
-            <app-text variant="text-small" color="text-white dark:text-gray-250">Fulano da Silva</app-text>
+            <app-text variant="text-small" color="text-white">Fulano da Silva</app-text>
             <app-button (click)="toggleDarkMode()" size="P" label="">
-              <app-icon-darkmode icon-left class="text-white dark:text-gray-250"></app-icon-darkmode>
+              <app-icon-darkmode icon-left class="text-white"></app-icon-darkmode>
             </app-button>
             <app-button size="P" label="">
-              <app-icon-bell icon-left class="text-white dark:text-gray-250"></app-icon-bell>
+              <app-icon-bell icon-left class="text-white"></app-icon-bell>
             </app-button>
             <app-button size="P" label="">
-              <app-icon-account-circle icon-left class="text-white dark:text-gray-250"></app-icon-account-circle>
-              <app-icon-arrowdown icon-left class="text-white dark:text-gray-250"></app-icon-arrowdown>
+              <app-icon-account-circle icon-left class="text-white"></app-icon-account-circle>
+              <app-icon-arrowdown icon-left class="text-white"></app-icon-arrowdown>
             </app-button>
           </div>
         } @else if(tablet) {
           <a href="/">
-            <app-icon-logo class="text-white dark:text-gray-250 m-auto"></app-icon-logo>
+            <app-icon-logo class="text-white m-auto"></app-icon-logo>
           </a>
           <div class="flex items-center gap-6">
             <app-text variant="text-small" color="text-white">Fulano da Silva</app-text>
             <div>
               <app-button size="P" label="">
-                <app-icon-account-circle icon-left class="text-white dark:text-gray-250"></app-icon-account-circle>
-                <app-icon-arrowdown icon-left class="text-white dark:text-gray-250"></app-icon-arrowdown>
+                <app-icon-account-circle icon-left class="text-white"></app-icon-account-circle>
+                <app-icon-arrowdown icon-left class="text-white"></app-icon-arrowdown>
               </app-button>
             </div>
           </div>
         } @else {
           <a href="/">
-            <app-icon-logo class="text-white dark:text-gray-250 m-auto"></app-icon-logo>
+            <app-icon-logo class="text-white m-auto"></app-icon-logo>
           </a>
           <app-button size="P" label="" (click)="toggleMenu()">
-            <app-icon-hamburger icon-left class="text-white dark:text-gray-250"></app-icon-hamburger>
+            <app-icon-hamburger icon-left class="text-white"></app-icon-hamburger>
           </app-button>
         }
       }
@@ -97,7 +96,7 @@
     [tablet]="tablet"
     [menuOpen]="menuOpen"
     [menuRef]="menuRef"
-    (closeMenu)="toggleMenu()"
+    (closeMenu)="closeMenu()"
     (menuRefReady)="setMenuRef($event)"
   >
   </app-menu>

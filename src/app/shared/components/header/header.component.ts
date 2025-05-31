@@ -99,7 +99,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.tablet = width >= 640 && width <= 1279;
   }
 
-  toggleMenu(): void {
+  toggleMenu(event?: MouseEvent): void {
+
+    if (event) event.stopPropagation();
+
     this.menuOpen = !this.menuOpen;
     if (this.menuOpen) {
       document.body.classList.add('overflow-hidden');
@@ -117,10 +120,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     const target = event.target as Node;
     const menuElement = this.menuRef?.nativeElement;
+    const hamburgerButton = document.querySelector('.app-icon-hamburger')?.parentElement;
 
-    if (menuElement && !menuElement.contains(target)) {
-      this.closeMenu();
-    }
+    if (menuElement && menuElement.contains(target)) return;
+
+    if (hamburgerButton && hamburgerButton.contains(target)) return;
+
+    this.closeMenu();
   }
 
   get showLandingMobileMenu(): boolean {
@@ -151,7 +157,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.menuRef = ref;
   }
 
-  private closeMenu(): void {
+  closeMenu(): void {
     this.menuOpen = false;
     this.enableScroll();
   }
@@ -159,4 +165,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   goToPanel(): void {
     this.router.navigate(['/panel']);
   }
+
+
 }

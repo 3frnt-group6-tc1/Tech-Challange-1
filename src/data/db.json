@@ -245,6 +245,14 @@
       "date": "2025-05-07T12:00:00.000Z",
       "description": "Cinema",
       "id_user": "u5"
+    },
+    {
+      "id": "1209",
+      "type": "exchange",
+      "description": "Teste",
+      "amount": 15000,
+      "date": "2025-05-31T03:23:19.014Z",
+      "id_user": "u2"
     }
   ]
 }

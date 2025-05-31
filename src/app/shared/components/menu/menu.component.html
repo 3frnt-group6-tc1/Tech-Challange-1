@@ -1,19 +1,39 @@
-@if(!isLoggedIn && (mobile || tablet) && menuOpen) {
-    <div class="fixed inset-0 z-50 bg-black/60 flex justify-center items-start pt-24">
-        <div #menuRef class="bg-white rounded-lg w-full p-9 flex flex-col gap-4 text-center shadow-xl">
-            <a href="#" class="text-cyan-blue-500 text-[18px] font-semibold">Sobre</a>
-            <a href="#" class="text-cyan-blue-500 text-[18px] font-semibold">Serviços</a>
+<!-- @if(!isLoggedIn && (mobile || tablet) && menuOpen) {
+    <div #menuRef class="fixed inset-0 z-50 bg-black/60 flex justify-center items-start pt-24">
+        <div class="bg-white dark:bg-purple-100 rounded-lg w-full p-9 flex flex-col gap-4 text-center shadow-xl">
+            <a href="#" class="text-cyan-blue-500 dark:text-gray-200 text-[18px] font-semibold" (click)="closeMenu.emit()">Sobre</a>
+            <a href="#" class="text-cyan-blue-500 dark:text-gray-200 text-[18px] font-semibold" (click)="closeMenu.emit()">Serviços</a>
             <div class="px-6 flex flex-col justify-center items-center gap-4">
-            <app-button theme="secondary" label="Abrir minha conta" size="G"></app-button>
-            <app-button theme="primary" label="Já tenho conta" size="G">
-                <app-icon-exit icon-right class="text-white" />
-            </app-button>
+                <app-button theme="secondary" label="Abrir minha conta" size="G" (click)="closeMenu.emit()"></app-button>
+                <app-button theme="ghost-white" label="Já tenho conta" size="G" (click)="closeMenu.emit()">
+                    <app-icon-exit icon-right class="text-white" />
+                </app-button>
             </div>
         </div>
     </div>
-<!-- Menu logado tablet (entre 640px e 1279px) -->
-} @else if(isLoggedIn && tablet) {
-    <nav class="absolute top-[70px] left-0 w-full bg-white py-4 flex flex-row items-center justify-center gap-4 shadow z-50">
+} -->
+
+<!-- menu.component.html -->
+@if(!isLoggedIn && (mobile || tablet) && menuOpen) {
+  <div #menuRef class="fixed inset-0 z-50 bg-black/60 flex justify-center items-start pt-24">
+    <!-- Esse conteúdo é considerado "dentro do menu" -->
+    <div class="bg-white dark:bg-purple-100 rounded-lg w-full p-9 flex flex-col gap-4 text-center shadow-xl">
+      <a href="#" class="text-cyan-blue-500 dark:text-gray-200 text-[18px] font-semibold" (click)="closeMenu.emit()">Sobre</a>
+      <a href="#" class="text-cyan-blue-500 dark:text-gray-200 text-[18px] font-semibold" (click)="closeMenu.emit()">Serviços</a>
+      <div class="px-6 flex flex-col justify-center items-center gap-4">
+        <app-button theme="secondary" label="Abrir minha conta" size="G" (click)="closeMenu.emit()"></app-button>
+        <app-button theme="ghost-white" label="Já tenho conta" size="G" (click)="closeMenu.emit()">
+          <app-icon-exit icon-right class="text-white" />
+        </app-button>
+      </div>
+    </div>
+  </div>
+}
+
+
+
+@else if(isLoggedIn && tablet) {
+    <nav class="absolute top-[70px] left-0 w-full bg-white  py-4 flex flex-row items-center justify-center gap-4 shadow z-50">
         <a href="#" class="text-cyan-blue-500 text-sm font-normal w-full max-w-[131px] flex justify-center">Início</a>
         <a href="#" class="text-cyan-blue-500 text-sm font-normal w-full max-w-[131px] flex justify-center">Transações</a>
         <a href="#" class="text-cyan-blue-500 text-sm font-normal w-full max-w-[131px] flex justify-center">Meus Cartões</a>

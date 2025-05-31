@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { ThemeService } from '../../services/Theme/theme.service'
+
 import { IconExitComponent } from '../../assets/icons/icon-exit.component';
 import { ButtonComponent } from '../button/button.component';
 import { TextComponent } from '../text/text.component';
@@ -9,6 +11,7 @@ import { IconHamburgerComponent } from "../../assets/icons/icon-hamburger.compon
 import { IconDarkmodeComponent } from "../../assets/icons/icon-darkmode.component";
 import { IconBellComponent } from "../../assets/icons/icon-bell.component";
 import { IconAccountCircleComponent } from "../../assets/icons/icon-account-circle.component";
+import { IconLogoComponent } from '../../assets/icons/icon-logo.component';
 import { IconArrowdownComponent } from '../../assets/icons/icon-arrowdown.component';
 import { MenuComponent } from "../menu/menu.component";
 
@@ -24,6 +27,7 @@ import { MenuComponent } from "../menu/menu.component";
     IconDarkmodeComponent,
     IconBellComponent,
     IconAccountCircleComponent,
+    IconLogoComponent,
     IconArrowdownComponent,
     MenuComponent
 ],
@@ -36,7 +40,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   tablet: boolean = false;
   menuOpen: boolean = false;
 
-  constructor() {
+  constructor(
+    public themeService: ThemeService
+  ) {
     const path = window.location.pathname;
     this.isLoggedIn = systemConfig.loggedPages.includes(path);
   }
@@ -51,12 +57,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     this.clickListener = this.handleClickOutside.bind(this);
     document.addEventListener('click', this.clickListener, true);
+
+    if (this.menuOpen) {
+      document.body.classList.add('overflow-hidden');
+    }
   }
 
   ngOnDestroy(): void {
     window.removeEventListener('resize', this.resizeListener);
     document.removeEventListener('click', this.clickListener, true);
     this.enableScroll();
+  }
+
+  toggleDarkMode() {
+    this.themeService.toggleDarkMode();
   }
 
   checkScreen(): void {
@@ -85,13 +99,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const menuElement = this.menuRef?.nativeElement;
 
     if (menuElement && !menuElement.contains(target)) {
-      this.menuOpen = false;
-      this.enableScroll();
+      this.closeMenu();
     }
   }
 
   get showLandingMobileMenu(): boolean {
-    return !this.isLoggedIn && (this.mobile || this.tablet) && this.menuOpen;
+    const condition = !this.isLoggedIn && (this.mobile || this.tablet) && this.menuOpen;
+
+    if (condition) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      this.enableScroll();
+    }
+
+    return condition;
   }
 
   get showLandingDesktopMenu(): boolean {
@@ -104,5 +125,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   get showLoggedTabletMenu(): boolean {
     return this.isLoggedIn && this.tablet;
+  }
+
+  setMenuRef(ref: ElementRef): void {
+    this.menuRef = ref;
+  }
+
+  private closeMenu(): void {
+    this.menuOpen = false;
+    this.enableScroll();
   }
 }

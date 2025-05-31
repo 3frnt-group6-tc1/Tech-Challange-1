@@ -1,20 +1,20 @@
-<footer class="bg-cyan-blue-500">
+<footer class="bg-cyan-blue-500 dark:dark:bg-purple-100">
   @if(!isLoggedIn) {
   <div class="container">
     <div class="flex flex-col lg:flex-row p-12 justify-center text-center gap-9">
       <div class="flex flex-col gap-4 w-full lg:w-72">
-        <app-text variant="text-regular" as="p" color="text-white">
+        <app-text variant="text-regular" as="p" color="text-white dark:text-gray-200">
           Serviços
         </app-text>
         <ul>
           <li class="flex flex-col gap-4">
-            <app-text variant="text-regular-special" as="p" color="text-white">
+            <app-text variant="text-regular-special" as="p" color="text-white dark:text-gray-200">
               Conta corrente
             </app-text>
-            <app-text variant="text-regular-special" as="p" color="text-white">
+            <app-text variant="text-regular-special" as="p" color="text-white dark:text-gray-200">
               Conta PJ
             </app-text>
-            <app-text variant="text-regular-special" as="p" color="text-white">
+            <app-text variant="text-regular-special" as="p" color="text-white dark:text-gray-200">
               Cartão de crédito
             </app-text>
           </li>
@@ -22,18 +22,18 @@
       </div>
 
       <div class="flex flex-col gap-4 w-full lg:w-72">
-        <app-text variant="text-regular" as="p" color="text-white">
+        <app-text variant="text-regular" as="p" color="text-white dark:text-gray-200">
           Contato
         </app-text>
         <ul>
           <li class="flex flex-col gap-4">
-            <app-text variant="text-regular-special" as="p" color="text-white">
+            <app-text variant="text-regular-special" as="p" color="text-white dark:text-gray-200">
               0800 004 250 08
             </app-text>
-            <app-text variant="text-regular-special" as="p" color="text-white">
+            <app-text variant="text-regular-special" as="p" color="text-white dark:text-gray-200">
               meajuda&#64;bytebank.com.br
             </app-text>
-            <app-text variant="text-regular-special" as="p" color="text-white">
+            <app-text variant="text-regular-special" as="p" color="text-white dark:text-gray-200">
               ouvidoria&#64;bytebank.com.br
             </app-text>
           </li>
@@ -41,21 +41,21 @@
       </div>
 
       <div class="flex flex-col gap-6 w-full lg:w-72 text-center">
-        <app-text variant="text-regular" as="p" color="text-white">
+        <app-text variant="text-regular" as="p" color="text-white dark:text-gray-200">
           © Copyright {{ year }} {{ company }}
         </app-text>
 
-        <app-icon-logo class="text-white m-auto"></app-icon-logo>
+        <app-icon-logo class="text-white dark:text-gray-200 m-auto"></app-icon-logo>
 
         <div class="flex flex-row gap-6 items-center justify-center">
           <app-button size="P" label="">
-            <app-icon-whatsapp icon-left class="text-white"></app-icon-whatsapp>
+            <app-icon-whatsapp icon-left class="text-white dark:text-gray-200"></app-icon-whatsapp>
           </app-button>
           <app-button size="P" label="">
-            <app-icon-instagram icon-left class="text-white"></app-icon-instagram>
+            <app-icon-instagram icon-left class="text-white dark:text-gray-200"></app-icon-instagram>
           </app-button>
           <app-button size="P" label="">
-            <app-icon-youtube icon-left class="text-white"></app-icon-youtube>
+            <app-icon-youtube icon-left class="text-white dark:text-gray-200"></app-icon-youtube>
           </app-button>
         </div>
       </div>
@@ -63,10 +63,10 @@
   </div>
   } @else {
   <div class="flex p-12 justify-between">
-    <app-text variant="text-small" as="p" color="text-white"
+    <app-text variant="text-small" as="p" color="text-white dark:text-gray-200"
       >V.{{ version }}</app-text
     >
-    <app-text variant="text-small-bold" as="p" color="text-white"
+    <app-text variant="text-small-bold" as="p" color="text-white dark:text-gray-200"
       >© Copyright {{ year }} {{ company }}</app-text
     >
   </div>

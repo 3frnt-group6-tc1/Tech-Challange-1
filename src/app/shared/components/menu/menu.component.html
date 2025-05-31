@@ -1,7 +1,7 @@
 <!-- Menu Mobile/tablet deslogado -->
 @if(!isLoggedIn && (mobile || tablet) && menuOpen) {
 <div #menuRef class="fixed inset-0 z-50 bg-black/60 flex justify-center items-start pt-24">
-  <div class="bg-white dark:bg-purple-100 rounded-lg w-full p-9 flex flex-col gap-4 text-center shadow-xl">
+  <div class="bg-white dark:bg-blue-violet-100 rounded-lg w-full p-9 flex flex-col gap-4 text-center shadow-xl">
     <a href="#" class="text-cyan-blue-500 dark:text-gray-200 text-[18px] font-semibold"
       (click)="onLinkClick($event)">Sobre</a>
     <a href="#" class="text-cyan-blue-500 dark:text-gray-200 text-[18px] font-semibold"

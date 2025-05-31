@@ -1,88 +1,10 @@
-<!-- <a
-  [routerLink]="route"
-  routerLinkActive="bg-cyan-blue-500 text-white"
-  class="flex items-center gap-3 px-4 py-3 rounded-lg text-cyan-blue-900 font-medium transition-colors duration-200"
-  [ngClass]="{
-    'bg-cyan-blue-500 text-white': active,
-    'text-cyan-blue-900 hover:text-white hover:bg-cyan-blue-900': !active
-  }"
->
-  <img [src]="icon" alt="Ícone" class="w-5 h-5" />
-  <span>{{ label }}</span>
-</a> -->
-
-<!-- <a
-  [routerLink]="route"
-  routerLinkActive="bg-cyan-blue-500 text-white"
-  class="flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors duration-200"
-  [ngClass]="{
-    'bg-cyan-blue-500 text-white': active,
-    'text-cyan-blue-900 hover:text-white hover:bg-cyan-blue-900': !active
-  }"
->
-  <img
-    [src]="icon"
-    alt=""
-    class="w-5 h-5 transition-all duration-300"
-    [ngClass]="{
-      'invert': isActive,
-      'invert brightness-0 saturate-100 hue-rotate-[180deg]': !isActive
-    }"
-  />
-  <span>{{ label }}</span>
-</a> -->
-
-<!-- <a
-  [routerLink]="route"
-  routerLinkActive="bg-cyan-blue-500 text-white"
-  class="flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors duration-200"
-  [ngClass]="{
-    'bg-cyan-blue-500 text-white': active,
-    'text-cyan-blue-900 hover:text-white hover:bg-cyan-blue-900': !active
-  }"
->
-    <app-icon-home [ngClass]="active ? 'text-white' : 'hover:text-cyan-blue-900'"></app-icon-home>
-    <span>{{ label }}</span>
-</a> -->
-
-<!-- <a
-  [routerLink]="route"
-  routerLinkActive="bg-cyan-blue-500 text-white"
-  class="flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors duration-200"
-  [ngClass]="{
-    'bg-cyan-blue-500 text-white': active,
-    'text-cyan-blue-900 hover:text-white hover:bg-cyan-blue-900': !active
-  }"
->
-  <ng-container *ngComponentOutlet="iconComponent" [ngClass]="active ? 'text-white' : 'hover:text-cyan-blue-900'"></ng-container>
-
-  <span>{{ label }}</span>
-</a> -->
-
-<!-- <a
-  [routerLink]="route"
-  routerLinkActive="bg-cyan-blue-500 text-white"
-  class="flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors duration-200"
-  [ngClass]="{
-    'bg-cyan-blue-500 text-white': active,
-    'text-cyan-blue-900 hover:text-white hover:bg-cyan-blue-900': !active
-  }"
->
-  <ng-container
-    *ngComponentOutlet="iconComponent"
-    [ngClass]="active ? 'text-white' : 'hover:text-cyan-blue-900'"
-  ></ng-container>
-
-  <span>{{ label }}</span>
-</a> -->
-
 <a
   [routerLink]="route"
   routerLinkActive="bg-cyan-blue-500 text-white"
   class="flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors duration-200 m-1"
   [ngClass]="{
-    'bg-cyan-blue-500 text-white': active,
-    'text-cyan-blue-900 hover:text-white hover:bg-cyan-blue-900': !active
+    'bg-cyan-blue-500 dark:bg-blue-violet-500 text-white': active,
+    'text-cyan-blue-900 hover:text-white hover:bg-cyan-blue-900 hover:dark:bg-blue-violet-900': !active
   }"
 >
   <span [ngClass]="active ? 'text-white' : 'hover:text-cyan-blue-900'">

@@ -43,7 +43,13 @@ module.exports = {
       },
       backgroundImage: {
         'primary-gradient': 'linear-gradient(to bottom, #003C50 0%, #007B8F 50%, #a9c4c9 100%);',
-        'primary-gradient-dark': 'linear-gradient(to bottom, #1A0078 0%, #6F47FF 100%);',
+        // 'primary-gradient-dark': 'linear-gradient(to bottom, #2a1155 0%, #653DF5 50%, #7D70BA 100%)',
+        // 'primary-gradient-dark': 'linear-gradient(to bottom, #2a1155 0%, #653DF5 50%, #443C68 100%)',
+        // 'primary-gradient-dark': 'linear-gradient(to bottom, #2a1155 0%, #653DF5 85%, #FC466B 100%)',
+        'primary-gradient-dark': 'linear-gradient(to bottom, #020024 0%, #090979 50%, #00D4FF 100%)',
+
+
+
         'secondary-gradient': 'linear-gradient(to bottom, #dee9ea, #ffffff)',
       },
       fontFamily: {
@@ -78,13 +84,10 @@ module.exports = {
 
         "brown-500": "#80440D",
         "brown-900": "#6b3c0a",
-
-        "purple-100": "#35189C",
-        "purple-200": "#5431D0",
-        "purple-300": "#653DF5",
-        "purple-400": "#4D20EF",
-        "purple-500": "#3401EE",
-
+        
+        "blue-violet-100": "#8589D6",
+        "blue-violet-500": "#090979",
+        "blue-violet-900": "#020024",
       },
     },
   },

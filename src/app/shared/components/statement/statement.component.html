@@ -3,99 +3,137 @@
 </div>
 
 <div class="rounded-xl shadow p-6 bg-white">
-  <app-text variant="subtitle" as="h2" color="text-gray-900"
-    >Transações</app-text
-  >
+  <app-text variant="subtitle" as="h2" color="text-gray-900">
+    {{ customTitle }}
+  </app-text>
 
   <div *ngIf="isLoading" class="text-center py-4">
     <app-text color="text-gray-600">Carregando transações...</app-text>
   </div>
 
-  <table
-    *ngIf="!isLoading && recentTransactions.length > 0"
-    class="w-full text-sm border-t-2 mt-3 pt-3"
-  >
-    <tbody>
-      <tr
-        *ngFor="let transaction of recentTransactions"
-        class="border-b-2 last:border-none"
-      >
-        <!-- Ícone -->
-        <td class="py-4">
-          <ng-container
-            [ngSwitch]="isDeposit(transaction) ? 'deposit' : 'withdraw'"
-          >
-            <app-icon-dollar
-              *ngSwitchCase="'deposit'"
-              class="w-4 h-4"
-              [ngClass]="'text-green-600'"
-            ></app-icon-dollar>
+  <!-- Scrollable container -->
+  <div [ngClass]="{'max-h-[400px] overflow-y-auto mt-3': showAllTransactions}">
+    <table
+      *ngIf="!isLoading && recentTransactions.length > 0"
+      class="w-full text-sm border-t-2 pt-3"
+    >
+      <tbody>
+        <tr
+          *ngFor="let transaction of recentTransactions"
+          class="border-b-2 last:border-none"
+        >
+          <!-- Columns ordered based on swapColumns input -->
+          <ng-container *ngIf="!swapColumns">
+            <!-- Ícone -->
+            <td class="py-4">
+              <ng-container
+                [ngSwitch]="isDeposit(transaction) ? 'deposit' : 'withdraw'"
+              >
+                <app-icon-dollar
+                  *ngSwitchCase="'deposit'"
+                  class="w-4 h-4"
+                  [ngClass]="'text-green-600'"
+                ></app-icon-dollar>
 
-            <app-icon-arrow-down-left
-              *ngSwitchCase="'withdraw'"
-              class="w-4 h-4"
-              [ngClass]="'text-red-600'"
-            ></app-icon-arrow-down-left>
+                <app-icon-arrow-down-left
+                  *ngSwitchCase="'withdraw'"
+                  class="w-4 h-4"
+                  [ngClass]="'text-red-600'"
+                ></app-icon-arrow-down-left>
+              </ng-container>
+            </td>
+
+            <!-- Descrição -->
+            <td class="py-4" *ngIf="showDetails">
+              <app-text
+                [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
+              >
+                {{ transaction.description }}
+              </app-text>
+            </td>
           </ng-container>
-        </td>
-        <!-- Descrição -->
-        <td class="py-4" *ngIf="showDetails">
-          <app-text
-            [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
-          >
-            {{ transaction.description }}
-          </app-text>
-        </td>
 
-        <!-- Tipo -->
-        <td class="py-4">
-          <app-text
-            [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
-          >
-            {{ getTransactionTypeLabel(transaction.type) }}
-          </app-text>
-        </td>
-        <!-- Valor -->
-        <td class="py-4">
-          <app-text
-            [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
-          >
-             {{ transaction.amount | brl }}
-          </app-text>
-        </td>
-        <!-- Data -->
-        <td class="py-4">
-          <app-text
-            [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
-          >
-            {{ formatDate(transaction.date) }}
-          </app-text>
-        </td>
-        <!-- Icone de Lápís -->
-        <td class="py-4 text-center">
-          <button (click)="editTransaction(transaction.id!)">
-            <app-icon-arrow-pencil
-              [ngClass]="
-                isDeposit(transaction) ? 'text-green-600' : 'text-red-600'
-              "
-              class="w-4 h-4"
-            ></app-icon-arrow-pencil>
-          </button>
-        </td>
-        <!-- Icone de Lixeira -->
-        <td class="py-4 text-center">
-          <button (click)="openDeleteModal(transaction.id!)">
-            <app-icon-bin
-              [ngClass]="
-                isDeposit(transaction) ? 'text-green-600' : 'text-red-600'
-              "
-              class="w-4 h-4"
-            ></app-icon-bin>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          <!-- Reversed column order for the second view -->
+          <ng-container *ngIf="swapColumns">
+            <!-- Descrição first -->
+            <td class="py-4" *ngIf="showDetails">
+              <app-text
+                [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
+              >
+                {{ transaction.description }}
+              </app-text>
+            </td>
+
+            <!-- Ícone second -->
+            <td class="py-4">
+              <ng-container
+                [ngSwitch]="isDeposit(transaction) ? 'deposit' : 'withdraw'"
+              >
+                <app-icon-dollar
+                  *ngSwitchCase="'deposit'"
+                  class="w-4 h-4"
+                  [ngClass]="'text-green-600'"
+                ></app-icon-dollar>
+
+                <app-icon-arrow-down-left
+                  *ngSwitchCase="'withdraw'"
+                  class="w-4 h-4"
+                  [ngClass]="'text-red-600'"
+                ></app-icon-arrow-down-left>
+              </ng-container>
+            </td>
+          </ng-container>
+
+          <!-- Rest of the columns remain the same -->
+          <td class="py-4">
+            <app-text
+              [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
+            >
+              {{ getTransactionTypeLabel(transaction.type) }}
+            </app-text>
+          </td>
+          <!-- Valor -->
+          <td class="py-4">
+            <app-text
+              [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
+            >
+               {{ transaction.amount | brl }}
+            </app-text>
+          </td>
+          <!-- Data -->
+          <td class="py-4">
+            <app-text
+              [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
+            >
+              {{ formatDate(transaction.date) }}
+            </app-text>
+          </td>
+          <!-- Icone de Lápís -->
+          <td class="py-4 text-center">
+            <button (click)="editTransaction(transaction.id!)">
+              <app-icon-arrow-pencil
+                [ngClass]="
+                  isDeposit(transaction) ? 'text-green-600' : 'text-red-600'
+                "
+                class="w-4 h-4"
+              ></app-icon-arrow-pencil>
+            </button>
+          </td>
+          <!-- Icone de Lixeira -->
+          <td class="py-4 text-center">
+            <button (click)="openDeleteModal(transaction.id!)">
+              <app-icon-bin
+                [ngClass]="
+                  isDeposit(transaction) ? 'text-green-600' : 'text-red-600'
+                "
+                class="w-4 h-4"
+              ></app-icon-bin>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <div
     *ngIf="!isLoading && recentTransactions.length === 0"
@@ -104,7 +142,7 @@
     <app-text color="text-gray-600">Nenhuma transação encontrada</app-text>
   </div>
 
-  <div class="flex justify-end mt-4" *ngIf="!showDetails">
+  <div class="flex justify-end mt-4" *ngIf="!showDetails && !showAllTransactions">
     <a
       href="/transactions"
       class="inline-flex items-center gap-2 text-cyan-blue-500 hover:underline"

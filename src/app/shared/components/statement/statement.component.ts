@@ -43,6 +43,9 @@ import { BrlPipe } from '../../pipes/brl.pipe';
 })
 export class StatementComponent implements OnInit, OnDestroy {
   @Input() showDetails = true;
+  @Input() showAllTransactions = false;
+  @Input() customTitle = 'Transações';
+  @Input() swapColumns = false;
   transactions: Transaction[] = [];
   transactionLabels = TRANSACTION_TYPE_LABELS;
   isLoading = false;
@@ -55,9 +58,10 @@ export class StatementComponent implements OnInit, OnDestroy {
   transactionToEdit: Transaction | null = null;
 
   get recentTransactions(): Transaction[] {
-    return this.transactions
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-      .slice(0, 6);
+    const sortedTransactions = this.transactions
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+    return this.showAllTransactions ? sortedTransactions : sortedTransactions.slice(0, 6);
   }
 
   constructor(

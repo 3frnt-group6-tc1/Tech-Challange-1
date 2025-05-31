@@ -1,5 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 import { ThemeService } from '../../services/Theme/theme.service'
 
@@ -30,7 +32,7 @@ import { MenuComponent } from "../menu/menu.component";
     IconLogoComponent,
     IconArrowdownComponent,
     MenuComponent
-],
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -41,7 +43,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   menuOpen: boolean = false;
 
   constructor(
-    public themeService: ThemeService
+    public themeService: ThemeService,
+    private readonly router: Router,
   ) {
     const path = window.location.pathname;
     this.isLoggedIn = systemConfig.loggedPages.includes(path);
@@ -50,6 +53,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @ViewChild('menuRef') menuRef?: ElementRef;
   private resizeListener = () => this.checkScreen();
   private clickListener!: (event: MouseEvent) => void;
+  private routerEventsSubscription: any;
 
   ngOnInit() {
     this.checkScreen();
@@ -61,12 +65,28 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (this.menuOpen) {
       document.body.classList.add('overflow-hidden');
     }
+
+    this.routerEventsSubscription = this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.updateLoginState(event.urlAfterRedirects);
+      });
+
+    this.updateLoginState(this.router.url);
   }
 
   ngOnDestroy(): void {
     window.removeEventListener('resize', this.resizeListener);
     document.removeEventListener('click', this.clickListener, true);
     this.enableScroll();
+
+    if (this.routerEventsSubscription) {
+      this.routerEventsSubscription.unsubscribe();
+    }
+  }
+
+  private updateLoginState(url: string) {
+    this.isLoggedIn = systemConfig.loggedPages.includes(url);
   }
 
   toggleDarkMode() {
@@ -134,5 +154,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private closeMenu(): void {
     this.menuOpen = false;
     this.enableScroll();
+  }
+
+  goToPanel(): void {
+    this.router.navigate(['/panel']);
   }
 }

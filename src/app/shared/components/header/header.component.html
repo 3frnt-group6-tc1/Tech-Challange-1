@@ -1,75 +1,105 @@
-<header class="bg-cyan-blue-500">
-  <div class="flex items-center justify-between h-24 container">
-    <!-- Variação para LandingPage -->
-    @if(!isLoggedIn) { 
-      @if(!mobile) {
-        <div class="flex gap-20">
-          <img src="assets/icons/logo.svg" alt="Logo Bytebank" />
+<header class="bg-cyan-blue-500 dark:bg-purple-100 shadow-x-light relative">
+  <div class="flex items-center justify-between container" [ngClass]="{ 'h-24': !isLoggedIn, 'h-[70px]': isLoggedIn }">
+    <!-- Usuário não logado (LandingPage) -->
+      @if(!isLoggedIn) {
+        @if(!mobile && !tablet) {
           <ul class="flex items-center gap-10">
+            
             <li>
-              <a
-                href="#"
-                class="text-white hover:text-orange-500 transition-all text-center font-lato text-[18px] font-semibold leading-normal"
-              >
+              <a href="/">
+                <app-icon-logo class="text-white m-auto"></app-icon-logo>
+              </a>
+            </li>
+            
+            <li>
+              <a href="#" class="text-white hover:text-orange-500 dark:hover:text-gray-250 font-lato text-[18px] font-semibold transition-all">
                 Sobre
               </a>
             </li>
             <li>
-              <a
-                href="#"
-                class="text-white hover:text-orange-500 transition-all text-center font-lato text-[18px] font-semibold leading-normal"
-              >
+              <a href="#" class="text-white hover:text-orange-500 dark:hover:text-gray-250 font-lato text-[18px] font-semibold transition-all">
                 Serviço
               </a>
             </li>
           </ul>
-        </div>
-        <div class="flex gap-9">
-          <app-button theme="secondary" label="Abrir minha conta" size="P">
+          <div class="flex items-center gap-6">
+            <app-button theme="secondary" label="Abrir minha conta" size="P"></app-button>
+            
+            <app-button theme="ghost-white" label="Já tenho conta" size="P">
+              <app-icon-exit icon-right class="text-white dark:text-gray-200 hover:dark:text-gray-250" />
+            </app-button>
+
+            <app-button (click)="toggleDarkMode()" size="P" label="">
+              <app-icon-darkmode icon-left class="text-white dark:text-gray-200"></app-icon-darkmode>
+            </app-button>
+
+          </div>
+        } @else { 
+          <div class="flex justify-between items-center w-full">
+            <a href="/">
+              <app-icon-logo class="text-white dark:text-gray-250 m-auto"></app-icon-logo>
+            </a>
+            <div class="flex gap-6">
+              <app-button (click)="toggleDarkMode()" size="P" label="">
+                <app-icon-darkmode icon-left class="text-white dark:text-gray-250"></app-icon-darkmode>
+              </app-button>
+              <app-button size="P" label="" (click)="toggleMenu()">
+                <app-icon-hamburger icon-left class="text-white dark:text-gray-250"></app-icon-hamburger>
+              </app-button>
+            </div>
+          </div>
+        }
+      } @else {
+        @if(!mobile && !tablet) {
+          <a href="/">
+            <app-icon-logo class="text-white dark:text-gray-250 m-auto"></app-icon-logo>
+          </a>
+          <div class="flex items-center gap-2">
+            <app-text variant="text-small" color="text-white dark:text-gray-250">Fulano da Silva</app-text>
+            <app-button (click)="toggleDarkMode()" size="P" label="">
+              <app-icon-darkmode icon-left class="text-white dark:text-gray-250"></app-icon-darkmode>
+            </app-button>
+            <app-button size="P" label="">
+              <app-icon-bell icon-left class="text-white dark:text-gray-250"></app-icon-bell>
+            </app-button>
+            <app-button size="P" label="">
+              <app-icon-account-circle icon-left class="text-white dark:text-gray-250"></app-icon-account-circle>
+              <app-icon-arrowdown icon-left class="text-white dark:text-gray-250"></app-icon-arrowdown>
+            </app-button>
+          </div>
+        } @else if(tablet) {
+          <a href="/">
+            <app-icon-logo class="text-white dark:text-gray-250 m-auto"></app-icon-logo>
+          </a>
+          <div class="flex items-center gap-6">
+            <app-text variant="text-small" color="text-white">Fulano da Silva</app-text>
+            <div>
+              <app-button size="P" label="">
+                <app-icon-account-circle icon-left class="text-white dark:text-gray-250"></app-icon-account-circle>
+                <app-icon-arrowdown icon-left class="text-white dark:text-gray-250"></app-icon-arrowdown>
+              </app-button>
+            </div>
+          </div>
+        } @else {
+          <a href="/">
+            <app-icon-logo class="text-white dark:text-gray-250 m-auto"></app-icon-logo>
+          </a>
+          <app-button size="P" label="" (click)="toggleMenu()">
+            <app-icon-hamburger icon-left class="text-white dark:text-gray-250"></app-icon-hamburger>
           </app-button>
-          <app-button theme="ghost-white" label="Já tenho conta" size="P">
-            <app-icon-exit icon-right color="text-white" />
-          </app-button>
-          <app-button size="P" label="">
-            <app-icon-darkmode icon-left class="text-white"></app-icon-darkmode>
-          </app-button>
-        </div>
+        }
       }
-      @else {
-        <img src="assets/icons/logo.svg" alt="Logo Bytebank" />
-        <div class="flex gap-9">
-          <app-button size="P" label="">
-            <app-icon-darkmode icon-left class="text-white"></app-icon-darkmode>
-          </app-button>
-          <app-button size="P" label="">
-            <app-icon-hamburger icon-left class="text-white"></app-icon-hamburger>
-          </app-button>
-        </div>
-      } 
-    }
-    <!-- Variação para usuario já logado -->
-    @else {
-    <img src="assets/icons/logo.svg" alt="Logo Bytebank" />
-    <div class="flex flex-row gap-6">
-      <app-text variant="text-small" color="text-white"
-        >Fulano da Silva</app-text
-      >
-      <a href="#">
-        <img
-          src="../../../../assets/icons/dark-mode.svg"
-          alt="Icone de Dark Mode"
-        />
-      </a>
-      <a href="#">
-        <img src="../../../../assets/icons/bell.svg" alt="Icone de aviso" />
-      </a>
-      <a href="#">
-        <img
-          src="../../../../assets/icons/account-circle.svg"
-          alt="Icone de Perfil do Usuario"
-        />
-      </a>
-    </div>
-    }
   </div>
+
+  <app-menu
+    [isLoggedIn]="isLoggedIn"
+    [mobile]="mobile"
+    [tablet]="tablet"
+    [menuOpen]="menuOpen"
+    [menuRef]="menuRef"
+    (closeMenu)="toggleMenu()"
+    (menuRefReady)="setMenuRef($event)"
+  >
+  </app-menu>
+
 </header>

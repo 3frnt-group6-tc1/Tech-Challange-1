@@ -44,6 +44,6 @@ export class HomeComponent {
   ];
 
   inputs = {
-    class: 'text-white w-24 h-24',
+    class: 'text-white dark:text-gray-200 w-24 h-24',
   };
 }

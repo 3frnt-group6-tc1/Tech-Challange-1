@@ -12,7 +12,7 @@ import { NewTransactionComponent } from '../../shared/components/new-transaction
     DashboardComponent,
     StatementComponent,
     NewTransactionComponent,
-  ],
+],
   templateUrl: './panel.component.html',
   styleUrl: './panel.component.scss',
 })

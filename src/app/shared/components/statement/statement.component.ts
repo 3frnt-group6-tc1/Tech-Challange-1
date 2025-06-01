@@ -72,33 +72,27 @@ export class StatementComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadUserTransactions();
 
-    // Listen for created transactions
     this.transactionEventService.transactionCreated$
       .pipe(takeUntil(this.destroy$))
       .subscribe((transaction) => {
         if (transaction.id_user === systemConfig.userId) {
-          // Add the new transaction to our list
           this.transactions = [transaction, ...this.transactions];
         }
       });
 
-    // Listen for updated transactions
     this.transactionEventService.transactionUpdated$
       .pipe(takeUntil(this.destroy$))
       .subscribe((transaction) => {
         if (transaction.id_user === systemConfig.userId) {
-          // Update the transaction in our list
           this.transactions = this.transactions.map((t) =>
             t.id === transaction.id ? transaction : t
           );
         }
       });
 
-    // Listen for deleted transactions
     this.transactionEventService.transactionDeleted$
       .pipe(takeUntil(this.destroy$))
       .subscribe((transactionId) => {
-        // Remove the transaction from our list
         this.transactions = this.transactions.filter(
           (t) => t.id !== transactionId
         );
@@ -127,7 +121,6 @@ export class StatementComponent implements OnInit, OnDestroy {
     });
   }
 
-  // Helper methods for template use
   isDeposit(transaction: Transaction): boolean {
     return isCredit(transaction.type);
   }
@@ -177,7 +170,6 @@ export class StatementComponent implements OnInit, OnDestroy {
 
     this.transactionService.delete(id).subscribe({
       next: () => {
-        // The transaction will be removed via the subscription to transactionDeleted$
         console.log('Transaction deleted', id);
       },
       error: (error) => {

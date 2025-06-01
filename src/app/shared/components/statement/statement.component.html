@@ -1,17 +1,33 @@
-<div *ngIf="showAlert" class="fixed top-0 left-0 right-0 bg-white text-cyan-blue-500 p-4 text-center z-50">
+<div
+  *ngIf="showAlert"
+  class="fixed top-0 left-0 right-0 bg-white text-cyan-blue-500 p-4 text-center z-50"
+>
   {{ alertMessage }}
 </div>
 
 <div class="rounded-xl shadow p-6 bg-white">
-  <app-text variant="subtitle" as="h2" color="text-gray-900">
-    {{ customTitle }}
-  </app-text>
+  <div class="flex items-end">
+    <app-text variant="subtitle" as="h2" color="text-gray-900">
+      {{ customTitle }}
+    </app-text>
+
+    <app-text
+      variant="text-small"
+      color="text-gray-400"
+      *ngIf="showLastTransactionsSubtitle"
+      class="pl-3"
+    >
+      {{"(últimas 6 transações)" }}
+    </app-text>
+  </div>
 
   <div *ngIf="isLoading" class="text-center py-4">
     <app-text color="text-gray-600">Carregando transações...</app-text>
   </div>
 
-  <div [ngClass]="{'max-h-[400px] overflow-y-auto mt-3': showAllTransactions}">
+  <div
+    [ngClass]="{ 'max-h-[400px] overflow-y-auto mt-3': showAllTransactions }"
+  >
     <table
       *ngIf="!isLoading && recentTransactions.length > 0"
       class="w-full text-sm border-t-2 mt-3 pt-3"
@@ -42,7 +58,9 @@
 
             <td class="py-4">
               <app-text
-                [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
+                [color]="
+                  isDeposit(transaction) ? 'text-green-600' : 'text-red-600'
+                "
               >
                 {{ getTransactionTypeLabel(transaction.type) }}
               </app-text>
@@ -50,7 +68,9 @@
 
             <td class="py-4" *ngIf="showDetails">
               <app-text
-                [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
+                [color]="
+                  isDeposit(transaction) ? 'text-green-600' : 'text-red-600'
+                "
               >
                 {{ transaction.description }}
               </app-text>
@@ -78,7 +98,9 @@
 
             <td class="py-4">
               <app-text
-                [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
+                [color]="
+                  isDeposit(transaction) ? 'text-green-600' : 'text-red-600'
+                "
               >
                 {{ getTransactionTypeLabel(transaction.type) }}
               </app-text>
@@ -86,7 +108,9 @@
 
             <td class="py-4" *ngIf="showDetails">
               <app-text
-                [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
+                [color]="
+                  isDeposit(transaction) ? 'text-green-600' : 'text-red-600'
+                "
               >
                 {{ transaction.description }}
               </app-text>
@@ -95,14 +119,18 @@
 
           <td class="py-4">
             <app-text
-              [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
+              [color]="
+                isDeposit(transaction) ? 'text-green-600' : 'text-red-600'
+              "
             >
-               {{ transaction.amount | brl }}
+              {{ transaction.amount | brl }}
             </app-text>
           </td>
           <td class="py-4">
             <app-text
-              [color]="isDeposit(transaction) ? 'text-green-600' : 'text-red-600'"
+              [color]="
+                isDeposit(transaction) ? 'text-green-600' : 'text-red-600'
+              "
             >
               {{ formatDate(transaction.date) }}
             </app-text>
@@ -139,7 +167,10 @@
     <app-text color="text-gray-600">Nenhuma transação encontrada</app-text>
   </div>
 
-  <div class="flex justify-end mt-4" *ngIf="!showDetails && !showAllTransactions">
+  <div
+    class="flex justify-end mt-4"
+    *ngIf="!showDetails && !showAllTransactions"
+  >
     <a
       href="/transactions"
       class="inline-flex items-center gap-2 text-cyan-blue-500 hover:underline"

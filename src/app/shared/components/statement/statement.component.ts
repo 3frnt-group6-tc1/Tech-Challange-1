@@ -45,6 +45,7 @@ export class StatementComponent implements OnInit, OnDestroy {
   @Input() showDetails = true;
   @Input() showAllTransactions = false;
   @Input() customTitle = 'Transações';
+  @Input() showLastTransactionsSubtitle = false;
   @Input() swapColumns = false;
   transactions: Transaction[] = [];
   transactionLabels = TRANSACTION_TYPE_LABELS;

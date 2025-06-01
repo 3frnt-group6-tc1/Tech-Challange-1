@@ -1,5 +1,11 @@
 <app-layout>
   <div class="mx-auto overflow-x-auto rounded-xl shadow-md">
-    <app-statement [showDetails]="true"></app-statement>
+    <app-statement
+      [showDetails]="true"
+      [showAllTransactions]="true"
+      [customTitle]="'Transações'"
+      [swapColumns]="true"
+    >
+    </app-statement>
   </div>
 </app-layout>

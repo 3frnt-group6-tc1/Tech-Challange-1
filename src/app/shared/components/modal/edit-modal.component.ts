@@ -50,6 +50,17 @@ export class EditModalComponent {
     });
   }
 
+  onlyNumbers(event: KeyboardEvent): boolean {
+    const pattern = /[0-9]/;
+    const inputChar = String.fromCharCode(event.charCode);
+    
+    if (!pattern.test(inputChar)) {
+      event.preventDefault();
+      return false;
+    }
+    return true;
+  }
+
   onAmountInput(event: Event): void {
     const input = event.target as HTMLInputElement;
     let value = input.value.replace(/\D/g, '');

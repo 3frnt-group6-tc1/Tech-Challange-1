@@ -10,6 +10,10 @@
 }
 
  
+html {
+  scroll-behavior: smooth;
+}
+
 body, html {
   font-family: 'Lato', sans-serif;
 }
@@ -29,3 +33,4 @@ body, html {
 .text-size-12 {
   font-size: 12px;
 }
+

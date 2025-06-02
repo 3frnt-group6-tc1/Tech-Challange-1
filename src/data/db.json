@@ -309,6 +309,14 @@
       "amount": 123.12,
       "date": "2025-05-31T13:43:28.195Z",
       "id_user": "u2"
+    },
+    {
+      "id": "bd88",
+      "type": "exchange",
+      "description": "asdf123",
+      "amount": 1231.23,
+      "date": "2025-06-02T02:01:38.372Z",
+      "id_user": "u2"
     }
   ]
 }

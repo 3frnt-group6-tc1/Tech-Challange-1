@@ -4,10 +4,10 @@
   class="flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors duration-200 m-1"
   [ngClass]="{
     'bg-cyan-blue-500 dark:bg-blue-violet-500 text-white': active,
-    'text-cyan-blue-900 hover:text-white hover:bg-cyan-blue-900 hover:dark:bg-blue-violet-900': !active
+    'text-cyan-blue-900 dark:text-blue-violet-500 hover:text-white dark:hover:text-white hover:bg-cyan-blue-900 hover:dark:bg-blue-violet-900': !active
   }"
 >
-  <span [ngClass]="active ? 'text-white' : 'hover:text-cyan-blue-900'">
+  <span [ngClass]="active ? 'text-white' : 'hover:text-cyan-blue-900 dark:hover:text-blue-violet-900'">
     <ng-container *ngComponentOutlet="iconComponent"></ng-container>
   </span>
   <span>{{ label }}</span>

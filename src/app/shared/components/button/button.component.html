@@ -19,10 +19,11 @@
   <span
     *ngIf="label"
     [ngClass]="{
-      '!text-white hover:!text-gray-200 dark:!text-brown-500 hover:!dark:text-brown-900': theme === 'primary' || theme === 'secondary',
-      'text-white hover:text-gray-200 dark:text-gray-200 hover:dark:text-gray-250': theme === 'ghost-white',
-      'text-cyan-blue-500': theme === 'outline-cyan-blue' || theme === 'ghost-cyan-blue',
-      'text-gray-500': disabled
+      'text-white hover:text-gray-200': theme === 'primary',
+      'dark:!text-brown-500 hover:!dark:text-brown-900 text-gray-50': theme === 'secondary',
+      '!text-white hover:!text-gray-200 dark:!text-gray-200 hover:!dark:text-gray-250': theme === 'ghost-white',
+      '!text-cyan-blue-500 hover:!text-white': theme === 'outline-cyan-blue' || theme === 'ghost-cyan-blue',
+      '!text-gray-500': disabled
     }"
   >
     {{ label }}

@@ -4,6 +4,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 import { ThemeService } from '../../services/Theme/theme.service'
+import { UserService } from '../../services/User/user-service';
 
 import { IconExitComponent } from '../../assets/icons/icon-exit.component';
 import { ButtonComponent } from '../button/button.component';
@@ -37,14 +38,20 @@ import { MenuComponent } from "../menu/menu.component";
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  userId: string = systemConfig.userId;
   isLoggedIn: boolean = true;
   mobile: boolean = false;
   tablet: boolean = false;
   menuOpen: boolean = false;
 
+  userName: string = '';
+
+  isLoading: boolean = true;
+
   constructor(
     public themeService: ThemeService,
     private readonly router: Router,
+    private readonly userService: UserService,
   ) {
     const path = window.location.pathname;
     this.isLoggedIn = systemConfig.loggedPages.includes(path);
@@ -70,8 +77,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         this.updateLoginState(event.urlAfterRedirects);
-      });
-
+    });
+    this.fetchUser();
     this.updateLoginState(this.router.url);
   }
 
@@ -88,6 +95,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private updateLoginState(url: string) {
     this.isLoggedIn = systemConfig.loggedPages.includes(url);
   }
+
+  fetchUser(): void {
+    this.isLoading = true;
+    this.userService.getById(systemConfig.userId).subscribe({
+      next: (response: any) => {
+        console.log('Usuário logado:', response);
+        this.userName = response.name;
+      },
+      error: (error: any) => {
+        this.isLoading = false;
+        console.error('Error fetching user name:', error);
+      }
+    });
+  }
+
 
   toggleDarkMode() {
     this.themeService.toggleDarkMode();

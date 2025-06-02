@@ -54,7 +54,9 @@
             <app-icon-logo class="text-white m-auto"></app-icon-logo>
           </a>
           <div class="flex items-center gap-2">
-            <app-text variant="text-small" color="text-white">Fulano da Silva</app-text>
+            <app-text variant="text-small" color="text-white">
+              {{userName}}
+            </app-text>
             <app-button (click)="toggleDarkMode()" size="P" label="">
               <app-icon-darkmode icon-left class="text-white"></app-icon-darkmode>
             </app-button>
@@ -71,7 +73,7 @@
             <app-icon-logo class="text-white m-auto"></app-icon-logo>
           </a>
           <div class="flex items-center gap-6">
-            <app-text variant="text-small" color="text-white">Fulano da Silva</app-text>
+            <app-text variant="text-small" color="text-white">{{userName}}</app-text>
             <div>
               <app-button size="P" label="">
                 <app-icon-account-circle icon-left class="text-white"></app-icon-account-circle>

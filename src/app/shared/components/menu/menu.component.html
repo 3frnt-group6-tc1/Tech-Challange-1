@@ -1,37 +1,98 @@
 <!-- Menu Mobile/tablet deslogado -->
 @if(!isLoggedIn && (mobile || tablet) && menuOpen) {
-<div #menuRef class="fixed inset-0 z-50 bg-black/60 flex justify-center items-start pt-24">
-  <div class="bg-white dark:bg-blue-violet-100 rounded-lg w-full p-9 flex flex-col gap-4 text-center shadow-xl">
-    <a href="#" class="text-cyan-blue-500 dark:text-gray-200 text-[18px] font-semibold"
-      (click)="onLinkClick($event)">Sobre</a>
-    <a href="#" class="text-cyan-blue-500 dark:text-gray-200 text-[18px] font-semibold"
-      (click)="onLinkClick($event)">Serviços</a>
-    <div class="px-6 flex flex-col justify-center items-center gap-4">
-      <app-button theme="secondary" label="Abrir minha conta" size="G" (click)="onLinkClick($event)"></app-button>
-      <app-button theme="ghost-white" label="Já tenho conta" size="G" (click)="goToPanel()">
-        <app-icon-exit icon-right class="text-white" />
-      </app-button>
+  <div #menuRef class="fixed inset-0 z-50 bg-black/60 flex justify-center items-start pt-24">
+    <div class="bg-white dark:bg-blue-violet-500 rounded-lg w-full p-9 flex flex-col gap-4 text-center shadow-xl">
+      <a href="#" class="text-cyan-blue-500 dark:text-gray-200 text-[18px] font-semibold"
+        (click)="onLinkClick($event)">Sobre</a>
+      <a href="#" class="text-cyan-blue-500 dark:text-gray-200 text-[18px] font-semibold"
+        (click)="onLinkClick($event)">Serviços</a>
+      <div class="px-6 flex flex-col justify-center items-center gap-4">
+        <app-button theme="secondary" label="Abrir minha conta" size="G" (click)="onLinkClick($event)"></app-button>
+        <app-button [theme]="themeService.isDarkMode() ? 'ghost-white' : 'primary'" label="Já tenho conta" size="G" (click)="goToPanel()">
+          <app-icon-exit icon-right class="text-white hover:dark:text-gray-200" />
+        </app-button>        
+      </div>
     </div>
   </div>
-</div>
 <!-- Menu logado Tablet -->
 } @else if(isLoggedIn && tablet) {
-<nav
-  class="absolute top-[70px] left-0 w-full bg-white  py-4 flex flex-row items-center justify-center gap-4 shadow z-50">
-  <a href="#" class="text-cyan-blue-500 text-sm font-normal w-full max-w-[131px] flex justify-center">Início</a>
-  <a href="#" class="text-cyan-blue-500 text-sm font-normal w-full max-w-[131px] flex justify-center">Transações</a>
-  <a href="#" class="text-cyan-blue-500 text-sm font-normal w-full max-w-[131px] flex justify-center">Meus Cartões</a>
-  <a href="#" class="text-cyan-blue-500 text-sm font-normal w-full max-w-[131px] flex justify-center">Configurações</a>
-  <!-- <a href="#" class="text-cyan-blue-500 text-sm font-normal w-full max-w-[131px] flex justify-center">Sair</a> -->
-</nav>
+  <nav class="absolute top-[70px] left-0 w-full bg-white py-4 flex flex-row items-center justify-center gap-4 shadow z-50">
+    <a
+      class="text-cyan-blue-500 dark:text-blue-violet-500 text-sm font-normal w-full max-w-[131px] flex justify-center cursor-pointer border-b-2 border-transparent transition-all
+        hover:border-cyan-blue-900 dark:hover:border-blue-violet-900"
+      [ngClass]="{ 'border-[#004d61] dark:border-blue-violet-500': isActive('/panel') }"
+    (click)="goToPanel()"
+    >
+      Início
+    </a>
+    <a
+      class="text-cyan-blue-500 dark:text-blue-violet-500 text-sm font-normal w-full max-w-[131px] flex justify-center cursor-pointer border-b-2 border-transparent transition-all
+        hover:border-cyan-blue-900 dark:hover:border-blue-violet-900"
+      [ngClass]="{ 'border-[#004d61] dark:border-blue-violet-500': isActive('/transactions') }"
+      (click)="goToTransactions()"
+    >
+      Transações
+    </a>
+    <a
+      class="text-cyan-blue-500 dark:text-blue-violet-500 text-sm font-normal w-full max-w-[131px] flex justify-center cursor-pointer border-b-2 border-transparent transition-all
+        hover:border-cyan-blue-900 dark:hover:border-blue-violet-900"
+      [ngClass]="{ 'border-[#004d61] dark:border-blue-violet-500': isActive('/cards') }"
+      (click)="goToCards()"
+    >
+      Meus Cartões
+    </a>
+    <a
+      class="text-cyan-blue-500 dark:text-blue-violet-500 text-sm font-normal w-full max-w-[131px] flex justify-center cursor-pointer border-b-2 border-transparent transition-all
+        hover:border-cyan-blue-900 dark:hover:border-blue-violet-900"
+      [ngClass]="{ 'border-[#004d61] dark:border-blue-violet-500': isActive('/configurations') }"
+      (click)="goToConfiguration()"
+    >
+      Configurações
+    </a>
+  </nav>
+
 <!-- Menu logado mobile -->
 } @else if(isLoggedIn && mobile && menuOpen) {
-<div class="absolute top-full left-0 bg-white w-full p-6 flex flex-col items-center gap-4 shadow-md z-50">
-  <a href="#" class="text-cyan-blue-500 hover:text-white hover:bg-cyan-blue-500 text-2xl font-normal p-2 w-full text-center transition-all rounded-lg">Início</a>
-  <a href="#" class="text-cyan-blue-500 hover:text-white hover:bg-cyan-blue-500 text-2xl font-normal p-2 w-full text-center transition-all rounded-lg">Transações</a>
-  <!-- <a href="#" class="text-cyan-blue-500 hover:text-white hover:bg-cyan-blue-500 text-2xl font-normal p-2 w-full text-center transition-all rounded-lg">Extrato</a> -->
-  <a href="#" class="text-cyan-blue-500 hover:text-white hover:bg-cyan-blue-500 text-2xl font-normal p-2 w-full text-center transition-all rounded-lg">Meus Cartões</a>
-  <a href="#" class="text-cyan-blue-500 hover:text-white hover:bg-cyan-blue-500 text-2xl font-normal p-2 w-full text-center transition-all rounded-lg">Configurações</a>
-  <!-- <a href="#" class="text-cyan-blue-500 hover:text-white hover:bg-cyan-blue-500 text-2xl font-normal p-2 w-full text-center transition-all rounded-lg">Sair</a> -->
-</div>
+  <div class="absolute top-full left-0 bg-white w-full p-6 flex flex-col items-center gap-4 shadow-md z-50">
+    <a
+      class="text-cyan-blue-500 dark:text-blue-violet-500 text-2xl font-normal p-2 w-full text-center transition-all rounded-lg cursor-pointer"
+      [ngClass]="{
+        'bg-cyan-blue-500 dark:bg-blue-violet-500 text-white dark:text-white font-bold ': isActive('/panel'),
+        'hover:text-white hover:bg-cyan-blue-900 dark:hover:text-white dark:hover:bg-blue-violet-900': !isActive('/panel')
+      }"
+      (click)="goToPanel()"
+    >
+      Início
+    </a>
+    <a
+      class="text-cyan-blue-500 dark:text-blue-violet-500 text-2xl font-normal p-2 w-full text-center transition-all rounded-lg cursor-pointer"
+      [ngClass]="{
+        'bg-cyan-blue-500 text-white dark:bg-blue-violet-500 dark:text-white font-bold': isActive('/transactions'),
+        'hover:text-white hover:bg-cyan-blue-900 dark:hover:text-white dark:hover:bg-blue-violet-900': !isActive('/transactions')
+      }"
+      (click)="goToTransactions()"
+    >
+      Transações
+    </a>
+    <a
+      class="text-cyan-blue-500 dark:text-blue-violet-500 text-2xl font-normal p-2 w-full text-center transition-all rounded-lg cursor-pointer"
+      [ngClass]="{
+        'bg-cyan-blue-500 text-white dark:bg-blue-violet-500 dark:text-white font-bold': isActive('/cards'),
+        'hover:text-white hover:bg-cyan-blue-900 dark:hover:text-white dark:hover:bg-blue-violet-900': !isActive('/cards')
+      }"
+      (click)="goToCards()"
+    >
+      Meus Cartões
+    </a>
+    <a
+      class="text-cyan-blue-500 dark:text-blue-violet-500 text-2xl font-normal p-2 w-full text-center transition-all rounded-lg cursor-pointer"
+      [ngClass]="{
+        'bg-cyan-blue-500 text-white dark:bg-blue-violet-500 dark:text-white font-bold': isActive('/configurations'),
+        'hover:text-white hover:bg-cyan-blue-900 dark:hover:text-white dark:hover:bg-blue-violet-900': !isActive('/configurations')
+      }"
+      (click)="goToConfiguration()"
+    >
+      Configurações
+    </a>
+  </div>
 }

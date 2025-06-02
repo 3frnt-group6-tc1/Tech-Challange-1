@@ -1,13 +1,11 @@
-<div class="p-6">
+<div class="p-4 sm:p-6 w-full max-w-full">
   <div *ngIf="isLoading" class="flex flex-col items-center justify-center p-8">
     <p class="text-gray-600">Carregando informações...</p>
   </div>
 
   <div *ngIf="!isLoading">
     <!-- Layout para telas maiores (Desktop) -->
-    <div
-      class="hidden sm:flex flex-col sm:flex-row justify-between items-start gap-6"
-    >
+    <div class="hidden sm:flex flex-col sm:flex-row justify-between items-start gap-6 w-full">
       <div>
         <h1 class="text-xl sm:text-2xl text-gray-900 font-bold">
           Olá, {{ userName }}!
@@ -61,7 +59,7 @@
     </div>
 
     <!-- Layout para telas pequenas (Mobile) -->
-    <div class="flex flex-col sm:hidden items-center text-center">
+    <div class="flex flex-col sm:hidden items-center text-center w-full">
       <div class="flex flex-col mb-4">
         <h1 class="text-xl text-gray-900 font-bold">Olá, {{ userName }}!</h1>
         <p class="text-gray-500 text-xs">{{ currentDate }}</p>
@@ -124,8 +122,8 @@
   [transactionData]="transactionData"
   [totalEntries]="totalEntries"
   [totalExits]="totalExits"
-  class="block px-6 pt-2 pb-12"
-></app-transaction-chart>
+  class="block px-6 pt-2 pb-12">
+</app-transaction-chart>
 
 <div
   *ngIf="errorMessage"

@@ -43,13 +43,7 @@ module.exports = {
       },
       backgroundImage: {
         'primary-gradient': 'linear-gradient(to bottom, #003C50 0%, #007B8F 50%, #a9c4c9 100%);',
-        // 'primary-gradient-dark': 'linear-gradient(to bottom, #2a1155 0%, #653DF5 50%, #7D70BA 100%)',
-        // 'primary-gradient-dark': 'linear-gradient(to bottom, #2a1155 0%, #653DF5 50%, #443C68 100%)',
-        // 'primary-gradient-dark': 'linear-gradient(to bottom, #2a1155 0%, #653DF5 85%, #FC466B 100%)',
         'primary-gradient-dark': 'linear-gradient(to bottom, #020024 0%, #090979 50%, #00D4FF 100%)',
-
-
-
         'secondary-gradient': 'linear-gradient(to bottom, #dee9ea, #ffffff)',
       },
       fontFamily: {
@@ -74,17 +68,14 @@ module.exports = {
         "green-600": "#157f40",
         "red-600": "#ce3426",
 
-        "green-darkmode": "#47A138",
-        "green-darkmode-900": "#2F7027",
-
-
-
         "yellow-500": "#E9C300",
         "yellow-900": "#ba9c00",
 
         "brown-500": "#80440D",
         "brown-900": "#6b3c0a",
         
+        "blue-violet-25":"#E8E9ED",
+        "blue-violet-50":"#DDDEE4",
         "blue-violet-100": "#8589D6",
         "blue-violet-500": "#090979",
         "blue-violet-900": "#020024",

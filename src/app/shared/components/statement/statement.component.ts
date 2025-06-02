@@ -114,7 +114,6 @@ export class StatementComponent implements OnInit, OnDestroy {
       next: (transactions) => {
         this.transactions = transactions.filter((t) => t.id);
         this.isLoading = false;
-        console.log('Loaded transactions:', this.transactions);
       },
       error: (error) => {
         this.isLoading = false;
@@ -174,7 +173,6 @@ export class StatementComponent implements OnInit, OnDestroy {
     this.transactionService.delete(id).subscribe({
       next: () => {
         // The transaction will be removed via the subscription to transactionDeleted$
-        console.log('Transaction deleted', id);
       },
       error: (error) => {
         console.error('Error deleting transaction:', error);

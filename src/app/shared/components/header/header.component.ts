@@ -1,7 +1,10 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 import { ThemeService } from '../../services/Theme/theme.service'
+import { UserService } from '../../services/User/user-service';
 
 import { IconExitComponent } from '../../assets/icons/icon-exit.component';
 import { ButtonComponent } from '../button/button.component';
@@ -30,18 +33,25 @@ import { MenuComponent } from "../menu/menu.component";
     IconLogoComponent,
     IconArrowdownComponent,
     MenuComponent
-],
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  userId: string = systemConfig.userId;
   isLoggedIn: boolean = true;
   mobile: boolean = false;
   tablet: boolean = false;
   menuOpen: boolean = false;
 
+  userName: string = '';
+
+  isLoading: boolean = true;
+
   constructor(
-    public themeService: ThemeService
+    public themeService: ThemeService,
+    private readonly router: Router,
+    private readonly userService: UserService,
   ) {
     const path = window.location.pathname;
     this.isLoggedIn = systemConfig.loggedPages.includes(path);
@@ -50,6 +60,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @ViewChild('menuRef') menuRef?: ElementRef;
   private resizeListener = () => this.checkScreen();
   private clickListener!: (event: MouseEvent) => void;
+  private routerEventsSubscription: any;
 
   ngOnInit() {
     this.checkScreen();
@@ -61,13 +72,44 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (this.menuOpen) {
       document.body.classList.add('overflow-hidden');
     }
+
+    this.routerEventsSubscription = this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.updateLoginState(event.urlAfterRedirects);
+    });
+    this.fetchUser();
+    this.updateLoginState(this.router.url);
   }
 
   ngOnDestroy(): void {
     window.removeEventListener('resize', this.resizeListener);
     document.removeEventListener('click', this.clickListener, true);
     this.enableScroll();
+
+    if (this.routerEventsSubscription) {
+      this.routerEventsSubscription.unsubscribe();
+    }
   }
+
+  private updateLoginState(url: string) {
+    this.isLoggedIn = systemConfig.loggedPages.includes(url);
+  }
+
+  fetchUser(): void {
+    this.isLoading = true;
+    this.userService.getById(systemConfig.userId).subscribe({
+      next: (response: any) => {
+        console.log('Usuário logado:', response);
+        this.userName = response.name;
+      },
+      error: (error: any) => {
+        this.isLoading = false;
+        console.error('Error fetching user name:', error);
+      }
+    });
+  }
+
 
   toggleDarkMode() {
     this.themeService.toggleDarkMode();
@@ -79,7 +121,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.tablet = width >= 640 && width <= 1279;
   }
 
-  toggleMenu(): void {
+  toggleMenu(event?: MouseEvent): void {
+
+    if (event) event.stopPropagation();
+
     this.menuOpen = !this.menuOpen;
     if (this.menuOpen) {
       document.body.classList.add('overflow-hidden');
@@ -97,10 +142,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     const target = event.target as Node;
     const menuElement = this.menuRef?.nativeElement;
+    const hamburgerButton = document.querySelector('.app-icon-hamburger')?.parentElement;
 
-    if (menuElement && !menuElement.contains(target)) {
-      this.closeMenu();
-    }
+    if (menuElement && menuElement.contains(target)) return;
+
+    if (hamburgerButton && hamburgerButton.contains(target)) return;
+
+    this.closeMenu();
   }
 
   get showLandingMobileMenu(): boolean {
@@ -131,8 +179,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.menuRef = ref;
   }
 
-  private closeMenu(): void {
+  closeMenu(): void {
     this.menuOpen = false;
     this.enableScroll();
   }
+
+  goToPanel(): void {
+    this.router.navigate(['/panel']);
+  }
+
+
 }

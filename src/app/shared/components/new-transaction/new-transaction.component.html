@@ -1,4 +1,4 @@
-<div class="rounded-xl shadow p-6 bg-white">
+<div class="rounded-xl shadow p-6 bg-white h-screen">
   <div class="pb-6">
     <div class="border-b-2">
       <app-text
@@ -34,13 +34,13 @@
         <div class="mb-4">
           <div class="relative inline-block w-full">
             <div
-              class="w-full bg-gray-100 border border-cyan-blue-500 text-cyan-blue-500 font-lato font-medium rounded-md p-4 flex items-center max-w-[360px]"
+              class="w-full bg-gray-100 border border-cyan-blue-500 dark:border-blue-violet-500  text-cyan-blue-500 dark:text-blue-violet-500 font-lato font-medium rounded-md p-4 flex items-center max-w-[360px]"
             >
-              <span class="text-cyan-blue-500 mr-2">R$</span>
+              <span class="text-cyan-blue-500  dark:text-blue-violet-500 mr-2">R$</span>
               <input
                 type="text"
                 placeholder="00,00"
-                class="bg-transparent w-full outline-none text-cyan-blue-500 placeholder-cyan-blue-500 placeholder-opacity-70"
+                class="bg-transparent w-full outline-none text-cyan-blue-500 dark:text-blue-violet-500 placeholder-cyan-blue-500 dark:placeholder-blue-violet-500 placeholder-opacity-70"
                 [(ngModel)]="valorTransacao"
                 (input)="onAmountChange($event)"
                 autocomplete="off"
@@ -55,7 +55,7 @@
           <input
             type="text"
             placeholder="Descrição da transação"
-            class="w-full max-w-[360px] bg-gray-100 border border-cyan-blue-500 text-cyan-blue-500 font-lato font-medium rounded-md p-4"
+            class="w-full max-w-[360px] bg-gray-100 border border-cyan-blue-500 dark:border-blue-violet-500 text-cyan-blue-500 dark:text-blue-violet-500 font-lato font-medium rounded-md p-4"
             [(ngModel)]="newTransaction.description"
             (input)="onDescriptionChange($event)"
           />

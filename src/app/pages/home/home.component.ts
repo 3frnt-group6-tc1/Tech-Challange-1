@@ -7,12 +7,11 @@ import { IconGiftComponent } from '../../shared/assets/icons/icon-gift.component
 import { IconOnComponent } from '../../shared/assets/icons/icon-on.component';
 import { IconStarComponent } from '../../shared/assets/icons/icon-star.component';
 import { IconNotebookComponent } from '../../shared/assets/icons/icon-notebook.component';
-import { FooterComponent } from '../../shared/components/footer/footer.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, TextComponent, FooterComponent],
+  imports: [CommonModule, TextComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

@@ -1,7 +1,7 @@
-<footer class="bg-cyan-blue-500 dark:dark:bg-purple-100">
+<footer class="bg-cyan-blue-500 dark:dark:bg-blue-violet-500">
   @if(!isLoggedIn) {
   <div class="container">
-    <div class="flex flex-col lg:flex-row p-12 justify-center text-center gap-9">
+    <div class="flex flex-col lg:flex-row p-12 justify-center text-center xl:text-start gap-9">
       <div class="flex flex-col gap-4 w-full lg:w-72">
         <app-text variant="text-regular" as="p" color="text-white dark:text-gray-200">
           Serviços
@@ -62,13 +62,13 @@
     </div>
   </div>
   } @else {
-  <div class="flex p-12 justify-between">
-    <app-text variant="text-small" as="p" color="text-white dark:text-gray-200"
-      >V.{{ version }}</app-text
-    >
-    <app-text variant="text-small-bold" as="p" color="text-white dark:text-gray-200"
-      >© Copyright {{ year }} {{ company }}</app-text
-    >
+  <div class="flex py-5 px-9 justify-between">
+    <app-text variant="text-small" as="p" color="text-white dark:text-gray-200">
+      V.{{ version }}
+    </app-text>
+    <app-text variant="text-small-bold" as="p" color="text-white dark:text-gray-200">
+      © Copyright {{ year }} {{ company }}
+    </app-text>
   </div>
   }
 </footer>

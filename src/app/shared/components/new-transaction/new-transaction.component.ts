@@ -127,8 +127,6 @@ export class NewTransactionComponent {
 
     this.transactionService.create(transaction).subscribe({
       next: (createdTransaction) => {
-        console.log('Transação criada:', createdTransaction);
-
         const transactionTypeLabel = this.getTransactionTypeLabel(transaction.type);
 
         this.submitStatus = {

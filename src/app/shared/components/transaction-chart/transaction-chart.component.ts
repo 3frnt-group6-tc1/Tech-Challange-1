@@ -62,7 +62,6 @@ export class TransactionChartComponent implements OnInit {
     if (maxYAxisValue === 0) return 0;
     const proportion = value / maxYAxisValue;
     const height = proportion * this.chartHeight;
-    console.log( `Calculating bar height for value ${value}: maxYAxisValue = ${maxYAxisValue}, proportion = ${proportion}, height = ${height}`);
     return height;
   }
 

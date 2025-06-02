@@ -43,6 +43,10 @@ import { BrlPipe } from '../../pipes/brl.pipe';
 })
 export class StatementComponent implements OnInit, OnDestroy {
   @Input() showDetails = true;
+  @Input() showAllTransactions = false;
+  @Input() customTitle = 'Transações';
+  @Input() showLastTransactionsSubtitle = false;
+  @Input() swapColumns = false;
   transactions: Transaction[] = [];
   transactionLabels = TRANSACTION_TYPE_LABELS;
   isLoading = false;
@@ -55,9 +59,10 @@ export class StatementComponent implements OnInit, OnDestroy {
   transactionToEdit: Transaction | null = null;
 
   get recentTransactions(): Transaction[] {
-    return this.transactions
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-      .slice(0, 6);
+    const sortedTransactions = this.transactions
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+    return this.showAllTransactions ? sortedTransactions : sortedTransactions.slice(0, 6);
   }
 
   constructor(
@@ -68,33 +73,27 @@ export class StatementComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadUserTransactions();
 
-    // Listen for created transactions
     this.transactionEventService.transactionCreated$
       .pipe(takeUntil(this.destroy$))
       .subscribe((transaction) => {
         if (transaction.id_user === systemConfig.userId) {
-          // Add the new transaction to our list
           this.transactions = [transaction, ...this.transactions];
         }
       });
 
-    // Listen for updated transactions
     this.transactionEventService.transactionUpdated$
       .pipe(takeUntil(this.destroy$))
       .subscribe((transaction) => {
         if (transaction.id_user === systemConfig.userId) {
-          // Update the transaction in our list
           this.transactions = this.transactions.map((t) =>
             t.id === transaction.id ? transaction : t
           );
         }
       });
 
-    // Listen for deleted transactions
     this.transactionEventService.transactionDeleted$
       .pipe(takeUntil(this.destroy$))
       .subscribe((transactionId) => {
-        // Remove the transaction from our list
         this.transactions = this.transactions.filter(
           (t) => t.id !== transactionId
         );
@@ -122,7 +121,6 @@ export class StatementComponent implements OnInit, OnDestroy {
     });
   }
 
-  // Helper methods for template use
   isDeposit(transaction: Transaction): boolean {
     return isCredit(transaction.type);
   }
@@ -173,6 +171,7 @@ export class StatementComponent implements OnInit, OnDestroy {
     this.transactionService.delete(id).subscribe({
       next: () => {
         // The transaction will be removed via the subscription to transactionDeleted$
+        console.log('Transaction deleted', id);
       },
       error: (error) => {
         console.error('Error deleting transaction:', error);

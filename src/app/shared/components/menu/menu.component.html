@@ -2,10 +2,12 @@
 @if(!isLoggedIn && (mobile || tablet) && menuOpen) {
   <div #menuRef class="fixed inset-0 z-50 bg-black/60 flex justify-center items-start pt-24">
     <div class="bg-white dark:bg-blue-violet-500 rounded-lg w-full p-9 flex flex-col gap-4 text-center shadow-xl">
-      <a href="#" class="text-cyan-blue-500 dark:text-gray-200 text-[18px] font-semibold"
-        (click)="onLinkClick($event)">Sobre</a>
-      <a href="#" class="text-cyan-blue-500 dark:text-gray-200 text-[18px] font-semibold"
-        (click)="onLinkClick($event)">Serviços</a>
+      <a href="#sobre" class="text-cyan-blue-500 dark:text-gray-200 text-[18px] font-semibold">
+        Sobre
+      </a>
+      <a href="#servico" class="text-cyan-blue-500 dark:text-gray-200 text-[18px] font-semibold">
+        Serviços
+      </a>
       <div class="px-6 flex flex-col justify-center items-center gap-4">
         <app-button theme="secondary" label="Abrir minha conta" size="G" (click)="onLinkClick($event)"></app-button>
         <app-button [theme]="themeService.isDarkMode() ? 'ghost-white' : 'primary'" label="Já tenho conta" size="G" (click)="goToPanel()">

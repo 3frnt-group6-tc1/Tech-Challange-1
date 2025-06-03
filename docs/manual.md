@@ -115,42 +115,42 @@ A seguir, apresentamos exemplos visuais das principais telas do sistema para fac
 
 <!-- Substitua pelo print real quando disponível -->
 
-![Tela de Login](../images/tela_login_exemplo.png)
+![Tela de Login](em construção...)
 _Exemplo de tela de autenticação do usuário._
 
 ### Tela Principal
 
 <!-- Substitua pelo print real quando disponível -->
 
-![Tela Inicial](../images/tela_inicial_exemplo.png)
+![Tela Inicial](./images/tela_inicial_exemplo.png)
 _Resumo do saldo, extrato das últimas transações e gráficos do mês._
 
 ### Tela de Listagem de Transações
 
 <!-- Substitua pelo print real quando disponível -->
 
-![Listagem de Transações](../images/tela_listagem_exemplo.png)
+![Listagem de Transações](./images/tela_listagem_exemplo.png)
 _Visualização de todas as transações cadastradas, com opções de editar e excluir._
 
 ### Modal de Edição e Exclusão de Transação
 
 <!-- Substitua pelo print real quando disponível -->
 
-![Cadastro de Transação](../images/tela_cadastro_exemplo.png)
+![Cadastro de Transação](./images/tela_cadastro_exemplo.png)
 _Formulário para adicionar ou editar uma transação financeira._
 
 ### Tela de Meus Cartões
 
 <!-- Substitua pelo print real quando disponível -->
 
-![Tela de Configurações](../images/tela_meus_cartoes_exemplo.png)
+![Tela de Configurações](./images/tela_meus_cartoes_exemplo.png)
 _Cartões do usuário logado._
 
 ### Tela de Configurações
 
 <!-- Substitua pelo print real quando disponível -->
 
-![Tela de Configurações](../images/tela_configuracoes_exemplo.png)
+![Tela de Configurações](./images/tela_configuracoes_exemplo.png)
 _Configurações de preferências do usuário e opções do sistema._
 
 ---

@@ -28,7 +28,7 @@ Este projeto consiste no desenvolvimento de uma aplicação web para **gerenciam
 - **Estilização:** Tailwind CSS
 - **Documentação de Componentes:** Storybook
 - **Design System:** Figma ([Visualizar Figma](https://www.figma.com/design/x4g46ODcpZOemqLp0FYOlO/Bytebank?node-id=0-1&p=f))
-- **Backend e Base de Dados:** JSON Server
+- **Backend:** JSON Server
 - **Base de Dados:** JSON
 
 ---
@@ -59,7 +59,7 @@ npm install
 3. **Execute a API backend:**
 
 ```bash
-npm server
+npm run server
 ```
 
 4. **Execute o projeto em ambiente de desenvolvimento:**
@@ -89,6 +89,14 @@ npm run storybook
 ```bash
 http://localhost:6006
 ```
+
+### ✅ Observações
+
+## Login e Usuário
+
+- Atualmente, o sistema não possui tela de login nem autenticação de usuários. O acesso é direto à landing page e todas as funcionalidades estão disponíveis sem restrição de acesso.
+- Para alterar o usuário ativo no sistema, é necessário modificar manualmente o valor da propriedade `userId` no arquivo `src/app/app.config.ts`. Basta substituir o valor atual pelo identificador desejado (por exemplo, 'u1', 'u2', etc.).
+- Futuramente, funcionalidades de autenticação e gerenciamento de usuários poderão ser implementadas para maior segurança e personalização.
 
 ---
 

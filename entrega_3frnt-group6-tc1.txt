@@ -20,7 +20,7 @@ Danyllo Silva
 Código Fonte
 https://github.com/3frnt-group6-tc1/Tech-Challange-1
 
-Vídeo de Apresentação do Projeto
+Vídeo de Demonstração
 <url-do-video>
 
 Vídeo de Explicação

@@ -18,7 +18,7 @@
       class="w-full md:w-1/2 md:pr-4 flex flex-col items-center md:items-start md:justify-start"
     >
       <!-- Inputs e botão -->
-      <div class="w-full max-w-sm md:max-w-none mt-8">
+      <div class="w-full max-w-sm md:max-w-none">
         <!-- Input de tipo de transação -->
         <div class="mb-4">
           <app-input
@@ -78,7 +78,7 @@
           theme="primary"
           size="GG"
           label="Concluir Transação"
-          class="w-full max-w-[360px]"
+          class="w-full max-w-full sm:max-w-[360px]"
           (click)="createTransaction()"
         >
         </app-button>

@@ -115,7 +115,7 @@ A seguir, apresentamos exemplos visuais das principais telas do sistema para fac
 
 <!-- Substitua pelo print real quando disponível -->
 
-![Tela de Login](../images/tela_login_exemplo.png)
+![Tela de Login](em construção...)
 _Exemplo de tela de autenticação do usuário._
 
 ### Tela Principal

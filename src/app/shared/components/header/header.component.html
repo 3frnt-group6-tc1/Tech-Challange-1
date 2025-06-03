@@ -28,7 +28,7 @@
               <app-icon-exit icon-right class="text-white dark:text-gray-200 hover:dark:text-gray-250" />
             </app-button>
 
-            <app-button (click)="toggleDarkMode()" size="P" label="">
+            <app-button (click)="toggleDarkMode()" size="P" label="" [theme]="'primary'">
               <app-icon-darkmode icon-left class="text-white dark:text-gray-200"></app-icon-darkmode>
             </app-button>
 
@@ -39,7 +39,7 @@
               <app-icon-logo class="text-white m-auto"></app-icon-logo>
             </a>
             <div class="flex gap-6">
-              <app-button (click)="toggleDarkMode()" size="P" label="">
+              <app-button (click)="toggleDarkMode()" size="P" label="" >
                 <app-icon-darkmode icon-left class="text-white"></app-icon-darkmode>
               </app-button>
               <app-button size="P" label="" (click)="toggleMenu()">

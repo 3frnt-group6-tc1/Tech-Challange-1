@@ -1,0 +1,27 @@
+Resumo
+
+O Sistema de Gestão Financeira é uma aplicação web desenvolvida para facilitar o gerenciamento financeiro pessoal,
+permitindo aos usuários visualizar, adicionar, editar e excluir transações de forma simples e intuitiva.
+A solução utiliza Angular para o desenvolvimento front-end, Tailwind CSS para estilização e Figma para o design,
+garantindo uma experiência moderna e responsiva.
+
+O projeto conta com uma interface baseada em Design System, documentação de componentes via Storybook e integração com um
+backend simulado por JSON Server, proporcionando um ambiente completo para testes e validação das funcionalidades.
+O objetivo principal é oferecer uma ferramenta eficiente para controle financeiro, com foco em acessibilidade, organização e facilidade de uso.
+
+A equipe de desenvolvimento é composta por cinco integrantes:
+Matheus Althman
+João Victor
+Vinícius Batista
+Fernando Borges
+Danyllo Silva
+
+
+Código Fonte
+https://github.com/3frnt-group6-tc1/Tech-Challange-1
+
+Vídeo de Apresentação do Projeto
+<url-do-video>
+
+Vídeo de Explicação
+<url-do-video>

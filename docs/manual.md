@@ -122,14 +122,14 @@ _Exemplo de tela de autenticação do usuário._
 
 <!-- Substitua pelo print real quando disponível -->
 
-![Tela Inicial](../images/tela_inicial_exemplo.png)
+![Tela Inicial](./images/tela_inicial_exemplo.png)
 _Resumo do saldo, extrato das últimas transações e gráficos do mês._
 
 ### Tela de Listagem de Transações
 
 <!-- Substitua pelo print real quando disponível -->
 
-![Listagem de Transações](../images/tela_listagem_exemplo.png)
+![Listagem de Transações](./images/tela_listagem_exemplo.png)
 _Visualização de todas as transações cadastradas, com opções de editar e excluir._
 
 ### Modal de Edição e Exclusão de Transação

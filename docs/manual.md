@@ -136,7 +136,7 @@ _Visualização de todas as transações cadastradas, com opções de editar e e
 
 <!-- Substitua pelo print real quando disponível -->
 
-![Cadastro de Transação](../images/tela_cadastro_exemplo.png)
+![Cadastro de Transação](./images/tela_cadastro_exemplo.png)
 _Formulário para adicionar ou editar uma transação financeira._
 
 ### Tela de Meus Cartões

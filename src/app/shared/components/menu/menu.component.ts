@@ -76,15 +76,8 @@ export class MenuComponent implements AfterViewInit, OnInit, OnDestroy {
     this.router.navigate(['/configurations']);
   }
 
-  // isActive(path: string): boolean {
-  //   const result = this.router.url.startsWith(path);
-  //   return result;
-  // }
-
   isActive(path: string): boolean {
-    // Remove query params e fragment
-    const cleanUrl = this.router.url.split('?')[0].split('#')[0];
-    return cleanUrl === path || cleanUrl.startsWith(path + '/');
+    return this.router.url === path || this.router.url.startsWith(path + '/');
   }
 
   get themeButton(): string {

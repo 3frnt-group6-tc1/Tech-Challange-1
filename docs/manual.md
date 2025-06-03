@@ -33,7 +33,7 @@ O sistema foi desenvolvido como parte do Tech Challenge do curso de p√≥s-gradua√
    ```
 3. Execute a API backend:
    ```bash
-   npm server
+   npm run server
    ```
 4. Execute o projeto em ambiente de desenvolvimento:
    ```bash

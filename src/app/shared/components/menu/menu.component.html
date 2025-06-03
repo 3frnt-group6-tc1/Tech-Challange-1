@@ -12,7 +12,7 @@
         <app-button theme="secondary" label="Abrir minha conta" size="G" (click)="onLinkClick($event)"></app-button>
         <app-button [theme]="themeService.isDarkMode() ? 'ghost-white' : 'primary'" label="Já tenho conta" size="G" (click)="goToPanel()">
           <app-icon-exit icon-right class="text-white hover:dark:text-gray-200" />
-        </app-button>        
+        </app-button>
       </div>
     </div>
   </div>
@@ -55,7 +55,8 @@
 
 <!-- Menu logado mobile -->
 } @else if(isLoggedIn && mobile && menuOpen) {
-  <div class="absolute top-full left-0 bg-white w-full p-6 flex flex-col items-center gap-4 shadow-md z-50">
+  <div class="fixed inset-0 z-50 bg-black/60 flex flex-col justify-start items-center">
+    <div class="bg-white dark:bg-blue-violet-100 w-full mt-[70px] p-6 flex flex-col items-center gap-4 shadow-md">
     <a
       class="text-cyan-blue-500 dark:text-blue-violet-500 text-2xl font-normal p-2 w-full text-center transition-all rounded-lg cursor-pointer"
       [ngClass]="{
@@ -97,4 +98,5 @@
       Configurações
     </a>
   </div>
+</div>
 }

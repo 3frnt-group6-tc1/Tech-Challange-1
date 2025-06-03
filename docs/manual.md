@@ -143,14 +143,14 @@ _Formulário para adicionar ou editar uma transação financeira._
 
 <!-- Substitua pelo print real quando disponível -->
 
-![Tela de Configurações](../images/tela_meus_cartoes_exemplo.png)
+![Tela de Configurações](./images/tela_meus_cartoes_exemplo.png)
 _Cartões do usuário logado._
 
 ### Tela de Configurações
 
 <!-- Substitua pelo print real quando disponível -->
 
-![Tela de Configurações](../images/tela_configuracoes_exemplo.png)
+![Tela de Configurações](./images/tela_configuracoes_exemplo.png)
 _Configurações de preferências do usuário e opções do sistema._
 
 ---

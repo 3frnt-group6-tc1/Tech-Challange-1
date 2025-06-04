@@ -21,7 +21,4 @@ Código Fonte
 https://github.com/3frnt-group6-tc1/Tech-Challange-1
 
 Vídeo de Demonstração
-<url-do-video>
-
-Vídeo de Explicação
-<url-do-video>
+https://drive.google.com/file/d/1zzYfn_8KjUOIu6Qk3TpjuPGHIpH9UglJ/view?usp=drive_link

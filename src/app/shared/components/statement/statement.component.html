@@ -26,6 +26,68 @@
     </app-text>
   </div>
 
+  <form
+    *ngIf="showAllTransactions"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 pt-4"
+  >
+    <input
+      type="text"
+      class="border rounded p-2 text-sm w-full"
+      placeholder="Buscar por descrição"
+      [(ngModel)]="filters.description"
+      name="description"
+    />
+
+    <select
+      class="border rounded p-2 text-sm w-full"
+      [(ngModel)]="filters.type"
+      name="type"
+    >
+      <option value="">Tipo</option>
+      <option value="credit">Crédito</option>
+      <option value="debit">Débito</option>
+    </select>
+
+    <select
+      class="border rounded p-2 text-sm w-full"
+      [(ngModel)]="filters.category"
+      name="category"
+    >
+      <option value="">Categoria</option>
+      <option
+        *ngFor="let label of transactionTypeKeys"
+        [value]="transactionLabels[label]"
+      >
+        {{ label }}
+      </option>
+    </select>
+
+    <input
+      type="number"
+      class="border rounded p-2 text-sm w-full"
+      placeholder="Valor mínimo"
+      [(ngModel)]="filters.minValue"
+      name="minValue"
+    />
+
+    <input
+      type="number"
+      class="border rounded p-2 text-sm w-full"
+      placeholder="Valor máximo"
+      [(ngModel)]="filters.maxValue"
+      name="maxValue"
+    />
+
+    <div class="flex gap-2">
+      <input
+        type="date"
+        class="border rounded p-2 text-sm w-full"
+        [(ngModel)]="filters.date"
+        name="date"
+      />
+    </div>
+  </form>
+
   <div *ngIf="isLoading" class="text-center py-4">
     <app-text color="text-gray-600">Carregando transações...</app-text>
   </div>

@@ -22,6 +22,7 @@ import { systemConfig } from '../../../app.config';
 import { TransactionEventService } from '../../services/TransactionEvent/transaction-event.service';
 import { IconArrowRightComponent } from '../../assets/icons/icon-arrow-right.component';
 import { BrlPipe } from '../../pipes/brl.pipe';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-statement',
@@ -36,7 +37,9 @@ import { BrlPipe } from '../../pipes/brl.pipe';
     IconArrowRightComponent,
     DeleteModalComponent,
     EditModalComponent,
-    BrlPipe
+    BrlPipe,
+    FormsModule
+
   ],
   templateUrl: './statement.component.html',
   styleUrls: ['./statement.component.scss'],
@@ -58,12 +61,70 @@ export class StatementComponent implements OnInit, OnDestroy {
   isEditModalOpen = false;
   transactionToEdit: Transaction | null = null;
 
-  get recentTransactions(): Transaction[] {
-    const sortedTransactions = this.transactions
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  filters = {
+    description: '',
+    type: '',
+    category: '',
+    minValue: null as number | null,
+    maxValue: null as number | null,
+    date: ''
+  };
 
-    return this.showAllTransactions ? sortedTransactions : sortedTransactions.slice(0, 6);
+  get transactionTypeKeys(): string[] {
+    return Object.keys(this.transactionLabels);
   }
+
+  // get recentTransactions(): Transaction[] {
+  //   const sortedTransactions = this.transactions
+  //     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  //   return this.showAllTransactions ? sortedTransactions : sortedTransactions.slice(0, 6);
+  // }
+
+  get recentTransactions(): Transaction[] {
+    let filtered = [...this.transactions];
+
+    if (this.filters.description) {
+      filtered = filtered.filter(t =>
+        t.description?.toLowerCase().includes(this.filters.description.toLowerCase())
+      );
+    }
+
+    if (this.filters.type) {
+      filtered = filtered.filter(t =>
+        this.filters.type === 'credit' ? isCredit(t.type) : isDebit(t.type)
+      );
+    }
+
+    if (this.filters.category) {
+      filtered = filtered.filter(t => t.type === this.filters.category);
+    }
+
+    if (this.filters.minValue !== null) {
+      filtered = filtered.filter(t => t.amount >= this.filters.minValue!);
+    }
+
+    if (this.filters.maxValue !== null) {
+      filtered = filtered.filter(t => t.amount <= this.filters.maxValue!);
+    }
+
+    if (this.filters.date) {
+      filtered = filtered.filter(t => {
+        const transactionDate = new Date(t.date);
+        const selectedDate = new Date(this.filters.date);
+        return (
+          transactionDate.getFullYear() === selectedDate.getFullYear() &&
+          transactionDate.getMonth() === selectedDate.getMonth() &&
+          transactionDate.getDate() === selectedDate.getDate()
+        );
+      });
+    }
+
+    filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+    return this.showAllTransactions ? filtered : filtered.slice(0, 6);
+  }
+
 
   constructor(
     private transactionService: TransactionService,

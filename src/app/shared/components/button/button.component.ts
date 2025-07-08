@@ -14,7 +14,7 @@ export class ButtonComponent {
     | 'outline-cyan-blue'
     | 'ghost-cyan-blue'
     | 'ghost-white' = 'primary';
-  @Input() size: 'P' | 'G' | 'GG' = 'G';
+  @Input() size: 'PP' | 'P' | 'G' | 'GG' = 'G';
   @Input() disabled: boolean = false;
   @Input() label: string = 'Button';
   @Input() iconPosition: 'left' | 'right' = 'left';

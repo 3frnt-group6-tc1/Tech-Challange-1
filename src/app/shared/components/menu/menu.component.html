@@ -20,9 +20,12 @@
 } @else if(isLoggedIn && tablet) {
   <nav class="absolute top-[70px] left-0 w-full bg-white py-4 flex flex-row items-center justify-center gap-4 shadow z-50">
     <a
-      class="text-cyan-blue-500 dark:text-blue-violet-500 text-sm font-normal w-full max-w-[131px] flex justify-center cursor-pointer border-b-2 border-transparent transition-all
-        hover:border-cyan-blue-900 dark:hover:border-blue-violet-900"
-      [ngClass]="{ 'border-[#004d61] dark:border-blue-violet-500': isActive('/panel') }"
+      class="text-cyan-blue-500 dark:text-blue-violet-500 text-sm font-normal w-full max-w-[131px] flex justify-center cursor-pointer border-b-2  transition-all
+         hover:border-cyan-blue-900 dark:hover:border-blue-violet-900"
+      [ngClass]="{
+        'border-cyan-blue-500 dark:border-blue-violet-500': isActive('/panel'),
+        'border-transparent': !isActive('/panel')
+      }"
     (click)="goToPanel()"
     >
       Início
@@ -30,7 +33,7 @@
     <a
       class="text-cyan-blue-500 dark:text-blue-violet-500 text-sm font-normal w-full max-w-[131px] flex justify-center cursor-pointer border-b-2 border-transparent transition-all
         hover:border-cyan-blue-900 dark:hover:border-blue-violet-900"
-      [ngClass]="{ 'border-[#004d61] dark:border-blue-violet-500': isActive('/transactions') }"
+      [ngClass]="{ 'border-cyan-blue-500 dark:border-blue-violet-500': isActive('/transactions') }"
       (click)="goToTransactions()"
     >
       Transações
@@ -38,7 +41,7 @@
     <a
       class="text-cyan-blue-500 dark:text-blue-violet-500 text-sm font-normal w-full max-w-[131px] flex justify-center cursor-pointer border-b-2 border-transparent transition-all
         hover:border-cyan-blue-900 dark:hover:border-blue-violet-900"
-      [ngClass]="{ 'border-[#004d61] dark:border-blue-violet-500': isActive('/cards') }"
+      [ngClass]="{ 'border-cyan-blue-500 dark:border-blue-violet-500': isActive('/cards') }"
       (click)="goToCards()"
     >
       Meus Cartões
@@ -46,7 +49,7 @@
     <a
       class="text-cyan-blue-500 dark:text-blue-violet-500 text-sm font-normal w-full max-w-[131px] flex justify-center cursor-pointer border-b-2 border-transparent transition-all
         hover:border-cyan-blue-900 dark:hover:border-blue-violet-900"
-      [ngClass]="{ 'border-[#004d61] dark:border-blue-violet-500': isActive('/configurations') }"
+      [ngClass]="{ 'border-cyan-blue-500 dark:border-blue-violet-500': isActive('/configurations') }"
       (click)="goToConfiguration()"
     >
       Configurações

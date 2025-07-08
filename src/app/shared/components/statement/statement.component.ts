@@ -16,6 +16,7 @@ import {
   isCredit,
   isDebit,
   TRANSACTION_TYPE_LABELS,
+  Attachment,
 } from '../../models/transaction';
 import { TransactionService } from '../../services/Transaction/transaction-service';
 import { systemConfig } from '../../../app.config';
@@ -23,6 +24,7 @@ import { TransactionEventService } from '../../services/TransactionEvent/transac
 import { IconArrowRightComponent } from '../../assets/icons/icon-arrow-right.component';
 import { BrlPipe } from '../../pipes/brl.pipe';
 import { FormsModule } from '@angular/forms';
+import { IconClipComponent } from "../../assets/icons/icon-clip.component";
 
 @Component({
   selector: 'app-statement',
@@ -38,9 +40,9 @@ import { FormsModule } from '@angular/forms';
     DeleteModalComponent,
     EditModalComponent,
     BrlPipe,
-    FormsModule
-
-  ],
+    FormsModule,
+    IconClipComponent
+],
   templateUrl: './statement.component.html',
   styleUrls: ['./statement.component.scss'],
 })
@@ -73,13 +75,6 @@ export class StatementComponent implements OnInit, OnDestroy {
   get transactionTypeKeys(): string[] {
     return Object.keys(this.transactionLabels);
   }
-
-  // get recentTransactions(): Transaction[] {
-  //   const sortedTransactions = this.transactions
-  //     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-  //   return this.showAllTransactions ? sortedTransactions : sortedTransactions.slice(0, 6);
-  // }
 
   get recentTransactions(): Transaction[] {
     let filtered = [...this.transactions];
@@ -276,4 +271,33 @@ export class StatementComponent implements OnInit, OnDestroy {
       this.openEditModal(transaction);
     }
   }
+
+  openFirstAttachment(attachments?: Attachment[]): void {
+    if (!attachments || attachments.length === 0) return;
+
+    const first = attachments[0];
+
+    const fileUrl = first.data;
+
+    const newTab = window.open();
+    if (newTab) {
+      if (first.type.startsWith('image/')) {
+        newTab.document.write(`
+          <html>
+            <head><title>${first.name}</title></head>
+            <body style="margin:0;">
+              <img src="${fileUrl}" style="width:100%;height:auto;display:block;" />
+            </body>
+          </html>
+        `);
+      } else {
+        newTab.location.href = fileUrl;
+      }
+      newTab.document.close();
+    } else {
+      console.error("Não foi possível abrir a nova aba.");
+    }
+  }
+
+
 }

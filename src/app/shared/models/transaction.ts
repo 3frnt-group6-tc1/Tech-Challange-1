@@ -17,6 +17,12 @@ export interface Transaction {
   date: Date;
   description: string;
   id_user: string;
+  attachments?: Attachment[]; // campo opcional
+}
+export interface Attachment {
+  name: string;
+  type: string;
+  data: string;
 }
 
 export function isCredit(type: TransactionType): boolean {

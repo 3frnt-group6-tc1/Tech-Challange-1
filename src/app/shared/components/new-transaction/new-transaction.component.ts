@@ -28,6 +28,13 @@ export class NewTransactionComponent {
     { display: 'Empréstimo (Empréstimo e Financiamento)', value: TransactionType.Loan }
   ];
 
+  categorySuggestions: string[] = [
+    'Alimentação', 'Transporte', 'Lazer', 'Educação', 'Saúde',
+    'Investimentos', 'Moradia', 'Viagem', 'Compras', 'Salário'
+  ];
+  filteredCategorySuggestions: string[] = [];
+  showSuggestions = false;
+
   newTransaction: Partial<Transaction> = {
     type: TransactionType.Exchange,
     amount: 0,
@@ -45,9 +52,9 @@ export class NewTransactionComponent {
     message: ''
   };
 
-  constructor(
-    private transactionService: TransactionService
-  ) {}
+  selectedFiles: File[] = [];
+
+  constructor(private transactionService: TransactionService) {}
 
   onTransactionTypeChange(value: TransactionType): void {
     this.newTransaction.type = value;
@@ -56,21 +63,16 @@ export class NewTransactionComponent {
   onAmountChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     let value = input.value.replace(/\D/g, '');
-
     value = value.substring(0, 12);
 
-    while (value.length < 3) {
-      value = '0' + value;
-    }
+    while (value.length < 3) value = '0' + value;
 
     const cents = value.slice(-2);
     let integer = value.slice(0, -2);
     integer = integer.replace(/^0+/, '') || '0';
-
     integer = integer.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
     const formatted = `${integer},${cents}`;
-
     this.valorTransacao = formatted;
     this.newTransaction.amount = Number(integer.replace(/\./g, '') + '.' + cents);
   }
@@ -78,73 +80,62 @@ export class NewTransactionComponent {
   onDescriptionChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.newTransaction.description = input.value;
+
+    const value = input.value.toLowerCase();
+    this.filteredCategorySuggestions = this.categorySuggestions
+      .filter(c => c.toLowerCase().includes(value))
+      .slice(0, 5);
+    this.showSuggestions = true;
+  }
+
+  selectCategorySuggestion(suggestion: string): void {
+    this.newTransaction.description = suggestion;
+    this.filteredCategorySuggestions = [];
+    this.showSuggestions = false;
+  }
+
+  hideSuggestionsDelayed(): void {
+    setTimeout(() => {
+      this.showSuggestions = false;
+    }, 200);
   }
 
   getTransactionTypeLabel(type: TransactionType): string {
-    const labels = Object.entries(TRANSACTION_TYPE_LABELS)
-      .find(([label, value]) => value === type);
-
+    const labels = Object.entries(TRANSACTION_TYPE_LABELS).find(([_, value]) => value === type);
     return labels ? labels[0] : type;
   }
 
-  createTransaction(): void {
-    if (!this.newTransaction.type) {
-      this.submitStatus = {
-        success: false,
-        message: 'Por favor, selecione o tipo de transação.'
-      };
+  async createTransaction(): Promise<void> {
+    if (!this.newTransaction.type || !this.newTransaction.amount || !this.newTransaction.description?.trim()) {
+      this.submitStatus = { success: false, message: 'Preencha todos os campos obrigatórios.' };
       return;
     }
 
-    if (!this.newTransaction.amount || this.newTransaction.amount <= 0) {
-      this.submitStatus = {
-        success: false,
-        message: 'Por favor, informe um valor válido para a transação.'
-      };
-      return;
-    }
+    this.submitStatus = { success: true, message: 'Processando transação...' };
 
-    if (!this.newTransaction.description || this.newTransaction.description.trim() === '') {
-      this.submitStatus = {
-        success: false,
-        message: 'Por favor, adicione uma descrição para a transação.'
-      };
-      return;
-    }
+    const attachments = await Promise.all(this.selectedFiles.map(file => this.convertFileToBase64(file)));
 
-    this.submitStatus = {
-      success: true,
-      message: 'Processando transação...'
-    };
-
-    const transaction: Transaction = {
+    const transaction: any = {
       type: this.newTransaction.type,
-      description: this.newTransaction.description,
       amount: this.newTransaction.amount,
-      date: new Date(),
-      id_user: this.fixedUserId
+      description: this.newTransaction.description,
+      date: new Date().toISOString(),
+      id_user: this.fixedUserId,
+      attachments
     };
 
     this.transactionService.create(transaction).subscribe({
-      next: (createdTransaction) => {
-        const transactionTypeLabel = this.getTransactionTypeLabel(transaction.type);
-
-        this.submitStatus = {
-          success: true,
-          message: `Transação de ${isCredit(transaction.type) ? 'crédito' : 'débito'} (${transactionTypeLabel}) criada com sucesso!`
-        };
-
+      next: () => {
+        this.submitStatus = { success: true, message: 'Transação criada com sucesso!' };
         this.resetForm();
       },
-      error: (error) => {
-        console.error('Erro ao criar transação:', error);
-        this.submitStatus = {
-          success: false,
-          message: 'Erro ao criar transação: ' + (error.message || 'Tente novamente mais tarde')
-        };
+      error: (err) => {
+        this.submitStatus = { success: false, message: 'Erro ao salvar transação.' };
+        console.error(err);
       }
     });
   }
+
 
   resetForm(): void {
     this.newTransaction = {
@@ -154,11 +145,47 @@ export class NewTransactionComponent {
     };
     this.valorTransacao = '';
     this.selectedOption = '';
-
+    this.selectedFiles = [];
     setTimeout(() => {
-      if (this.submitStatus.success) {
-        this.submitStatus.message = '';
-      }
+      if (this.submitStatus.success) this.submitStatus.message = '';
     }, 3000);
   }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFiles.push(...Array.from(input.files));
+    }
+  }
+
+  removeFile(index: number): void {
+    this.selectedFiles.splice(index, 1);
+  }
+
+  allowOnlyNumbers(event: KeyboardEvent): void {
+    const isNumber = /^[0-9]$/;
+    if (!isNumber.test(event.key)) {
+      event.preventDefault();
+    }
+  }
+
+  allowOnlyLetters(event: KeyboardEvent): void {
+    const regex = /^[a-zA-ZÀ-ÿ\s]*$/;
+    if (!regex.test(event.key)) {
+      event.preventDefault();
+    }
+  }
+
+  private convertFileToBase64(file: File): Promise<{ name: string, type: string, data: string }> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        resolve({ name: file.name, type: file.type, data: reader.result as string });
+      };
+      reader.onerror = reject;
+    });
+  }
+
+
 }

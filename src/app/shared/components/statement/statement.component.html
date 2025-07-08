@@ -249,6 +249,17 @@
                 ></app-icon-bin>
               </button>
             </td>
+            <td class="py-2 sm:py-4 text-center pl-1">
+              <ng-container *ngIf="transaction.attachments?.length">
+                <button
+                  (click)="openFirstAttachment(transaction.attachments!)"
+                  class="text-cyan-blue-500 hover:text-cyan-700"
+                  title="Visualizar anexo"
+                >
+                  <app-icon-clip class="w-5 h-5 inline-block text-cyan-blue-500 hover:text-cyan-700"></app-icon-clip>
+                </button>
+              </ng-container>
+            </td>
           </tr>
         </tbody>
       </table>

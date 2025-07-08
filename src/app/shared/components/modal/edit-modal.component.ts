@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +11,7 @@ import { Transaction } from '../../models/transaction';
   templateUrl: './edit-modal.component.html',
   styleUrls: ['./edit-modal.component.scss']
 })
-export class EditModalComponent {
+export class EditModalComponent implements OnChanges {
   @Input() isOpen: boolean = false;
   @Input() transaction: Transaction | null = null;
   @Output() save = new EventEmitter<{ id: string; amount: number; description: string }>();
@@ -21,20 +21,40 @@ export class EditModalComponent {
   description: string = '';
   amountFormatted: string = '';
 
-  ngOnChanges(): void {
+  descriptionTouched = false;
+  amountTouched = false;
+
+  ngOnChanges(changes: SimpleChanges): void {
     if (this.transaction) {
       this.amount = this.transaction.amount;
       this.description = this.transaction.description;
       this.amountFormatted = this.formatAmount(this.amount);
+      this.descriptionTouched = false;
+      this.amountTouched = false;
     }
   }
 
+  get isDescriptionValid(): boolean {
+    return this.description.trim().length >= 3;
+  }
+
+  get isAmountValid(): boolean {
+    return this.amount > 0;
+  }
+
+  get isFormValid(): boolean {
+    return this.isDescriptionValid && this.isAmountValid;
+  }
+
   onSave(): void {
-    if (this.transaction && this.transaction.id) {
+    this.descriptionTouched = true;
+    this.amountTouched = true;
+
+    if (this.transaction && this.transaction.id && this.isFormValid) {
       this.save.emit({
         id: this.transaction.id,
         amount: this.amount,
-        description: this.description
+        description: this.description.trim()
       });
     }
   }
@@ -53,7 +73,7 @@ export class EditModalComponent {
   onlyNumbers(event: KeyboardEvent): boolean {
     const pattern = /[0-9]/;
     const inputChar = String.fromCharCode(event.charCode);
-    
+
     if (!pattern.test(inputChar)) {
       event.preventDefault();
       return false;
@@ -78,5 +98,6 @@ export class EditModalComponent {
 
     this.amountFormatted = `${integer},${cents}`;
     this.amount = Number(integer.replace(/\./g, '') + '.' + cents);
+    this.amountTouched = true;
   }
 }

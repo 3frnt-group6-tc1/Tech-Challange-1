@@ -5,7 +5,10 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
+
     <h2 class="text-black-900 text-lg mb-4 text-center">Editar Transação</h2>
+
+    <!-- Valor -->
     <div class="mb-4">
       <label class="block text-black-900 mb-2">Valor</label>
       <input
@@ -15,14 +18,41 @@
         (keypress)="onlyNumbers($event)"
         class="w-full p-2 border border-gray-300 rounded"
       />
+      <p *ngIf="!isAmountValid && amountTouched" class="text-red-500 text-xs mt-1">
+        Informe um valor válido maior que R$ 0,00.
+      </p>
     </div>
+
+    <!-- Descrição -->
     <div class="mb-4">
       <label class="block text-black-900 mb-2">Descrição</label>
-      <input type="text" [(ngModel)]="description" class="w-full p-2 border border-gray-300 rounded" />
+      <input
+        type="text"
+        [(ngModel)]="description"
+        (blur)="descriptionTouched = true"
+        class="w-full p-2 border border-gray-300 rounded"
+      />
+      <p *ngIf="!isDescriptionValid && descriptionTouched" class="text-red-500 text-xs mt-1">
+        A descrição deve ter pelo menos 3 caracteres.
+      </p>
     </div>
+
+    <!-- Ações -->
     <div class="flex justify-center gap-4">
-      <app-button theme="outline-cyan-blue" size="G" label="Cancelar" (click)="onCancel()" ></app-button>
-      <app-button theme="primary" size="G" label="Salvar" (click)="onSave()"></app-button>
+      <app-button
+        theme="outline-cyan-blue"
+        size="G"
+        label="Cancelar"
+        (click)="onCancel()"
+      ></app-button>
+
+      <app-button
+        theme="primary"
+        size="G"
+        label="Salvar"
+        [disabled]="!isFormValid"
+        (click)="onSave()"
+      ></app-button>
     </div>
   </div>
 </div>
